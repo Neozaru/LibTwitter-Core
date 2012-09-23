@@ -1,0 +1,14 @@
+/------------------ libtwitter-core.pc.in ------------------------
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: LibTwitter-Core C++
+Description: C++ Library for Twitter API
+URL: http://libtwitter.org
+Version: 0.0.1
+Requires: libcurl
+Libs: -L@libdir@ -ltwitter-core -lcurl -lpthread
+Cflags: -I@includedir@/Twitter/
+\-------------------------------------------------------
