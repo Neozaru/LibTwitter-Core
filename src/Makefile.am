@@ -1,12 +1,13 @@
-top_srcdir = .
+top_srcdir = ../
 
 # Didn't found solution for working with subdirs and statically link internal subdirs ...
+AUTOMAKE_OPTIONS = subdir-objects
+
 
 core=Twitter/Core
 
 lib_LTLIBRARIES = libtwitter-core.la
 
-AUTOMAKE_OPTIONS = subdir-objects
 
 libtwitter_core_la_SOURCES = Twitter/Core/OAuth.cpp Twitter/Core/OAuth.h \
 					 Twitter/Core/Utils.cpp Twitter/Core/Utils.h \
@@ -14,10 +15,7 @@ libtwitter_core_la_SOURCES = Twitter/Core/OAuth.cpp Twitter/Core/OAuth.h \
 					 Twitter/Core/TwitterRequest.cpp Twitter/Core/TwitterRequest.h \
 					 Twitter/Core/RequestCreator.cpp Twitter/Core/RequestCreator.h \
 					 Twitter/Core/TwitterSession.cpp Twitter/Core/TwitterSession.h \
-					 Twitter/Core/TwitterRequestListener.h
-
-#libtwitter_core_la_LIBADD = Parsers/libtwitter-miniparser.la
-			
+					 Twitter/Core/TwitterRequestListener.h	
 
 
 libtwitter_core_la_SOURCES += Twitter/Core/Parsers/HTML_Parser.h \

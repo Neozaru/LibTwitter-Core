@@ -28,9 +28,6 @@
     */
     void debug( const std::string& str );
 
-    template<typename T>
-    const std::string otos( const T& Value );
-
     std::string put_variable_in_url( const std::string& URL, 
                                      const std::string& var_name, 
                                      const std::string var_value );
@@ -40,6 +37,24 @@
 
     std::map<std::string,std::string> index_variables_key_value( std::vector<std::string> keys, ... );
 
+
+  template<typename T>
+   inline std::string otos( const T& Value ) {
+
+        std::ostringstream oss;
+        oss << Value;
+        
+        std::string str = oss.str();
+
+        if ( str != "-1" ) {
+          return str;
+        }
+        else {
+          return "";
+        }
+        
+
+    }
   };
     
 

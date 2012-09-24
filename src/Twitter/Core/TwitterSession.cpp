@@ -64,7 +64,7 @@ int TwitterSession::send_request( TwitterRequest* tr ) {
 		tr->send();
 	}
 
-	return _request_counter-1;
+	return _request_counter;
 
 }
 
@@ -75,6 +75,8 @@ unsigned long TwitterSession::get_request_response_code( int request_id ) {
 	if ( tr != NULL ) {
 		return tr->get_response_code();
 	}
+
+
 
 	return false;
 

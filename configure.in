@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([1.00])
-AC_INIT(LibTwitter C++, 1.7, contact@libtwitter.org)
+AC_INIT(LibTwitter C++, 0.0.1, neozaru@mailoo.org)
 #AM_INIT_AUTOMAKE
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_MACRO_DIR([m4])
@@ -34,7 +34,7 @@ DX_PS_FEATURE(OFF)
 AM_PROG_LIBTOOL
 AC_PROG_MAKE_SET
 
-#LT_INIT
+#LT_INIT #deprecated
 
 # Checks for programs.
 AC_PROG_CXX
@@ -46,7 +46,7 @@ AC_PROG_CC
 AC_CHECK_HEADERS([inttypes.h limits.h memory.h stdint.h stdlib.h string.h sys/socket.h sys/time.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_CHECK_HEADER_STDBOOL
+AC_HEADER_STDBOOL
 AC_C_INLINE
 AC_TYPE_SIZE_T
 
@@ -61,5 +61,6 @@ AC_CONFIG_FILES([Makefile
                 examples/Client_Streaming_Session/Makefile
                 examples/Client_Streaming_Listener/Makefile
                 examples/Client_Streaming_Hard_Request/Makefile])
-#AC_CONFIG_SUBDIRS([other])
+
+
 AC_OUTPUT

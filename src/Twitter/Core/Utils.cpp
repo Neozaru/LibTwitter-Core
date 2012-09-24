@@ -18,23 +18,7 @@ namespace Utils {
 
     }
 
-    template<typename T>
-    const std::string otos( const T& Value ) {
 
-        std::ostringstream oss;
-        oss << Value;
-        
-        std::string str = oss.str();
-
-        if ( str != "-1" ) {
-          return str;
-        }
-        else {
-          return "";
-        }
-        
-
-    }
 
 
   std::string put_variable_in_url( const std::string& URL, 
