@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
+AC_PREREQ([1.00])
 AC_INIT(LibTwitter C++, 1.7, contact@libtwitter.org)
 #AM_INIT_AUTOMAKE
 AM_INIT_AUTOMAKE([subdir-objects])
