@@ -1,8 +1,6 @@
 LibTwitter-Core
 ===============
 
-C++ Twitter API Library (Core)
-
 **LibTwitter C++** (or LibTwitter Cpp or LibTwitter) is a C++ Twitter API library.
 
 **LibTwitter** will be divided in two layers :
