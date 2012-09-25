@@ -1,0 +1,10 @@
+:: update_status :: float truc 10  , int machin, string truc "a" :: POST :: aaa/mentions_timeline
+/* Test de la documentation en 
+plusieurs lignes c'est
+        drôle.
+        */
+:: update_status :: float truc, int machin :: GET :: statuses/aadqs
+:: get_status :: float truc, int machin :: GET :: statuses/getit
+:: get_retweets :: int id, int count DEF, bool trim_user false :: GET :: statuses/retweets/:id
+:: get_suggested_users :: string slug :: GET :: users/suggestions/:slug/members
+:: fake_aaa :: string aa :: POST :: users/lol
