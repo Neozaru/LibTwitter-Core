@@ -1,4 +1,13 @@
+See "COPYING" for licence information
 
+See "compling.txt" to see how to compile the program
+
+A Doxygen-doc is also available :
+- make doxygen-doc
+
+You can also make examples (./examples/Client_****)
+
+[...]
 
 **LibTwitter C++** (or LibTwitter Cpp or LibTwitter) is a C++ Twitter API library.
 
