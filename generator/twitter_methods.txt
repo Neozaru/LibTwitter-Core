@@ -1,0 +1,5 @@
+:: mentions_timeline:: int count 20, int since_id DEF, int max_id DEF, bool trim_user false, bool contributor_details false, bool include_entities true :: GET :: statuses/mentions_timeline
+/* Doc here for "mentions_timeline"  */
+:: user_timeline :: int user_id DEF, string screen_name DEF, int count DEF, int since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_rts true :: GET :: statuses/user_timeline
+:: home_timeline :: int count DEF, int since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_entities true :: GET :: statuses/home_timeline
+

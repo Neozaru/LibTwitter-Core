@@ -49,22 +49,29 @@ static const char* e_HTTP_response_code_Text[] {
 
 
 
+
 namespace TwitterConsts {
 
 
 
 	const string API_LINK = "http://api.twitter.com/1.1/";
 
-	namespace Formats {
-		const string JSON = ".json";
-		const string XML = ".xml";
-		const string HTML = ".html";
-	}
 
-
-	const string STATUSES = "statuses/";
 	const string ACCOUNT = "account/";
 
+
+/* BEGIN_PYGEN don't remove this comment (2012/9/25 23:11) */
+
+	namespace STATUSES {
+
+		const std::string STATUSES = "statuses/";
+
+		const std::string MENTIONS_TIMELINE = STATUSES+"mentions_timeline";
+		const std::string USER_TIMELINE = STATUSES+"user_timeline";
+		const std::string HOME_TIMELINE = STATUSES+"home_timeline";
+	};
+
+/* END_PYGEN don't remove this comment (2012/9/25 23:11) */
 
 	namespace Streaming {
 
@@ -72,25 +79,12 @@ namespace TwitterConsts {
 
 	};
 
-	namespace Statuses {
 
+	namespace Tweets {
 
-		namespace Timelines {
-
-			const string MENTIONS_TIMELINE = API_LINK + STATUSES + "mentions_timeline.json";
-
-
-		}
-
-		namespace Tweets {
-
-			const string UPDATE = API_LINK + STATUSES + "update.json";
-
-		}
-
+		const string UPDATE = API_LINK + "statuses/" + "update.json";
 
 	}
-
 
 	namespace Users {
 
@@ -104,6 +98,6 @@ namespace TwitterConsts {
 
 	}
 	
-}
+};
 
 #endif

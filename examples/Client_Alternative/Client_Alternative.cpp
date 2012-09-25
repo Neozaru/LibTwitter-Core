@@ -144,7 +144,7 @@ int main( int argc, char** argv ) {
 	* Last example, showing how to retrieve response data
 	*/
 
-	TwitterRequest* tr_mentions = ts->get_mentions_timeline_request();
+	TwitterRequest* tr_mentions = ts->mentions_timeline_request();
 	tr_mentions->send();
 
 	if ( tr_mentions->get_response_code() != e_HTTP_response_code::OK ) {

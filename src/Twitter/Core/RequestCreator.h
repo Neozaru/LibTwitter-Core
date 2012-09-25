@@ -113,14 +113,6 @@
 
 		/* See file "request_methods_generator.py" */
 
-		TwitterRequest* get_mentions_timeline_request( int count = 5, 
-								 float since_id = N_UN, 
-								 int max_id = N_UN,
-								 int trim_user = N_UN,
-								 bool contributor_details = false,
-								 bool include_entities = true
-								 );
-
 		TwitterRequest* update_status_request( const std::string& status,
 								 int in_reply_to = N_UN,
 								 bool display_coordinates = false,
@@ -134,6 +126,37 @@
 		TwitterRequest* verify_credentials_request();
 
 		TwitterRequest* get_settings_request();
+
+
+/* BEGIN_PYGEN don't remove this comment (2012/9/25 23:11) */
+/* Doc here for "mentions_timeline"  */
+TwitterRequest* mentions_timeline_request( int count = 20, 
+										int since_id = N_UN, 
+										int max_id = N_UN, 
+										bool trim_user = false, 
+										bool contributor_details = false, 
+										bool include_entities = true );
+
+TwitterRequest* user_timeline_request( int user_id = N_UN, 
+										std::string screen_name = S_UN, 
+										int count = N_UN, 
+										int since_id = N_UN, 
+										int max_id = N_UN, 
+										bool trim_user = false, 
+										bool exclude_replies = false, 
+										bool contributor_details = false, 
+										bool include_rts = true );
+
+
+TwitterRequest* home_timeline_request( int count = N_UN, 
+										int since_id = N_UN, 
+										int max_id = N_UN, 
+										bool trim_user = false, 
+										bool exclude_replies = false, 
+										bool contributor_details = false, 
+										bool include_entities = true );
+
+/* END_PYGEN don't remove this comment (2012/9/25 23:11) */
 
 
 	protected:

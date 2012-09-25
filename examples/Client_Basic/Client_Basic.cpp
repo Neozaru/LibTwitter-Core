@@ -121,7 +121,7 @@ int main( int argc, char** argv ) {
 
 	std::cout << "Status updated !" << std::endl;
 
-	request_id = ts->send_request( ts->get_mentions_timeline_request() );
+	request_id = ts->send_request( ts->mentions_timeline_request() );
 
 	if ( ts->get_request_response_code( request_id ) != e_HTTP_response_code::OK ) {
 

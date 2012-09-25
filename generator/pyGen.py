@@ -2,7 +2,7 @@
 
 # 09.17/12 "very_ugly_epic_requests_methods_generator.py". For further information, contact me < neozaru @ mailoo . org >
 #
-# *IMPORTANT NOTE* : Reading this script can cause irreparable damage on your eyes and your brains.
+# *IMPORTANT NOTE* : Reading this script can cause irreparable damage on your eyes and your brain.
 # Knows effects : <enter new effect here>
 #
 # This script was created in order to facilitate the creation/edition of Twitter requests methods 
@@ -43,6 +43,7 @@
 
 
 import sys, codecs, shutil
+import datetime
 
 # Groups all constants used by functions.
 class Tw_ConstantS:
@@ -84,9 +85,9 @@ class Tw_ConstantS:
 	def getMainNamespace(self):
 		return self.___main_namespace
 
-
 	def gen_space(self):
-		rstr = "\n"+self.___main_namespace+" {\n"
+		rstr = ""
+		#rstr += "\n namespace "+self.___main_namespace+" {\n"
 		for n in self.namespaces:
 			current_namespace = n
 			rstr += "\n\tnamespace "+current_namespace+" {\n\n"
@@ -97,7 +98,7 @@ class Tw_ConstantS:
 
 			rstr += "\t};\n"
 
-		rstr += "\n};\n"
+		#rstr += "\n};\n"
 		return rstr
 
 # Constants are used for Twitter API links
@@ -133,8 +134,8 @@ class Tw_Method:
 		#  CONSTANTS
 		self.___request_object = "TwitterRequest*"
 		self.___make_request_function = "__make_a_request"
-		self.___class_name = "TwitterSession"
-		self.___put_in_URL = "PUT_IN_URL"
+		self.___class_name = "RequestCreator"
+		self.___put_in_URL = "PUT_VAR_IN_URL"
 		self.___map_macro = "REC_ARGS_<nb>"
 		self.___add_function = "set_"+method+"_data"
 		self.___suffix = "_request"
@@ -326,7 +327,7 @@ def parse_file(cm,file_in):
 				methods.append(current_method)
 			current_method = parse_method(cm,line)
 
-		elif current_method is not None:
+		elif line[:1] != "#" and current_method is not None:
 			current_method.addDoc(line)
 			
 	if current_method not in methods:
@@ -342,7 +343,7 @@ def remove_from_file(file_name,pattern):
 	    for i,line in enumerate(infile):
 	    	if "BEGIN_"+pattern in line:
 	    		cutting = 1
-	    		outfile.write("/* HERE_"+pattern+" */\n")
+	    		outfile.write("/* HERE_"+pattern+" don't remove this comment */\n")
 	    	if not cutting:
 	    		outfile.write(line)
 	    	if "END_"+pattern in line:
@@ -355,25 +356,44 @@ def remove_from_file(file_name,pattern):
 # Will write methods body (or declaration) in source file (or header file)
 # Argments : (Methods list, Output file name, Pattern to recognize where to write, body(1) or decl(0) )
 def write_in_file(method_list,file_name,pattern,body_or_decl):
+	t = datetime.datetime.now()
 	file_out = open(file_name,"r+")
 	with open(file_name) as infile, open(file_name+".out","w") as outfile:
 	    for i,line in enumerate(infile):
 	        if "HERE_"+pattern in line:
-	        	outfile.write("/* BEGIN_"+pattern+" */\n")
+	        	outfile.write("/* BEGIN_"+pattern+" don't remove this comment ("+str(t.year)+"/"+str(t.month)+"/"+str(t.day)+" "+str(t.hour)+":"+str(t.minute)+") */\n")
 	        	for m in method_list:
 	        		if body_or_decl == 1:
 	        			outfile.write( m.gen_function(0) )
 	        		else:
 	        			outfile.write( m.gen_declaration(1) )
 	        		outfile.write("\n")
-	        	outfile.write("/* END_"+pattern+" */\n")
+	        	outfile.write("/* END_"+pattern+" don't remove this comment ("+str(t.year)+"/"+str(t.month)+"/"+str(t.day)+" "+str(t.hour)+":"+str(t.minute)+") */\n")
 	        else:
 	        	outfile.write(line)
 	shutil.move(file_name+".out",file_name)
 
+def write_constants_file(file_name,consts):
+	t = datetime.datetime.now()
+	file_out = open(file_name,"r+")
+	with open(file_name) as infile, open(file_name+".out","w") as outfile:
+	    for i,line in enumerate(infile):
+	        if "HERE_"+pattern in line:
+	        	outfile.write("/* BEGIN_"+pattern+" don't remove this comment ("+str(t.year)+"/"+str(t.month)+"/"+str(t.day)+" "+str(t.hour)+":"+str(t.minute)+") */\n")
+	        	outfile.write(consts.gen_space())
+	        	outfile.write("\n")
+	        	outfile.write("/* END_"+pattern+" don't remove this comment ("+str(t.year)+"/"+str(t.month)+"/"+str(t.day)+" "+str(t.hour)+":"+str(t.minute)+") */\n")
+	        else:
+	        	outfile.write(line)
+	shutil.move(file_name+".out",file_name)
 
-if len(sys.argv) != 3 :
-	print "Usage : "+sys.argv[0]+" <file_to_parse> <output_file_whithout_ext>"
+def dump_if_exists(file_name):
+	if is_file_exists(file_name):
+		print("Ouput file '" + file_name + "' already exists. Saving old file to '" + file_name + ".old'")
+		shutil.copy(file_name, file_name+".old")
+
+if len(sys.argv) < 3 :
+	print "Usage : "+sys.argv[0]+" <file_to_parse> <output_file_whithout_ext> [<constants_file>.h]"
 	print "--> <output_file> will be auto-completed by \".h/.cpp\" (input) and \".out\" (output)"
 	sys.exit(1)
 
@@ -396,13 +416,8 @@ if not is_file_exists(file_name_in):
 	print(file_name_in + " : file not found") 
 	sys.exit(1)
 
-if is_file_exists(file_name_out+".cpp"):
-	print("Ouput file '" + file_name_out + ".cpp" + "' already exists. Saving old file to '" + file_name_out + ".cpp.old'")
-	shutil.copy(file_name_out + ".cpp", file_name_out+".cpp.old")
-
-if is_file_exists(file_name_out+".h"):
-	print("Ouput file '" + file_name_out + ".h" + "' already exists. Saving old file to '" + file_name_out + ".h.old'")
-	shutil.copy(file_name_out + ".h", file_name_out+".h.old")
+dump_if_exists(file_name_out+".cpp")
+dump_if_exists(file_name_out+".h")
 
 
 file_in = open(file_name_in,"r")
@@ -426,6 +441,14 @@ remove_from_file(file_name_out+".h",pattern)
 
 write_in_file(methods,file_name_out+".cpp",pattern,1)
 write_in_file(methods,file_name_out+".h",pattern,0)
+
+if len(sys.argv) > 3:
+	consts_file = sys.argv[3]
+	print("Writing constants in file "+consts_file+"...")
+	remove_from_file(consts_file,pattern)
+	dump_if_exists(consts_file)
+	write_constants_file(consts_file,cm)
+	print("Done.")
 
 #constants_file = open("TwitterConstants.h.out")
 # twc.addConst("statuses/mention_timeline")
