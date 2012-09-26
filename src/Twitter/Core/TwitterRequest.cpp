@@ -7,6 +7,8 @@
 #include "TwitterConstants.h"
 #include "TwitterRequestListener.h"
 
+
+
 TwitterRequest::TwitterRequest( TwitterSession* session, const std::string& url ) 
 							  : CurlProcess(url), _session(session) {
 
@@ -26,20 +28,24 @@ TwitterSession* TwitterRequest::get_session() {
 
 std::string TwitterRequest::get_response_data() {
 
-	return _response_data;
+	pthread_mutex_lock( &_data_mutex_rw );
+
+		return _response_data;
+
+	pthread_mutex_unlock( &_data_mutex_rw );
+
 }
 
-/**
-* \fn on_data_received
-*
-* \brief Called automatically when data is received
-*
-* \param Autofilled std::string containing data received
-*
-*/
+
 void TwitterRequest::_on_data_received( const std::string& data ) {
+
 	Utils::debug("//////////////////////////////\n " + data );
-	_response_data += data;
+
+	pthread_mutex_lock( &_data_mutex_rw );
+
+		_response_data += data;
+
+	pthread_mutex_unlock( &_data_mutex_rw );
 
 
 	this->on_data_received( data );
