@@ -61,22 +61,29 @@ class Tw_ConstantS:
 			self.namespaces.append(namespace)
 
 	def addConst(self,link):
-		if link not in self.constants:
-			tab = link.split("/")
-			
-			l_namespace = tab[0].upper()
-			self.addNamespace( l_namespace )
+		#if link not in self.constants:
+		tab = link.split("/")
+		
+		l_namespace = tab[0].upper()
+		self.addNamespace( l_namespace )
 
-			sublink = tab[1]
-			if len(tab) > 2:
-				sublink += "/"+tab[2]
-				if len(tab) > 3:
-					sublink += "/"+tab[3]
+		sublink = tab[1]
+		if len(tab) > 2:
+			sublink += "/"+tab[2]
+			if len(tab) > 3:
+				sublink += "/"+tab[3]
 
-			const_obj = Tw_Constant( l_namespace, sublink )
+		const_obj = Tw_Constant( l_namespace, sublink )
 
-			self.constants.append(const_obj)
-			return const_obj
+		# Checks if const is already indexed
+		for c in self.constants:
+			if c.getNamespace() == const_obj.getNamespace():
+				if c.getConstName() == const_obj.getConstName():
+					return const_obj
+
+		self.constants.append(const_obj)
+	
+		return const_obj
 
 	def delConst(self,const):
 		if const in self.constants:
@@ -87,7 +94,7 @@ class Tw_ConstantS:
 
 	def gen_space(self):
 		rstr = ""
-		#rstr += "\n namespace "+self.___main_namespace+" {\n"
+
 		for n in self.namespaces:
 			current_namespace = n
 			rstr += "\n\tnamespace "+current_namespace+" {\n\n"
@@ -119,8 +126,9 @@ class Tw_Constant:
 		return self.const_name.upper()
 
 	def gen_line(self):
+		api_link = "API_LINK"
 		rstr = ""
-		rstr += "const std::string "+self.getConstName()+" = "+self.getNamespace()+"+\""+self.sublink+"\""+";"
+		rstr += "const std::string "+self.getConstName()+" = "+api_link+" + "+self.getNamespace()+" + \""+self.sublink+"\""+" + FORMAT"+" ;"
 		return rstr
 
 class Tw_Method:
@@ -253,7 +261,7 @@ class Tw_Parameter:
 	def __init__(self,p_type,name):
 		
 		#  CONSTANTS
-		___string_type = "std::string"
+		___string_type = "const std::string&"
 		#
 
 		if p_type == "string":

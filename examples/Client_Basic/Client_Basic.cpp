@@ -115,6 +115,7 @@ int main( int argc, char** argv ) {
 	if ( ts->get_request_response_code( request_id ) != e_HTTP_response_code::OK ) {
 
 		std::cout << "Status not updated... Bad response code" << std::endl;
+
 		return -3;
 	}
 

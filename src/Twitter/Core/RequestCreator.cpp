@@ -45,7 +45,7 @@ void RequestCreator::set_next_request( TwitterRequest* req ) {
 /* REC_ARGS_X : Convert X arguments to String, and put them in a std::map */
 /* 				"<var_name>" => "<var_value_in_string>" */
 
-
+/*
 TwitterRequest* RequestCreator::update_status_request( const std::string& status, int in_reply_to, bool display_coordinates,
 						 					bool trim_user ) {
 
@@ -55,6 +55,7 @@ TwitterRequest* RequestCreator::update_status_request( const std::string& status
 
 	return req;
 }
+*/
 
 TwitterRequest* RequestCreator::verify_credentials_request() {
 
@@ -81,26 +82,26 @@ TwitterRequest* RequestCreator::stream_user_request( std::string with, std::stri
 
 }
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/26 17:23) */
-TwitterRequest* RequestCreator::mentions_timeline_request( int count, std::string since_id, int max_id, bool trim_user, bool contributor_details, bool include_entities ) {
+/* BEGIN_PYGEN don't remove this comment (2012/9/26 22:31) */
+TwitterRequest* RequestCreator::mentions_timeline_request( int count, uid_t since_id, int max_id, bool trim_user, bool contributor_details, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::MENTIONS_TIMELINE );
 	req->set_GET_data( REC_ARGS_6( count, since_id, max_id, trim_user, contributor_details, include_entities ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::user_timeline_request( int user_id, std::string screen_name, int count, int since_id, int max_id, bool trim_user, bool exclude_replies, bool contributor_details, bool include_rts ) {
+TwitterRequest* RequestCreator::user_timeline_request( int user_id, const std::string& screen_name, int count, uid_t since_id, int max_id, bool trim_user, bool exclude_replies, bool contributor_details, bool include_rts ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::USER_TIMELINE );
 	req->set_GET_data( REC_ARGS_9( user_id, screen_name, count, since_id, max_id, trim_user, exclude_replies, contributor_details, include_rts ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::home_timeline_request( int count, int since_id, int max_id, bool trim_user, bool exclude_replies, bool contributor_details, bool include_entities ) {
+TwitterRequest* RequestCreator::home_timeline_request( int count, uid_t since_id, int max_id, bool trim_user, bool exclude_replies, bool contributor_details, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::HOME_TIMELINE );
 	req->set_GET_data( REC_ARGS_7( count, since_id, max_id, trim_user, exclude_replies, contributor_details, include_entities ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::retweets_request( std::string id, int count, bool trim_user ) {
+TwitterRequest* RequestCreator::retweets_request( uid_t id, int count, bool trim_user ) {
 	TwitterRequest* req = __make_a_request( 
 		PUT_VAR_IN_URL( TwitterConsts::STATUSES::RETWEETS, id )
 	 );
@@ -108,7 +109,7 @@ TwitterRequest* RequestCreator::retweets_request( std::string id, int count, boo
 	return req;
 }
 
-TwitterRequest* RequestCreator::destroy_status_request( std::string id, bool trim_user ) {
+TwitterRequest* RequestCreator::destroy_status_request( uid_t id, bool trim_user ) {
 	TwitterRequest* req = __make_a_request( 
 		PUT_VAR_IN_URL( TwitterConsts::STATUSES::DESTROY, id )
 	 );
@@ -116,13 +117,13 @@ TwitterRequest* RequestCreator::destroy_status_request( std::string id, bool tri
 	return req;
 }
 
-TwitterRequest* RequestCreator::update_status_request( std::string status, std::string in_reply_to_status_id, std::string place_id, bool display_coordinates, bool trim_user, float lat, float lon ) {
+TwitterRequest* RequestCreator::update_status_request( const std::string& status, const std::string& in_reply_to_status_id, const std::string& place_id, bool display_coordinates, bool trim_user, float lat, float lon ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::UPDATE );
 	req->set_POST_data( REC_ARGS_7( status, in_reply_to_status_id, place_id, display_coordinates, trim_user, lat, lon ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::retweet_request( std::string id, bool trim_user ) {
+TwitterRequest* RequestCreator::retweet_request( uid_t id, bool trim_user ) {
 	TwitterRequest* req = __make_a_request( 
 		PUT_VAR_IN_URL( TwitterConsts::STATUSES::RETWEET, id )
 	 );
@@ -130,23 +131,143 @@ TwitterRequest* RequestCreator::retweet_request( std::string id, bool trim_user 
 	return req;
 }
 
-TwitterRequest* RequestCreator::oembed_status_request( std::string id, std::string url, int maxwidth, bool hide_media, bool hide_thread, bool omit_script, std::string align, std::string related, std::string lang ) {
+TwitterRequest* RequestCreator::oembed_status_request( uid_t id, const std::string& url, int maxwidth, bool hide_media, bool hide_thread, bool omit_script, const std::string& align, const std::string& related, const std::string& lang ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::OEMBED );
 	req->set_GET_data( REC_ARGS_9( id, url, maxwidth, hide_media, hide_thread, omit_script, align, related, lang ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::search_tweets_request( std::string q, std::string locale, std::string result_type, int count, std::string until, std::string since_id, std::string max_id, bool include_entities, std::string callback ) {
+TwitterRequest* RequestCreator::search_tweets_request( const std::string& q, const std::string& locale, const std::string& result_type, int count, const std::string& until, uid_t since_id, const std::string& max_id, bool include_entities, const std::string& callback ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::SEARCH::TWEETS );
 	req->set_GET_data( REC_ARGS_9( q, locale, result_type, count, until, since_id, max_id, include_entities, callback ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::sent_direct_messages_request( int count, int page, std::string since_id, std::string max_id, bool include_entities ) {
+TwitterRequest* RequestCreator::sent_direct_messages_request( int count, int page, uid_t since_id, const std::string& max_id, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::DIRECT_MESSAGES::SENT );
 	req->set_GET_data( REC_ARGS_5( count, page, since_id, max_id, include_entities ) );
 	return req;
 }
 
-/* END_PYGEN don't remove this comment (2012/9/26 17:23) */
+TwitterRequest* RequestCreator::show_direct_messages_request( uid_t id ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::DIRECT_MESSAGES::SHOW );
+	req->set_GET_data( REC_ARGS_1( id ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::destroy_direct_messages_request( uid_t id, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::DIRECT_MESSAGES::DESTROY );
+	req->set_POST_data( REC_ARGS_2( id, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::new_direct_message_by_user_id_request( const std::string& user_id, const std::string& text ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::DIRECT_MESSAGES::NEW );
+	req->set_POST_data( REC_ARGS_2( user_id, text ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::new_direct_message_by_screen_name_request( const std::string& screen_name, const std::string& text ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::DIRECT_MESSAGES::NEW );
+	req->set_POST_data( REC_ARGS_2( screen_name, text ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::friends_ids_request( uid_t user_id, bool stringify_ids ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDS::IDS );
+	req->set_GET_data( REC_ARGS_2( user_id, stringify_ids ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::friends_ids_request( const std::string& screen_name, bool stringify_ids ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDS::IDS );
+	req->set_GET_data( REC_ARGS_2( screen_name, stringify_ids ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::followers_ids_request( uid_t user_id, bool stringify_ids ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FOLLOWERS::IDS );
+	req->set_GET_data( REC_ARGS_2( user_id, stringify_ids ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::followers_ids_request( const std::string& screen_name, bool stringify_ids ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FOLLOWERS::IDS );
+	req->set_GET_data( REC_ARGS_2( screen_name, stringify_ids ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::lookup_friendship_by_names_request( const std::string& screen_name ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::LOOKUP );
+	req->set_GET_data( REC_ARGS_1( screen_name ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::lookup_friendship_by_ids_request( const std::string& user_id ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::LOOKUP );
+	req->set_GET_data( REC_ARGS_1( user_id ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::incoming_friendships_request( bool stringify_ids ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::INCOMING );
+	req->set_GET_data( REC_ARGS_1( stringify_ids ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::outgoing_friendships_request( bool stringify_ids ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::OUTGOING );
+	req->set_GET_data( REC_ARGS_1( stringify_ids ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::create_friendship_request( const std::string& screen_name, bool follow ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::CREATE );
+	req->set_POST_data( REC_ARGS_2( screen_name, follow ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::create_friendship_request( uid_t user_id, bool follow ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::CREATE );
+	req->set_POST_data( REC_ARGS_2( user_id, follow ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::destroy_friendship_request( const std::string& screen_name ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::DESTROY );
+	req->set_POST_data( REC_ARGS_1( screen_name ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::destroy_friendship_request( uid_t user_id ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::DESTROY );
+	req->set_POST_data( REC_ARGS_1( user_id ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::update_friendship_request( const std::string& screen_name, bool retweets, bool device ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::UPDATE );
+	req->set_POST_data( REC_ARGS_3( screen_name, retweets, device ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::update_friendship_request( uid_t user_id, bool retweets, bool device ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::UPDATE );
+	req->set_POST_data( REC_ARGS_3( user_id, retweets, device ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::show_friendship_request( uid_t source_id, uid_t target_id ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::SHOW );
+	req->set_GET_data( REC_ARGS_2( source_id, target_id ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::show_friendship_request( const std::string& source_screen_name, const std::string& target_screen_name ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::SHOW );
+	req->set_GET_data( REC_ARGS_2( source_screen_name, target_screen_name ) );
+	return req;
+}
+
+/* END_PYGEN don't remove this comment (2012/9/26 22:31) */
 

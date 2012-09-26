@@ -3,6 +3,9 @@
 
 	#include "TwitterConstants.h"
 
+	typedef std::string tid_t;
+	typedef unsigned int uid_t;
+
 	/**
 	* \namespace TwDefaults
 	* \brief Default values in requests
@@ -113,11 +116,13 @@
 
 		/* See file "request_methods_generator.py" */
 
+/*
 		TwitterRequest* update_status_request( const std::string& status,
 								 int in_reply_to = N_UN,
 								 bool display_coordinates = false,
 								 bool trim_user = false
 								 );
+*/
 
 		TwitterRequest* stream_user_request( std::string with = "followings",
 											std::string track = S_UN
@@ -128,78 +133,143 @@
 		TwitterRequest* get_settings_request();
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/26 17:23) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/26 22:31) */
 /* Doc here for "mentions_timeline"  */
 TwitterRequest* mentions_timeline_request( int count = 20, 
-										std::string since_id = S_UN, 
+										uid_t since_id = N_UN, 
 										int max_id = N_UN, 
 										bool trim_user = false, 
 										bool contributor_details = false, 
 										bool include_entities = true );
 
 TwitterRequest* user_timeline_request( int user_id = N_UN, 
-										std::string screen_name = S_UN, 
+										const std::string& screen_name = S_UN, 
 										int count = N_UN, 
-										int since_id = N_UN, 
+										uid_t since_id = N_UN, 
 										int max_id = N_UN, 
 										bool trim_user = false, 
 										bool exclude_replies = false, 
 										bool contributor_details = false, 
 										bool include_rts = true );
 
+
 TwitterRequest* home_timeline_request( int count = N_UN, 
-										int since_id = N_UN, 
+										uid_t since_id = N_UN, 
 										int max_id = N_UN, 
 										bool trim_user = false, 
 										bool exclude_replies = false, 
 										bool contributor_details = false, 
 										bool include_entities = true );
 
-TwitterRequest* retweets_request( std::string id, 
+TwitterRequest* retweets_request( uid_t id, 
 										int count = 50, 
 										bool trim_user = false );
 
-TwitterRequest* destroy_status_request( std::string id, 
+TwitterRequest* destroy_status_request( uid_t id, 
 										bool trim_user = false );
 
-TwitterRequest* update_status_request( std::string status, 
-										std::string in_reply_to_status_id = S_UN, 
-										std::string place_id = S_UN, 
+TwitterRequest* update_status_request( const std::string& status, 
+										const std::string& in_reply_to_status_id = S_UN, 
+										const std::string& place_id = S_UN, 
 										bool display_coordinates = false, 
 										bool trim_user = false, 
 										float lat = N_UN, 
 										float lon = N_UN );
 
-TwitterRequest* retweet_request( std::string id, 
+TwitterRequest* retweet_request( uid_t id, 
 										bool trim_user = false );
 
-TwitterRequest* oembed_status_request( std::string id, 
-										std::string url, 
+TwitterRequest* oembed_status_request( uid_t id, 
+										const std::string& url, 
 										int maxwidth = N_UN, 
 										bool hide_media = false, 
 										bool hide_thread = false, 
 										bool omit_script = false, 
-										std::string align = "center", 
-										std::string related = S_UN, 
-										std::string lang = S_UN );
+										const std::string& align = "center", 
+										const std::string& related = S_UN, 
+										const std::string& lang = S_UN );
 
-TwitterRequest* search_tweets_request( std::string q, 
-										std::string locale = S_UN, 
-										std::string result_type = S_UN, 
+
+TwitterRequest* search_tweets_request( const std::string& q, 
+										const std::string& locale = S_UN, 
+										const std::string& result_type = S_UN, 
 										int count = N_UN, 
-										std::string until = S_UN, 
-										std::string since_id = S_UN, 
-										std::string max_id = S_UN, 
+										const std::string& until = S_UN, 
+										uid_t since_id = N_UN, 
+										const std::string& max_id = S_UN, 
 										bool include_entities = true, 
-										std::string callback = S_UN );
+										const std::string& callback = S_UN );
 
 TwitterRequest* sent_direct_messages_request( int count = N_UN, 
 										int page = N_UN, 
-										std::string since_id = S_UN, 
-										std::string max_id = S_UN, 
+										uid_t since_id = N_UN, 
+										const std::string& max_id = S_UN, 
 										bool include_entities = true );
 
-/* END_PYGEN don't remove this comment (2012/9/26 17:23) */
+TwitterRequest* show_direct_messages_request( uid_t id );
+
+TwitterRequest* destroy_direct_messages_request( uid_t id, 
+										bool include_entities = true );
+
+TwitterRequest* new_direct_message_by_user_id_request( const std::string& user_id, 
+										const std::string& text );
+
+
+TwitterRequest* new_direct_message_by_screen_name_request( const std::string& screen_name, 
+										const std::string& text );
+
+TwitterRequest* friends_ids_request( uid_t user_id, 
+										bool stringify_ids = true );
+
+TwitterRequest* friends_ids_request( const std::string& screen_name, 
+										bool stringify_ids = true );
+
+TwitterRequest* followers_ids_request( uid_t user_id, 
+										bool stringify_ids = true );
+
+TwitterRequest* followers_ids_request( const std::string& screen_name, 
+										bool stringify_ids = true );
+
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+TwitterRequest* lookup_friendship_by_names_request( const std::string& screen_name );
+
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+TwitterRequest* lookup_friendship_by_ids_request( const std::string& user_id );
+
+TwitterRequest* incoming_friendships_request( bool stringify_ids = true );
+
+TwitterRequest* outgoing_friendships_request( bool stringify_ids = true );
+
+TwitterRequest* create_friendship_request( const std::string& screen_name, 
+										bool follow = true );
+
+TwitterRequest* create_friendship_request( uid_t user_id, 
+										bool follow = true );
+
+TwitterRequest* destroy_friendship_request( const std::string& screen_name );
+
+TwitterRequest* destroy_friendship_request( uid_t user_id );
+
+TwitterRequest* update_friendship_request( const std::string& screen_name, 
+										bool retweets, 
+										bool device );
+
+TwitterRequest* update_friendship_request( uid_t user_id, 
+										bool retweets, 
+										bool device );
+
+TwitterRequest* show_friendship_request( uid_t source_id, 
+										uid_t target_id );
+
+
+TwitterRequest* show_friendship_request( const std::string& source_screen_name, 
+										const std::string& target_screen_name );
+
+/* END_PYGEN don't remove this comment (2012/9/26 22:31) */
 
 
 	protected:
