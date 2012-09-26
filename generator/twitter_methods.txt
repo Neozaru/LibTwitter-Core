@@ -1,5 +1,17 @@
-:: mentions_timeline:: int count 20, int since_id DEF, int max_id DEF, bool trim_user false, bool contributor_details false, bool include_entities true :: GET :: statuses/mentions_timeline
+:: mentions_timeline:: int count 20, string since_id DEF, int max_id DEF, bool trim_user false, bool contributor_details false, bool include_entities true :: GET :: statuses/mentions_timeline
 /* Doc here for "mentions_timeline"  */
 :: user_timeline :: int user_id DEF, string screen_name DEF, int count DEF, int since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_rts true :: GET :: statuses/user_timeline
 :: home_timeline :: int count DEF, int since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_entities true :: GET :: statuses/home_timeline
-
+:: retweets :: string id, int count 50, bool trim_user false :: GET :: statuses/retweets/:id
+:: show :: string id, bool include_my_retweet false, bool trim_user false, bool include_entities true :: statuses/show/:id
+:: destroy_status :: string id, bool trim_user false :: POST :: statuses/destroy/:id
+:: update_status :: string status, string in_reply_to_status_id DEF, string place_id DEF, bool display_coordinates false, bool trim_user false, float lat DEF, float lon DEF :: POST :: statuses/update
+:: retweet :: string id, bool trim_user false :: POST :: statuses/retweet/:id
+# TODO (manually)
+#:: update_status_media ::  :: POST :: statuses/update_with_media
+:: oembed_status :: string id, string url, int maxwidth DEF, bool hide_media false, bool hide_thread false, bool omit_script false, string align "center", string related DEF, string lang DEF :: GET :: statuses/oembed
+:: search_tweets :: string q, string locale DEF, string result_type DEF, int count DEF, string until DEF, string since_id DEF, string max_id DEF, bool include_entities true, string callback DEF :: GET :: search/tweets
+# DIRECT MESSAGES
+#:: direct_messages :: int count DEF, int page DEF, string since_id DEF, string max_id DEF, bool include_entities true, bool skip_status false :: GET :: direct_messages
+:: sent_direct_messages :: int count DEF, int page DEF, string since_id DEF, string max_id DEF, bool include_entities true :: GET :: direct_messages/sent
+#:: show_direct_message :: GET :: direct_messages/show

@@ -128,10 +128,10 @@
 		TwitterRequest* get_settings_request();
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/25 23:11) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/26 17:23) */
 /* Doc here for "mentions_timeline"  */
 TwitterRequest* mentions_timeline_request( int count = 20, 
-										int since_id = N_UN, 
+										std::string since_id = S_UN, 
 										int max_id = N_UN, 
 										bool trim_user = false, 
 										bool contributor_details = false, 
@@ -147,7 +147,6 @@ TwitterRequest* user_timeline_request( int user_id = N_UN,
 										bool contributor_details = false, 
 										bool include_rts = true );
 
-
 TwitterRequest* home_timeline_request( int count = N_UN, 
 										int since_id = N_UN, 
 										int max_id = N_UN, 
@@ -156,7 +155,51 @@ TwitterRequest* home_timeline_request( int count = N_UN,
 										bool contributor_details = false, 
 										bool include_entities = true );
 
-/* END_PYGEN don't remove this comment (2012/9/25 23:11) */
+TwitterRequest* retweets_request( std::string id, 
+										int count = 50, 
+										bool trim_user = false );
+
+TwitterRequest* destroy_status_request( std::string id, 
+										bool trim_user = false );
+
+TwitterRequest* update_status_request( std::string status, 
+										std::string in_reply_to_status_id = S_UN, 
+										std::string place_id = S_UN, 
+										bool display_coordinates = false, 
+										bool trim_user = false, 
+										float lat = N_UN, 
+										float lon = N_UN );
+
+TwitterRequest* retweet_request( std::string id, 
+										bool trim_user = false );
+
+TwitterRequest* oembed_status_request( std::string id, 
+										std::string url, 
+										int maxwidth = N_UN, 
+										bool hide_media = false, 
+										bool hide_thread = false, 
+										bool omit_script = false, 
+										std::string align = "center", 
+										std::string related = S_UN, 
+										std::string lang = S_UN );
+
+TwitterRequest* search_tweets_request( std::string q, 
+										std::string locale = S_UN, 
+										std::string result_type = S_UN, 
+										int count = N_UN, 
+										std::string until = S_UN, 
+										std::string since_id = S_UN, 
+										std::string max_id = S_UN, 
+										bool include_entities = true, 
+										std::string callback = S_UN );
+
+TwitterRequest* sent_direct_messages_request( int count = N_UN, 
+										int page = N_UN, 
+										std::string since_id = S_UN, 
+										std::string max_id = S_UN, 
+										bool include_entities = true );
+
+/* END_PYGEN don't remove this comment (2012/9/26 17:23) */
 
 
 	protected:
