@@ -150,7 +150,7 @@ private:
 	std::string _response_data;
 
 
-	pthread_mutex_t _data_mutex_rw = PTHREAD_MUTEX_INITIALIZER;
+	pthread_mutex_t _data_mutex_rw;
 
 
 };
