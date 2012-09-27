@@ -4,6 +4,7 @@
 	#include "TwitterConstants.h"
 
 	typedef std::string tid_t;
+	typedef unsigned int cid_t;
 	typedef unsigned int uid_t;
 
 	/**
@@ -128,12 +129,13 @@
 											std::string track = S_UN
 											  );
 
+/*
 		TwitterRequest* verify_credentials_request();
 
 		TwitterRequest* get_settings_request();
+*/
 
-
-/* BEGIN_PYGEN don't remove this comment (2012/9/26 22:31) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/27 22:50) */
 /* Doc here for "mentions_timeline"  */
 TwitterRequest* mentions_timeline_request( int count = 20, 
 										uid_t since_id = N_UN, 
@@ -269,7 +271,33 @@ TwitterRequest* show_friendship_request( uid_t source_id,
 TwitterRequest* show_friendship_request( const std::string& source_screen_name, 
 										const std::string& target_screen_name );
 
-/* END_PYGEN don't remove this comment (2012/9/26 22:31) */
+TwitterRequest* verify_credentials_request( bool include_entities = true, 
+										bool skip_status = false );
+
+TwitterRequest* update_delivery_device_request( const std::string& device = "none", 
+										bool include_entities = false );
+
+TwitterRequest* update_profile_background_image_request( bool use = true, 
+										const std::string& image = S_UN, 
+										bool tile = true, 
+										bool skip_status = true );
+
+TwitterRequest* update_profile_colors_request( const std::string& profile_background_color = S_UN, 
+										const std::string& profile_text_color = S_UN, 
+										const std::string& profile_link_color = S_UN, 
+										const std::string& profile_sidebar_fill_color = S_UN, 
+										const std::string& profile_sidebar_border_color = S_UN, 
+										bool skip_status = true, 
+										bool include_entities = false );
+
+TwitterRequest* get_blocks_list_request( cid_t cursor = N_UN, 
+										bool skip_status = true, 
+										bool include_entities = false );
+
+TwitterRequest* get_blocks_ids_request( cid_t cursor = N_UN, 
+										bool stringify_ids = true );
+
+/* END_PYGEN don't remove this comment (2012/9/27 22:50) */
 
 
 	protected:

@@ -58,12 +58,10 @@ namespace TwitterConsts {
 	const string API_LINK = "http://api.twitter.com/"+API_VERSION+"/";
 	const string STREAM_API_LINK = "http://stream.twitter.com/"+API_VERSION+"/";
 
-	const string FORMAT = ".json";
-
-	const string ACCOUNT = "account/";
+	const string FORMAT  = ".json";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/26 22:31) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/27 22:50) */
 
 	namespace STATUSES {
 
@@ -123,7 +121,25 @@ namespace TwitterConsts {
 		const std::string SHOW = API_LINK + FRIENDSHIPS + "show" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/9/26 22:31) */
+	namespace ACCOUNT {
+
+		const std::string ACCOUNT = "account/";
+
+		const std::string VERIFY_CREDENTIALS = API_LINK + ACCOUNT + "verify_credentials" + FORMAT ;
+		const std::string UPDATE_DELIVERY_DEVICE = API_LINK + ACCOUNT + "update_delivery_device" + FORMAT ;
+		const std::string UPDATE_PROFILE_BACKGROUND_IMAGE = API_LINK + ACCOUNT + "update_profile_background_image" + FORMAT ;
+		const std::string UPDATE_PROFILE_COLORS = API_LINK + ACCOUNT + "update_profile_colors" + FORMAT ;
+	};
+
+	namespace BLOCKS {
+
+		const std::string BLOCKS = "blocks/";
+
+		const std::string LIST = API_LINK + BLOCKS + "list" + FORMAT ;
+		const std::string IDS = API_LINK + BLOCKS + "ids" + FORMAT ;
+	};
+
+/* END_PYGEN don't remove this comment (2012/9/27 22:50) */
 
 	namespace Streaming {
 
@@ -138,18 +154,7 @@ namespace TwitterConsts {
 
 	};
 
-	namespace Users {
 
-		const string VERIFY_CREDENTIALS = API_LINK + ACCOUNT + "verify_credentials.json";
-
-	};
-
-	namespace Settings {
-
-		const string GET_SETTINGS = API_LINK + ACCOUNT + "settings.json";
-
-	};
-	
 };
 
 #endif

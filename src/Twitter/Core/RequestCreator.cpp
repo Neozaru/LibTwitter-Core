@@ -56,7 +56,7 @@ TwitterRequest* RequestCreator::update_status_request( const std::string& status
 	return req;
 }
 */
-
+/*
 TwitterRequest* RequestCreator::verify_credentials_request() {
 
 
@@ -66,12 +66,14 @@ TwitterRequest* RequestCreator::verify_credentials_request() {
 
 }
 
+
 TwitterRequest* RequestCreator::get_settings_request() {
 
 	TwitterRequest* req = __make_a_request( TwitterConsts::Settings::GET_SETTINGS );
 
 	return req;
 }
+*/
 
 TwitterRequest* RequestCreator::stream_user_request( std::string with, std::string track ) {
 
@@ -82,7 +84,7 @@ TwitterRequest* RequestCreator::stream_user_request( std::string with, std::stri
 
 }
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/26 22:31) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/27 22:50) */
 TwitterRequest* RequestCreator::mentions_timeline_request( int count, uid_t since_id, int max_id, bool trim_user, bool contributor_details, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::MENTIONS_TIMELINE );
 	req->set_GET_data( REC_ARGS_6( count, since_id, max_id, trim_user, contributor_details, include_entities ) );
@@ -269,5 +271,41 @@ TwitterRequest* RequestCreator::show_friendship_request( const std::string& sour
 	return req;
 }
 
-/* END_PYGEN don't remove this comment (2012/9/26 22:31) */
+TwitterRequest* RequestCreator::verify_credentials_request( bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::ACCOUNT::VERIFY_CREDENTIALS );
+	req->set_GET_data( REC_ARGS_2( include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::update_delivery_device_request( const std::string& device, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::ACCOUNT::UPDATE_DELIVERY_DEVICE );
+	req->set_POST_data( REC_ARGS_2( device, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::update_profile_background_image_request( bool use, const std::string& image, bool tile, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::ACCOUNT::UPDATE_PROFILE_BACKGROUND_IMAGE );
+	req->set_POST_data( REC_ARGS_4( use, image, tile, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::update_profile_colors_request( const std::string& profile_background_color, const std::string& profile_text_color, const std::string& profile_link_color, const std::string& profile_sidebar_fill_color, const std::string& profile_sidebar_border_color, bool skip_status, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::ACCOUNT::UPDATE_PROFILE_COLORS );
+	req->set_POST_data( REC_ARGS_7( profile_background_color, profile_text_color, profile_link_color, profile_sidebar_fill_color, profile_sidebar_border_color, skip_status, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::get_blocks_list_request( cid_t cursor, bool skip_status, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::BLOCKS::LIST );
+	req->set_GET_data( REC_ARGS_3( cursor, skip_status, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::get_blocks_ids_request( cid_t cursor, bool stringify_ids ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::BLOCKS::IDS );
+	req->set_GET_data( REC_ARGS_2( cursor, stringify_ids ) );
+	return req;
+}
+
+/* END_PYGEN don't remove this comment (2012/9/27 22:50) */
 

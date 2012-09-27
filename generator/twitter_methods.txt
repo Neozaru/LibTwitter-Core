@@ -48,3 +48,16 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: show_friendship :: string source_screen_name, string target_screen_name :: GET :: friendships/show
 
 # USERS
+#:: get_account_settings :: :: GET :: account/settings
+:: verify_credentials :: bool include_entities true, bool skip_status false :: GET :: account/verify_credentials
+#todo : Maybe custom request for account settings ?
+#:: set_account_settings :: :: POST :: account/settings
+:: update_delivery_device :: string device "none", bool include_entities false :: POST :: account/update_delivery_device
+#todo : Like settings, that could be critical
+#:: update_profile :: :: POST :: account/update_profile
+:: update_profile_background_image :: bool use true, string image DEF, bool tile true, bool skip_status true :: POST :: account/update_profile_background_image
+:: update_profile_colors :: string profile_background_color DEF, string profile_text_color DEF, string profile_link_color DEF, string profile_sidebar_fill_color DEF, string profile_sidebar_border_color DEF, bool skip_status true, bool include_entities false :: POST :: account/update_profile_colors
+#todo
+:: update_profile_image :: POST :: account/update_profile_image
+:: get_blocks_list :: cid_t cursor DEF, bool skip_status true, bool include_entities false :: GET :: blocks/list
+:: get_blocks_ids :: cid_t cursor DEF, bool stringify_ids true :: GET :: blocks/ids
