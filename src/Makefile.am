@@ -6,10 +6,10 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 core=Twitter/Core
 
-lib_LTLIBRARIES = libtwitter-core.la
+lib_LTLIBRARIES = $(top_builddir)/bin/libtwitter-core.la
 
 
-libtwitter_core_la_SOURCES = Twitter/Core/OAuth.cpp Twitter/Core/OAuth.h \
+__top_builddir__bin_libtwitter_core_la_SOURCES = Twitter/Core/OAuth.cpp Twitter/Core/OAuth.h \
 					 Twitter/Core/Utils.cpp Twitter/Core/Utils.h \
 					 Twitter/Core/CurlProcess.cpp Twitter/Core/CurlProcess.h \
 					 Twitter/Core/TwitterRequest.cpp Twitter/Core/TwitterRequest.h \
@@ -18,12 +18,12 @@ libtwitter_core_la_SOURCES = Twitter/Core/OAuth.cpp Twitter/Core/OAuth.h \
 					 Twitter/Core/TwitterRequestListener.h	
 
 
-libtwitter_core_la_SOURCES += Twitter/Core/Parsers/HTML_Parser.h \
+__top_builddir__bin_libtwitter_core_la_SOURCES += Twitter/Core/Parsers/HTML_Parser.h \
 		 Twitter/Core/Parsers/Auth_Page_Parser.cpp Twitter/Core/Parsers/Auth_Page_Parser.h \
 		 Twitter/Core/Parsers/PIN_Page_Parser.cpp Twitter/Core/Parsers/PIN_Page_Parser.h
 	
 
-libtwitter_core_la_SOURCES += Twitter/Core/Utils/SHA1.cpp Twitter/Core/Utils/SHA1.h \
+__top_builddir__bin_libtwitter_core_la_SOURCES += Twitter/Core/Utils/SHA1.cpp Twitter/Core/Utils/SHA1.h \
 					 Twitter/Core/Utils/HMAC_SHA1.cpp Twitter/Core/Utils/HMAC_SHA1.h \
 					 Twitter/Core/Utils/base64.cpp Twitter/Core/Utils/base64.h \
 					 Twitter/Core/Utils/urlencode.cpp Twitter/Core/Utils/urlencode.h

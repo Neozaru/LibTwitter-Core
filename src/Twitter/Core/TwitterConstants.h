@@ -5,6 +5,14 @@
 
 	using namespace std;
 	
+	typedef const std::string& str_t;
+
+	typedef std::string tid_t;
+	typedef unsigned int cid_t;
+	typedef unsigned int uid_t;
+	typedef unsigned int lid_t;
+	typedef unsigned int slug_t;
+	typedef unsigned int sid_t;
 
 
 
@@ -61,7 +69,10 @@ namespace TwitterConsts {
 	const string FORMAT  = ".json";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/28 16:24) */
+	const string REPORT_SPAM = API_LINK + "report_spam";
+
+
+/* BEGIN_PYGEN don't remove this comment (2012/9/29 0:1) */
 
 	namespace STATUSES {
 
@@ -178,7 +189,33 @@ namespace TwitterConsts {
 		const std::string SUBSCRIPTIONS = API_LINK + LISTS + "subscriptions" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/9/28 16:24) */
+	namespace SAVED_SEARCHES {
+
+		const std::string SAVED_SEARCHES = "saved_searches/";
+
+		const std::string LIST = API_LINK + SAVED_SEARCHES + "list" + FORMAT ;
+		const std::string SHOW = API_LINK + SAVED_SEARCHES + "show/:id" + FORMAT ;
+		const std::string CREATE = API_LINK + SAVED_SEARCHES + "create" + FORMAT ;
+		const std::string DESTROY = API_LINK + SAVED_SEARCHES + "destroy/:id" + FORMAT ;
+	};
+
+	namespace TRENDS {
+
+		const std::string TRENDS = "trends/";
+
+		const std::string PLACE = API_LINK + TRENDS + "place" + FORMAT ;
+		const std::string AVAILABLE = API_LINK + TRENDS + "available" + FORMAT ;
+		const std::string CLOSEST = API_LINK + TRENDS + "closest" + FORMAT ;
+	};
+
+	namespace APPLICATION {
+
+		const std::string APPLICATION = "application/";
+
+		const std::string RATE_LIMIT_STATUS = API_LINK + APPLICATION + "rate_limit_status" + FORMAT ;
+	};
+
+/* END_PYGEN don't remove this comment (2012/9/29 0:1) */
 
 	namespace Streaming {
 

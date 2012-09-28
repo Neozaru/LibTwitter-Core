@@ -64,14 +64,17 @@ class Tw_ConstantS:
 		#if link not in self.constants:
 		tab = link.split("/")
 		
-		l_namespace = tab[0].upper()
-		self.addNamespace( l_namespace )
+		l_namespace = ""
 
-		sublink = tab[1]
-		if len(tab) > 2:
-			sublink += "/"+tab[2]
-			if len(tab) > 3:
-				sublink += "/"+tab[3]
+		sublink = link
+		if len(tab) > 1:
+			l_namespace = tab[0].upper()
+			self.addNamespace( l_namespace )
+			sublink = tab[1]
+			if len(tab) > 2:
+				sublink += "/"+tab[2]
+				if len(tab) > 3:
+					sublink += "/"+tab[3]
 
 		const_obj = Tw_Constant( l_namespace, sublink )
 
@@ -179,6 +182,8 @@ class Tw_Method:
 
 		rstr = ""
 
+		rstr += self.gen_doc()
+
 		if inc_doc == 1:
 			rstr += self.documentation
 
@@ -216,8 +221,11 @@ class Tw_Method:
 	def gen_body(self):
 		rstr = ""
 
-		link_constant = self.cm.getMainNamespace()+"::"+self.request_const.getNamespace()+"::"+self.request_const.getConstName()
-		
+
+		link_constant = self.cm.getMainNamespace()
+		if self.request_const.getNamespace() != "":
+			link_constant += "::"+self.request_const.getNamespace()
+		link_constant += "::"+self.request_const.getConstName()
 		# Copy a temporary list from the parameters list
 		my_parameters = self.parameters[:]
 
@@ -243,6 +251,25 @@ class Tw_Method:
 
 		return rstr
 
+	def gen_doc(self):
+
+		twitter_link = "http://dev.twitter.com/docs/api/1.1/"+self.http_method.lower()+"/"+self.request_link
+		text = "Twitter Documentation for ["+self.name+"]"
+
+		rstr = ""
+		rstr += "/**\n"
+		
+		rstr += "* \htmlonly \n"
+		rstr += "* <a target=\"_blank\"href=\""+twitter_link+"\">"+text+"<a>"
+		rstr += "\n* \endhtmlonly\n"
+
+		rstr += "* \latexonly \n"
+		rstr += "* \href{"+twitter_link+"}{"+text.replace("_","\_")+"}"
+		rstr += "\n* \endlatexonly\n"
+
+		rstr += "*/\n"
+
+		return rstr
 
 	def debug(self,pdoc):
 		print("Method (" + self.http_method + ") : "+self.name)
@@ -261,7 +288,8 @@ class Tw_Parameter:
 	def __init__(self,p_type,name):
 		
 		#  CONSTANTS
-		___string_type = "const std::string&"
+		#___string_type = "const std::string&"
+		___string_type = "str_t"
 		#
 
 		if p_type == "string":
@@ -283,10 +311,10 @@ class Tw_Parameter:
 		rstr = self.to_str()
 		if self.default_value != "":
 			if self.default_value == "DEF":
-				if "string" in self.p_type:
-					rstr += " = S_UN"
-				else:
+				if "str" not in self.p_type:
 					rstr += " = N_UN"
+				else:
+					rstr += " = S_UN"
 
 			else:
 				rstr += " = "+self.default_value
@@ -320,9 +348,12 @@ def parse_method(cm,p_str):
 		method = Tw_Method(cm,tab[1].strip(),tab[3].strip(),tab[4].strip())
 
 		tab_vars = tab[2].split(",")
+		#print("Split : ")
+		#print(tab_vars)
 		for p in tab_vars:
-			param = parse_parameter(p)
-			method.addParameter( param )
+			if p != " ":
+				param = parse_parameter(p)
+				method.addParameter( param )
 
 		return method
 
