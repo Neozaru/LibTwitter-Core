@@ -6,6 +6,9 @@
 	typedef std::string tid_t;
 	typedef unsigned int cid_t;
 	typedef unsigned int uid_t;
+	typedef unsigned int lid_t;
+	typedef unsigned int slug_t;
+
 
 	/**
 	* \namespace TwDefaults
@@ -135,7 +138,7 @@
 		TwitterRequest* get_settings_request();
 */
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/27 22:50) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/28 12:15) */
 /* Doc here for "mentions_timeline"  */
 TwitterRequest* mentions_timeline_request( int count = 20, 
 										uid_t since_id = N_UN, 
@@ -297,7 +300,110 @@ TwitterRequest* get_blocks_list_request( cid_t cursor = N_UN,
 TwitterRequest* get_blocks_ids_request( cid_t cursor = N_UN, 
 										bool stringify_ids = true );
 
-/* END_PYGEN don't remove this comment (2012/9/27 22:50) */
+TwitterRequest* create_blocks_by_screen_name_request( const std::string& screen_name, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* create_blocks_by_id_request( uid_t user_id, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* destroy_blocks_by_screen_name_request( const std::string& screen_name, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* destroy_blocks_by_id_request( uid_t user_id, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+TwitterRequest* lookup_user_by_id_request( const std::string& user_id, 
+										bool include_entities = true );
+
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+TwitterRequest* lookup_user_by_screen_name_request( const std::string& screen_name, 
+										bool include_entities = true );
+
+TwitterRequest* show_user_by_id_request( const std::string& user_id, 
+										bool include_entities = true );
+
+TwitterRequest* show_user_by_screen_name_request( const std::string& screen_name, 
+										bool include_entities = true );
+
+TwitterRequest* search_user_request( const std::string& q, 
+										int count = N_UN, 
+										int page = N_UN, 
+										bool include_entities = true );
+
+TwitterRequest* user_contributees_by_user_id_request( uid_t user_id, 
+										bool include_entities = true, 
+										bool skip_status = false );
+
+TwitterRequest* user_contributees_by_screen_name_request( const std::string& screen_name, 
+										bool include_entities = true, 
+										bool skip_status = false );
+
+TwitterRequest* user_contributors_by_user_id_request( uid_t user_id, 
+										bool include_entities = true, 
+										bool skip_status = false );
+
+
+TwitterRequest* user_contributors_by_screen_name_request( const std::string& screen_name, 
+										bool include_entities = true, 
+										bool skip_status = false );
+
+TwitterRequest* user_suggestions_request( const std::string& slug, 
+										const std::string& lang = S_UN );
+
+TwitterRequest* user_suggestions_alt_request( const std::string& lang = S_UN );
+
+
+TwitterRequest* user_suggestions_members_request( const std::string& slug );
+
+TwitterRequest* list_favorites_request( uid_t user_id = N_UN, 
+										int count = N_UN, 
+										int since_id = N_UN, 
+										int max_id = N_UN, 
+										bool include_entities = false );
+
+TwitterRequest* list_favorites_by_screen_name_request( const std::string& screen_name, 
+										int count = N_UN, 
+										int since_id = N_UN, 
+										int max_id = N_UN, 
+										bool include_entities = false );
+
+TwitterRequest* destroy_favorite_request( tid_t id, 
+										bool include_entities = false );
+
+
+TwitterRequest* create_favorite_request( tid_t id, 
+										bool include_entities = false );
+
+TwitterRequest* lists_by_user_id_request( uid_t user_id );
+
+TwitterRequest* lists_by_screen_name_request( uid_t screen_name );
+
+TwitterRequest* list_statuses_by_ids_request( lid_t list_id, 
+										uid_t owner_id, 
+										int count = N_UN, 
+										int since_id = N_UN, 
+										int max_id = N_UN, 
+										bool include_entities = false, 
+										bool include_rts = false );
+
+TwitterRequest* list_statuses_by_names_request( lid_t slug, 
+										uid_t owner_screen_name, 
+										int count = N_UN, 
+										int since_id = N_UN, 
+										int max_id = N_UN, 
+										bool include_entities = false, 
+										bool include_rts = false );
+
+/* END_PYGEN don't remove this comment (2012/9/28 12:15) */
 
 
 	protected:

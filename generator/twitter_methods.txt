@@ -61,3 +61,39 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: update_profile_image :: POST :: account/update_profile_image
 :: get_blocks_list :: cid_t cursor DEF, bool skip_status true, bool include_entities false :: GET :: blocks/list
 :: get_blocks_ids :: cid_t cursor DEF, bool stringify_ids true :: GET :: blocks/ids
+:: create_blocks_by_screen_name :: string screen_name, bool include_entities  false, bool skip_status true :: POST :: blocks/create
+:: create_blocks_by_id :: uid_t user_id, bool include_entities  false, bool skip_status true :: POST :: blocks/create
+:: destroy_blocks_by_screen_name :: string screen_name, bool include_entities  false, bool skip_status true :: POST :: blocks/destroy
+:: destroy_blocks_by_id :: uid_t user_id, bool include_entities  false, bool skip_status true :: POST :: blocks/destroy
+:: lookup_user_by_id :: string user_id, bool include_entities true :: GET :: users/lookup
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+:: lookup_user_by_screen_name :: string screen_name, bool include_entities true :: GET :: users/lookup
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+:: show_user_by_id :: string user_id, bool include_entities true :: GET :: users/show
+:: show_user_by_screen_name :: string screen_name, bool include_entities true :: GET :: users/show
+:: search_user :: string q, int count DEF, int page DEF, bool include_entities true :: GET :: users/search
+:: user_contributees_by_user_id :: uid_t user_id, bool include_entities true, bool skip_status false :: GET :: users/contributees
+:: user_contributees_by_screen_name :: string screen_name, bool include_entities true, bool skip_status false :: GET :: users/contributees
+:: user_contributors_by_user_id :: uid_t user_id, bool include_entities true, bool skip_status false :: GET :: users/contributors
+:: user_contributors_by_screen_name :: string screen_name, bool include_entities true, bool skip_status false :: GET :: users/contributors
+
+# SUGGESTED USERS
+:: user_suggestions :: string slug, string lang DEF :: GET :: users/suggestions/:slug
+:: user_suggestions_alt :: string lang DEF :: GET :: users/suggestions
+:: user_suggestions_members :: string slug :: GET :: users/suggestions/:slug/members
+
+# FAVORITES
+:: list_favorites :: uid_t user_id DEF, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false :: GET :: favorites/list
+:: list_favorites_by_screen_name :: string screen_name, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false :: GET :: favorites/list
+:: destroy_favorite :: tid_t id, bool include_entities false :: POST :: favorites/destroy 
+:: create_favorite :: tid_t id, bool include_entities false :: POST :: favorites/create
+
+# LISTS
+:: lists_by_user_id :: uid_t user_id :: GET :: lists/list
+:: lists_by_screen_name :: uid_t screen_name :: GET :: lists/list
+:: list_statuses_by_ids :: lid_t list_id, uid_t owner_id, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses
+:: list_statuses_by_names :: lid_t slug, uid_t owner_screen_name, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses

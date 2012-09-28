@@ -84,7 +84,7 @@ TwitterRequest* RequestCreator::stream_user_request( std::string with, std::stri
 
 }
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/27 22:50) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/28 12:15) */
 TwitterRequest* RequestCreator::mentions_timeline_request( int count, uid_t since_id, int max_id, bool trim_user, bool contributor_details, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::MENTIONS_TIMELINE );
 	req->set_GET_data( REC_ARGS_6( count, since_id, max_id, trim_user, contributor_details, include_entities ) );
@@ -307,5 +307,153 @@ TwitterRequest* RequestCreator::get_blocks_ids_request( cid_t cursor, bool strin
 	return req;
 }
 
-/* END_PYGEN don't remove this comment (2012/9/27 22:50) */
+TwitterRequest* RequestCreator::create_blocks_by_screen_name_request( const std::string& screen_name, bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::BLOCKS::CREATE );
+	req->set_POST_data( REC_ARGS_3( screen_name, include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::create_blocks_by_id_request( uid_t user_id, bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::BLOCKS::CREATE );
+	req->set_POST_data( REC_ARGS_3( user_id, include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::destroy_blocks_by_screen_name_request( const std::string& screen_name, bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::BLOCKS::DESTROY );
+	req->set_POST_data( REC_ARGS_3( screen_name, include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::destroy_blocks_by_id_request( uid_t user_id, bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::BLOCKS::DESTROY );
+	req->set_POST_data( REC_ARGS_3( user_id, include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::lookup_user_by_id_request( const std::string& user_id, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::LOOKUP );
+	req->set_GET_data( REC_ARGS_2( user_id, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::lookup_user_by_screen_name_request( const std::string& screen_name, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::LOOKUP );
+	req->set_GET_data( REC_ARGS_2( screen_name, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::show_user_by_id_request( const std::string& user_id, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::SHOW );
+	req->set_GET_data( REC_ARGS_2( user_id, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::show_user_by_screen_name_request( const std::string& screen_name, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::SHOW );
+	req->set_GET_data( REC_ARGS_2( screen_name, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::search_user_request( const std::string& q, int count, int page, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::SEARCH );
+	req->set_GET_data( REC_ARGS_4( q, count, page, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::user_contributees_by_user_id_request( uid_t user_id, bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::CONTRIBUTEES );
+	req->set_GET_data( REC_ARGS_3( user_id, include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::user_contributees_by_screen_name_request( const std::string& screen_name, bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::CONTRIBUTEES );
+	req->set_GET_data( REC_ARGS_3( screen_name, include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::user_contributors_by_user_id_request( uid_t user_id, bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::CONTRIBUTORS );
+	req->set_GET_data( REC_ARGS_3( user_id, include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::user_contributors_by_screen_name_request( const std::string& screen_name, bool include_entities, bool skip_status ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::CONTRIBUTORS );
+	req->set_GET_data( REC_ARGS_3( screen_name, include_entities, skip_status ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::user_suggestions_request( const std::string& slug, const std::string& lang ) {
+	TwitterRequest* req = __make_a_request( 
+		PUT_VAR_IN_URL( TwitterConsts::USERS::SUGGESTIONS, slug )
+	 );
+	req->set_GET_data( REC_ARGS_1( lang ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::user_suggestions_alt_request( const std::string& lang ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::SUGGESTIONS );
+	req->set_GET_data( REC_ARGS_1( lang ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::user_suggestions_members_request( const std::string& slug ) {
+	TwitterRequest* req = __make_a_request( 
+		PUT_VAR_IN_URL( TwitterConsts::USERS::SUGGESTIONS, slug )
+	 );
+
+	return req;
+}
+
+TwitterRequest* RequestCreator::list_favorites_request( uid_t user_id, int count, int since_id, int max_id, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FAVORITES::LIST );
+	req->set_GET_data( REC_ARGS_5( user_id, count, since_id, max_id, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::list_favorites_by_screen_name_request( const std::string& screen_name, int count, int since_id, int max_id, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FAVORITES::LIST );
+	req->set_GET_data( REC_ARGS_5( screen_name, count, since_id, max_id, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::destroy_favorite_request( tid_t id, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FAVORITES::DESTROY );
+	req->set_POST_data( REC_ARGS_2( id, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::create_favorite_request( tid_t id, bool include_entities ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::FAVORITES::CREATE );
+	req->set_POST_data( REC_ARGS_2( id, include_entities ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::lists_by_user_id_request( uid_t user_id ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::LIST );
+	req->set_GET_data( REC_ARGS_1( user_id ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::lists_by_screen_name_request( uid_t screen_name ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::LIST );
+	req->set_GET_data( REC_ARGS_1( screen_name ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::list_statuses_by_ids_request( lid_t list_id, uid_t owner_id, int count, int since_id, int max_id, bool include_entities, bool include_rts ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::STATUSES );
+	req->set_GET_data( REC_ARGS_7( list_id, owner_id, count, since_id, max_id, include_entities, include_rts ) );
+	return req;
+}
+
+TwitterRequest* RequestCreator::list_statuses_by_names_request( lid_t slug, uid_t owner_screen_name, int count, int since_id, int max_id, bool include_entities, bool include_rts ) {
+	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::STATUSES );
+	req->set_GET_data( REC_ARGS_7( slug, owner_screen_name, count, since_id, max_id, include_entities, include_rts ) );
+	return req;
+}
+
+/* END_PYGEN don't remove this comment (2012/9/28 12:15) */
 

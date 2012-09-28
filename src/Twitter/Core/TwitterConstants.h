@@ -61,7 +61,7 @@ namespace TwitterConsts {
 	const string FORMAT  = ".json";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/27 22:50) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/28 12:15) */
 
 	namespace STATUSES {
 
@@ -137,9 +137,40 @@ namespace TwitterConsts {
 
 		const std::string LIST = API_LINK + BLOCKS + "list" + FORMAT ;
 		const std::string IDS = API_LINK + BLOCKS + "ids" + FORMAT ;
+		const std::string CREATE = API_LINK + BLOCKS + "create" + FORMAT ;
+		const std::string DESTROY = API_LINK + BLOCKS + "destroy" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/9/27 22:50) */
+	namespace USERS {
+
+		const std::string USERS = "users/";
+
+		const std::string LOOKUP = API_LINK + USERS + "lookup" + FORMAT ;
+		const std::string SHOW = API_LINK + USERS + "show" + FORMAT ;
+		const std::string SEARCH = API_LINK + USERS + "search" + FORMAT ;
+		const std::string CONTRIBUTEES = API_LINK + USERS + "contributees" + FORMAT ;
+		const std::string CONTRIBUTORS = API_LINK + USERS + "contributors" + FORMAT ;
+		const std::string SUGGESTIONS = API_LINK + USERS + "suggestions/:slug" + FORMAT ;
+	};
+
+	namespace FAVORITES {
+
+		const std::string FAVORITES = "favorites/";
+
+		const std::string LIST = API_LINK + FAVORITES + "list" + FORMAT ;
+		const std::string DESTROY = API_LINK + FAVORITES + "destroy" + FORMAT ;
+		const std::string CREATE = API_LINK + FAVORITES + "create" + FORMAT ;
+	};
+
+	namespace LISTS {
+
+		const std::string LISTS = "lists/";
+
+		const std::string LIST = API_LINK + LISTS + "list" + FORMAT ;
+		const std::string STATUSES = API_LINK + LISTS + "statuses" + FORMAT ;
+	};
+
+/* END_PYGEN don't remove this comment (2012/9/28 12:15) */
 
 	namespace Streaming {
 
