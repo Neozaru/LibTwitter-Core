@@ -61,7 +61,7 @@ namespace TwitterConsts {
 	const string FORMAT  = ".json";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/28 12:15) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/28 16:24) */
 
 	namespace STATUSES {
 
@@ -168,9 +168,17 @@ namespace TwitterConsts {
 
 		const std::string LIST = API_LINK + LISTS + "list" + FORMAT ;
 		const std::string STATUSES = API_LINK + LISTS + "statuses" + FORMAT ;
+		const std::string MEMBERS = API_LINK + LISTS + "members/destroy" + FORMAT ;
+		const std::string MEMBERSHIPS = API_LINK + LISTS + "memberships" + FORMAT ;
+		const std::string SUBSCRIBERS = API_LINK + LISTS + "subscribers" + FORMAT ;
+		const std::string DESTROY = API_LINK + LISTS + "destroy" + FORMAT ;
+		const std::string UPDATE = API_LINK + LISTS + "update" + FORMAT ;
+		const std::string CREATE = API_LINK + LISTS + "create" + FORMAT ;
+		const std::string SHOW = API_LINK + LISTS + "show" + FORMAT ;
+		const std::string SUBSCRIPTIONS = API_LINK + LISTS + "subscriptions" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/9/28 12:15) */
+/* END_PYGEN don't remove this comment (2012/9/28 16:24) */
 
 	namespace Streaming {
 

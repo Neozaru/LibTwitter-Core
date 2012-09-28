@@ -138,7 +138,7 @@
 		TwitterRequest* get_settings_request();
 */
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/28 12:15) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/28 16:24) */
 /* Doc here for "mentions_timeline"  */
 TwitterRequest* mentions_timeline_request( int count = 20, 
 										uid_t since_id = N_UN, 
@@ -388,14 +388,13 @@ TwitterRequest* lists_by_user_id_request( uid_t user_id );
 TwitterRequest* lists_by_screen_name_request( uid_t screen_name );
 
 TwitterRequest* list_statuses_by_ids_request( lid_t list_id, 
-										uid_t owner_id, 
 										int count = N_UN, 
 										int since_id = N_UN, 
 										int max_id = N_UN, 
 										bool include_entities = false, 
 										bool include_rts = false );
 
-TwitterRequest* list_statuses_by_names_request( lid_t slug, 
+TwitterRequest* list_statuses_by_names_request( const std::string& slug, 
 										uid_t owner_screen_name, 
 										int count = N_UN, 
 										int since_id = N_UN, 
@@ -403,7 +402,135 @@ TwitterRequest* list_statuses_by_names_request( lid_t slug,
 										bool include_entities = false, 
 										bool include_rts = false );
 
-/* END_PYGEN don't remove this comment (2012/9/28 12:15) */
+TwitterRequest* destroy_list_member_by_ids_request( lid_t list_id, 
+										uid_t user_id );
+
+TwitterRequest* destroy_list_member_by_names_request( const std::string& slug, 
+										uid_t screen_name );
+
+TwitterRequest* list_membership_request( const std::string& screen_name, 
+										cid_t cursor = N_UN );
+
+TwitterRequest* list_membership_by_id_request( uid_t user_id, 
+										cid_t cursor = N_UN );
+
+TwitterRequest* list_suscribers_request( const std::string& slug, 
+										const std::string& screen_name, 
+										cid_t cursor, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* list_suscribers_by_id_request( lid_t list_id, 
+										cid_t cursor, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* subscribe_to_list_request( lid_t list_id );
+
+TwitterRequest* subscribe_to_list_request( const std::string& slug, 
+										const std::string& owner_screen_name );
+
+TwitterRequest* show_user_is_suscriber_by_ids_request( uid_t user_id, 
+										lid_t list_id, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* show_user_is_suscriber_by_names_request( const std::string& screen_name, 
+										lid_t slug, 
+										const std::string& owner_screen_name, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* unsubscribe_from_list_request( lid_t list_id );
+
+TwitterRequest* unsubscribe_from_list_request( const std::string& slug, 
+										const std::string& owner_screen_name );
+
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+TwitterRequest* subscribe_to_list_multi_by_ids_request( lid_t list_id, 
+										const std::string& user_id );
+
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+TwitterRequest* subscribe_to_list_multi_by_ids_request( const std::string& slug, 
+										const std::string& owner_screen_name, 
+										const std::string& screen_name );
+
+TwitterRequest* show_user_is_member_by_ids_request( lid_t list_id, 
+										uid_t user_id, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* show_user_is_member_by_names_request( const std::string& slug, 
+										const std::string& owner_screen_name, 
+										const std::string& screen_name, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* list_members_by_id_request( lid_t list_id, 
+										cid_t cursor = N_UN, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* list_members_by_name_request( const std::string& slug, 
+										const std::string& owner_screen_name, 
+										cid_t cursor, 
+										bool include_entities = false, 
+										bool skip_status = true );
+
+TwitterRequest* join_list_request( uid_t user_id, 
+										lid_t list_id );
+
+TwitterRequest* join_list_request( const std::string& screen_name, 
+										const std::string& slug, 
+										const std::string& owner_screen_name );
+
+TwitterRequest* part_from_list_request( lid_t list_id );
+
+TwitterRequest* update_list_by_id_request( lid_t list_id, 
+										const std::string& name = S_UN, 
+										const std::string& description = "", 
+										const std::string& mode = "public" );
+
+TwitterRequest* update_list_by_name_request( const std::string& slug, 
+										const std::string& owner_screen_name, 
+										const std::string& name = S_UN, 
+										const std::string& description = "", 
+										const std::string& mode = "public" );
+
+TwitterRequest* create_list_request( const std::string& name, 
+										const std::string& description = "", 
+										bool mode = "public" );
+
+TwitterRequest* show_list_request( lid_t list_id );
+
+TwitterRequest* show_list_request( const std::string& slug, 
+										const std::string& owner_screen_name );
+
+TwitterRequest* lists_subscription_by_id_request( uid_t user_id, 
+										int count = N_UN, 
+										cid_t cursor = N_UN );
+
+TwitterRequest* lists_subscription_by_screen_name_request( const std::string& screen_name, 
+										int count = N_UN, 
+										cid_t cursor = N_UN );
+
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+TwitterRequest* expulse_from_list_by_ids_request( lid_t list_id, 
+										const std::string& user_id );
+
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/TwitterRequest* expulse_from_list_by_names_request( const std::string& slug, 
+										const std::string& owner_screen_name, 
+										const std::string& screen_name );
+
+/* END_PYGEN don't remove this comment (2012/9/28 16:24) */
 
 
 	protected:

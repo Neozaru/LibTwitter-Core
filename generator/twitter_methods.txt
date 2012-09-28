@@ -95,5 +95,49 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 # LISTS
 :: lists_by_user_id :: uid_t user_id :: GET :: lists/list
 :: lists_by_screen_name :: uid_t screen_name :: GET :: lists/list
-:: list_statuses_by_ids :: lid_t list_id, uid_t owner_id, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses
-:: list_statuses_by_names :: lid_t slug, uid_t owner_screen_name, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses
+:: list_statuses_by_ids :: lid_t list_id, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses
+:: list_statuses_by_names :: string slug, uid_t owner_screen_name, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses
+:: destroy_list_member_by_ids :: lid_t list_id, uid_t user_id :: POST :: lists/members/destroy
+:: destroy_list_member_by_names :: string slug, uid_t screen_name :: POST :: lists/members/destroy
+:: list_membership :: string screen_name, cid_t cursor DEF :: GET :: lists/memberships
+:: list_membership_by_id :: uid_t user_id, cid_t cursor DEF :: GET :: lists/memberships
+:: list_suscribers :: string slug, string screen_name, cid_t cursor, bool include_entities false, bool skip_status true :: GET :: lists/subscribers
+:: list_suscribers_by_id :: lid_t list_id, cid_t cursor, bool include_entities false, bool skip_status true :: GET :: lists/subscribers
+:: subscribe_to_list :: lid_t list_id :: POST :: lists/subscribers/create
+:: subscribe_to_list :: string slug, string owner_screen_name :: POST :: lists/subscribers/create
+:: show_user_is_suscriber_by_ids :: uid_t user_id, lid_t list_id, bool include_entities false, bool skip_status true :: GET :: lists/subscribers/show
+:: show_user_is_suscriber_by_names :: string screen_name, lid_t slug, string owner_screen_name, bool include_entities false, bool skip_status true :: GET :: lists/subscribers/show
+:: unsubscribe_from_list :: lid_t list_id :: POST :: lists/subscribers/destroy
+:: unsubscribe_from_list :: string slug, string owner_screen_name :: POST :: lists/subscribers/destroy
+:: subscribe_to_list_multi_by_ids :: lid_t list_id, string user_id :: POST :: lists/members/create_all
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+:: subscribe_to_list_multi_by_ids :: string slug, string owner_screen_name, string screen_name :: POST :: lists/members/create_all
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+:: show_user_is_member_by_ids :: lid_t list_id, uid_t user_id, bool include_entities false, bool skip_status true :: GET :: lists/members/show
+:: show_user_is_member_by_names :: string slug, string owner_screen_name, string screen_name, bool include_entities false, bool skip_status true :: GET :: lists/members/show
+:: list_members_by_id :: lid_t list_id, cid_t cursor DEF, bool include_entities false, bool skip_status true :: GET :: lists/members
+:: list_members_by_name :: string slug, string owner_screen_name, cid_t cursor, bool include_entities false, bool skip_status true :: GET :: lists/members
+:: join_list :: uid_t user_id, lid_t list_id :: POST :: lists/members/create
+:: join_list :: string screen_name, string slug, string owner_screen_name :: POST :: lists/members/create
+:: part_from_list :: lid_t list_id :: POST :: lists/destroy
+:: part_from_list :: string slug, screen_name owner_screen_name :: lists/destroy
+:: update_list_by_id :: lid_t list_id, string name DEF, string description "", string mode "public" :: POST :: lists/update
+:: update_list_by_name :: string slug, string owner_screen_name, string name DEF, string description "", string mode "public" :: POST :: lists/update
+:: create_list :: string name, string description "", bool mode "public" :: POST :: lists/create
+:: show_list :: lid_t list_id :: GET :: lists/show
+:: show_list :: string slug, string owner_screen_name :: GET :: lists/show
+:: lists_subscription_by_id :: uid_t user_id, int count DEF, cid_t cursor DEF :: GET :: lists/subscriptions
+:: lists_subscription_by_screen_name :: string screen_name, int count DEF, cid_t cursor DEF :: GET :: lists/subscriptions
+:: expulse_from_list_by_ids :: lid_t list_id, string user_id :: POST :: lists/members/destroy_all
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+:: expulse_from_list_by_names :: string slug, string owner_screen_name, string screen_name :: POST :: lists/members/destroy_all
+/*
+You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
+*/
+
