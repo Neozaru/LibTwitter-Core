@@ -1,7 +1,7 @@
 #include "PIN_Page_Parser.h"
 
-#include "Utils.h"
-#include "OAuth.h"
+#include "../Utils.h"
+#include "../OAuth.h"
 
 PIN_Page_Parser::PIN_Page_Parser() {
 

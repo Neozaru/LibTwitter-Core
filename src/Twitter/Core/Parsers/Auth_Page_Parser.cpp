@@ -1,7 +1,7 @@
 #include "Auth_Page_Parser.h"
 
-#include "Utils.h"
-#include "OAuth.h"
+#include "../Utils.h"
+#include "../OAuth.h"
 
 Auth_Page_Parser::Auth_Page_Parser()  {
 

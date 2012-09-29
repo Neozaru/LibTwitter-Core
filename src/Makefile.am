@@ -30,7 +30,7 @@ __top_builddir__bin_libtwitter_core_la_SOURCES += Twitter/Core/Utils/SHA1.cpp Tw
 
 
 
-AM_CPPFLAGS = -I$(core)/ -I$(core)/Utils -I$(core)/Parsers
+#AM_CPPFLAGS = -I$(core)/ -I$(core)/Utils -I$(core)/Parsers
 
 
 library_includedir = $(includedir)/$(core)

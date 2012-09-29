@@ -5,9 +5,9 @@
 
 #include "OAuth.h"
 
-#include "HMAC_SHA1.h"
-#include "base64.h"
-#include "urlencode.h"
+#include "Utils/HMAC_SHA1.h"
+#include "Utils/base64.h"
+#include "Utils/urlencode.h"
 #include "Utils.h"
 
 /*++

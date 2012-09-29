@@ -4,8 +4,8 @@
 #include "CurlProcess.h"
 #include "Utils.h"
 
-#include "Auth_Page_Parser.h"
-#include "PIN_Page_Parser.h"
+#include "Parsers/Auth_Page_Parser.h"
+#include "Parsers/PIN_Page_Parser.h"
 
 bool _g_debug_mode;
 

@@ -10,9 +10,10 @@
 
 
 TwitterRequest::TwitterRequest( TwitterSession* session, const std::string& url ) 
-							  : CurlProcess(url), _session(session) {
+							  : CurlProcess(url),  _session(session) {
 
- 	_data_mutex_rw = PTHREAD_MUTEX_INITIALIZER;
+ 	pthread_mutex_init(&_data_mutex_rw,NULL);
+
 }
 
 TwitterRequest::~TwitterRequest() {
