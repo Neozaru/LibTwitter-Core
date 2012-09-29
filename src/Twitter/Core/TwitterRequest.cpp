@@ -7,10 +7,12 @@
 #include "TwitterConstants.h"
 #include "TwitterRequestListener.h"
 
-
+//#include <stdio.h>
+#include <cstdio>
+#include <string.h>
 
 TwitterRequest::TwitterRequest( TwitterSession* session, const std::string& url ) 
-							  : CurlProcess(url),  _session(session) {
+							  : CurlProcess(url),  _session(session), _form_post(NULL), _form_end(NULL) {
 
  	pthread_mutex_init(&_data_mutex_rw,NULL);
 
@@ -18,9 +20,11 @@ TwitterRequest::TwitterRequest( TwitterSession* session, const std::string& url 
 
 TwitterRequest::~TwitterRequest() {
 
+    if ( _form_post != NULL ) {
+    	curl_formfree(_form_post);
+    }
+
 }
-
-
 
 
 TwitterSession* TwitterRequest::get_session() {
@@ -107,6 +111,61 @@ void TwitterRequest::remove_listener( TwitterRequestListener* listener ) {
 	_listeners.erase(listener);
 }
 
+static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userp) {
+  
+	std::cout << "Size : " << size << ". Nmemb : " << nmemb << std::endl;
+
+  	if ( userp != NULL ) {
+
+		FILE* file = reinterpret_cast<FILE*>(userp);
+
+		/* In C++, you need to cast output of "malloc" */
+		char* data = (char*) malloc( size );
+
+		if ( data != NULL ) {
+		
+			int readed = fread(data,size,nmemb,file);
+
+			std::cout << "Readed : " << readed << std::endl;
+
+			if ( readed >= 0 ) {
+
+    			memcpy(ptr, data, readed);
+
+    			if ( readed < size*nmemb ) {
+    				std::cout << "End of file ?" << std::endl;
+    				return 0;
+    			}
+
+    			return size*nmemb;
+    		}
+		}
+
+	}
+
+	return -1;
+
+}
+
+void TwitterRequest::add_form_file( const std::string& field_name, const std::string& file_path ) {
+
+	curl_formadd(&_form_post,
+	           &_form_end,
+	           CURLFORM_COPYNAME, field_name.c_str(),
+	           CURLFORM_FILE, file_path.c_str(),
+	           CURLFORM_END);
+	 
+}
+
+void TwitterRequest::add_form_data( const std::string& field_name, const std::string& value ) {
+	
+	curl_formadd(&_form_post,
+	       &_form_end,
+	       CURLFORM_COPYNAME, field_name.c_str(),
+	       CURLFORM_COPYCONTENTS, value.c_str(),
+	       CURLFORM_END);
+
+}
 
 void TwitterRequest::prepare() {
 
@@ -128,6 +187,13 @@ void TwitterRequest::prepare() {
     else {
     	data = concatenate_data(_GET_data);
     }
+
+    if ( _form_post != NULL ) {
+    	method = POST;
+   		curl_easy_setopt( _curl, CURLOPT_POST, 1 );
+    	curl_easy_setopt( _curl, CURLOPT_HTTPPOST, _form_post );
+    }
+
 
 	std::string oauth_header = _session->get_oauth().get_oauth_header( method, _url, data );
     

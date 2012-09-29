@@ -701,3 +701,46 @@ TwitterRequest* RequestCreator::rate_limit_status_request( str_t ressources ) {
 
 /* END_PYGEN don't remove this comment (2012/9/29 0:1) */
 
+
+/* MANUALLY (media uploads) */
+TwitterRequest* RequestCreator::_update_status_with_media_request( str_t status, str_t in_reply_to_status_id, bool possibly_sensitive,  str_t place_id,  bool display_coordinates,  bool trim_user,  float lat,  float lon ) {
+
+	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::UPDATE_WITH_MEDIA);
+
+	req->add_form_data( "status", status );
+	if ( in_reply_to_status_id != S_UN ) { req->add_form_data( "in_reply_to_status_id", in_reply_to_status_id ); }
+	if ( possibly_sensitive ) { req->add_form_data( "possibly_sensitive", "true" ); }
+
+	if ( place_id != S_UN ) { req->add_form_data( "place_id", place_id ); }
+
+	if ( display_coordinates ) { req->add_form_data( "display_coordinates", "true" ); }
+	if ( trim_user ) { req->add_form_data( "trim_user", "true" ); }
+	if ( lon != N_UN ) { req->add_form_data( "lon", Utils::otos(lon) ); }
+	if ( lat != N_UN ) { req->add_form_data( "lat", Utils::otos(lat) ); }
+
+	return req;
+
+}
+
+
+TwitterRequest* RequestCreator::update_status_with_media_request( str_t status, str_t media_path, str_t in_reply_to_status_id, bool possibly_sensitive,  str_t place_id,  bool display_coordinates,  bool trim_user,  float lat,  float lon ) {
+
+	TwitterRequest* req = _update_status_with_media_request( status, in_reply_to_status_id, possibly_sensitive,  place_id,  display_coordinates,  trim_user,  lat,  lon );
+	req->add_form_file( MEDIA_TAG, media_path );
+	return req;
+
+}
+
+TwitterRequest* RequestCreator::update_status_with_media_request( str_t status, std::list<std::string> media_paths_list, str_t in_reply_to_status_id, bool possibly_sensitive,  str_t place_id,  bool display_coordinates,  bool trim_user,  float lat,  float lon ) {
+
+	TwitterRequest* req = _update_status_with_media_request( status, in_reply_to_status_id, possibly_sensitive, place_id,  display_coordinates,  trim_user,  lat,  lon );
+	
+	std::list<std::string>::iterator iter;
+
+	for ( iter = media_paths_list.begin(); iter != media_paths_list.end(); iter++ ) {
+		req->add_form_file( MEDIA_TAG, (*iter) );
+	}
+	
+	return req;
+
+}

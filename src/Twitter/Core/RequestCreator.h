@@ -1,8 +1,10 @@
 #ifndef H_REQUEST_CREATOR_H
 	#define H_REQUEST_CREATOR_H
 
-	#include "TwitterConstants.h"
 
+	#include <list>
+
+	#include "TwitterConstants.h"
 
 
 	/**
@@ -1366,11 +1368,58 @@ TwitterRequest* rate_limit_status_request( str_t ressources );
 
 /* END_PYGEN don't remove this comment (2012/9/29 0:1) */
 
+
+/* MANUALLY (file uploads) */
+
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/statuses/update">Twitter Documentation for [update_status]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/post/statuses/update_with_media}{Twitter Documentation for [update\_status_with_media]}
+* \endlatexonly
+*/
+TwitterRequest* update_status_with_media_request( 
+										str_t status, 
+										str_t media_path,
+										str_t in_reply_to_status_id = S_UN,
+										bool possibly_sensitive = false, 
+										str_t place_id = S_UN, 
+										bool display_coordinates = false, 
+										bool trim_user = false, 
+										float lat = N_UN, 
+										float lon = N_UN );
+
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/statuses/update">Twitter Documentation for [update_status]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/post/statuses/update_with_media}{Twitter Documentation for [update\_status_with_media]}
+* \endlatexonly
+*/
+TwitterRequest* update_status_with_media_request( 
+										str_t status, 
+										std::list<std::string> media_paths,
+										str_t in_reply_to_status_id = S_UN,
+										bool possibly_sensitive = false, 
+										str_t place_id = S_UN, 
+										bool display_coordinates = false, 
+										bool trim_user = false, 
+										float lat = N_UN, 
+										float lon = N_UN );
+
+
 	protected:
 
 		GenericFactory* _requests_factory;
 
 		TwitterRequest* _next_request;
+
+
+	private:
+
+		TwitterRequest* _update_status_with_media_request( str_t status, str_t in_reply_to_status_id, bool possibly_sensitive,  str_t place_id,  bool display_coordinates,  bool trim_user,  float lat,  float lon );
 
 	};
 

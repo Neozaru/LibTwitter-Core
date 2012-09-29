@@ -34,6 +34,7 @@ namespace e_HTTP_response_code {
 		
 		OK = 200,
 		RATE_LIMIT = 88,
+		MEDIA_LIMIT = 192,
 		NOT_FOUND = 404,
 		NOT_ACCEPTABLE = 406,
 		FLOOD = 429,
@@ -54,7 +55,7 @@ static const char* e_HTTP_response_code_Text[] {
 };
 */
 
-
+const std::string MEDIA_TAG = "media[]";
 
 
 
@@ -84,6 +85,7 @@ namespace TwitterConsts {
 		const std::string RETWEETS = API_LINK + STATUSES + "retweets/:id" + FORMAT ;
 		const std::string DESTROY = API_LINK + STATUSES + "destroy/:id" + FORMAT ;
 		const std::string UPDATE = API_LINK + STATUSES + "update" + FORMAT ;
+		const std::string UPDATE_WITH_MEDIA = API_LINK + STATUSES + "update_with_media" + FORMAT ;
 		const std::string RETWEET = API_LINK + STATUSES + "retweet/:id" + FORMAT ;
 		const std::string OEMBED = API_LINK + STATUSES + "oembed" + FORMAT ;
 	};

@@ -81,6 +81,27 @@ public:
 	*/
 	void remove_listener( TwitterRequestListener* listener );
 
+
+	/**
+	* \fn add_form_file
+	* \brief Adds a file in multipart upload list. (ex : uploading an image with status)
+	*
+	* \param field_name Name of the form field
+	* \param file_path Path to the file to upload
+	*
+	*/
+	void add_form_file( const std::string& field_name, const std::string& file_path );
+
+	/**
+	* \fn add_form_data
+	* \brief Adds data to a HTTP multipart form. Replaces "POST" data in uploading requests
+	*
+	* \param field_name Name of the form field
+	* \param value Associated data
+	*
+	*/
+	void add_form_data( const std::string& field_name, const std::string& value );
+
 protected:
 
 	/**
@@ -151,6 +172,9 @@ private:
 
 
 	pthread_mutex_t _data_mutex_rw;
+
+	curl_httppost* _form_post;
+	curl_httppost* _form_end;
 
 
 };

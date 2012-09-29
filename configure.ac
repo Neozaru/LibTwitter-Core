@@ -2,8 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([1.00])
-AC_INIT(LibTwitter C++, 0.0.1, neozaru@mailoo.org)
-#AM_INIT_AUTOMAKE
+AC_INIT(LibTwitter-Core C++, 0.0.1, neozaru@mailoo.org)
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -58,6 +57,7 @@ AC_CONFIG_FILES([Makefile
                 libtwitter-core.pc
                 examples/Client_Basic/Makefile
                 examples/Client_Alternative/Makefile
+                examples/Client_Send_Image/Makefile
                 examples/Client_Streaming_Session/Makefile
                 examples/Client_Streaming_Listener/Makefile
                 examples/Client_Streaming_Hard_Request/Makefile])
