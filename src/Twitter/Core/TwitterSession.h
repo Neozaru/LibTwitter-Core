@@ -15,7 +15,7 @@
 
 	class TwitterRequest;
 
-	using namespace TwDefaults;
+	//using namespace TwDefaults;
 	/**
 	* \class TwitterSession TwitterSession.h
 	* \brief Represents an user Twitter session.
@@ -160,7 +160,7 @@
 		* See "Utils::debug(*)" calls in source code" 
 		*
 		*/ 
-		void set_debug_mode( bool debug );
+		void set_debug_mode( char debug );
 
 
 		template <typename TwitterRequestClass>

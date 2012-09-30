@@ -3,7 +3,8 @@
 #include "Utils.h"
 #include "Utils/urlencode.h"
 
-CurlProcess::CurlProcess( const std::string& url ) : _thread_id(-1), _url(url), _running(false), _response_code(999), _headerList(NULL) {
+CurlProcess::CurlProcess( const std::string& url ) 
+: _thread_id(-1), _url(url), _running(false), _response_code(999), _header_list(NULL), _form_post(NULL), _form_end(NULL)  {
 
 	_curl = this->load_curl();
 
@@ -14,9 +15,15 @@ CurlProcess::CurlProcess( const std::string& url ) : _thread_id(-1), _url(url), 
 CurlProcess::~CurlProcess() {
 
 	this->stop();
-	if ( _headerList != NULL ) {
-		curl_slist_free_all( _headerList );
+	
+	if ( _header_list != NULL ) {
+		curl_slist_free_all( _header_list );
 	}
+
+    if ( _form_post != NULL ) {
+    	curl_formfree(_form_post);
+    }
+
 	curl_easy_cleanup( _curl );
     _curl = NULL;
 
@@ -144,6 +151,27 @@ void CurlProcess::set_GET_data( const std::map<std::string,std::string>& data ) 
 }
 
 
+void CurlProcess::add_form_file( const std::string& field_name, const std::string& file_path ) {
+
+	curl_formadd(&_form_post,
+	           &_form_end,
+	           CURLFORM_COPYNAME, field_name.c_str(),
+	           CURLFORM_FILE, file_path.c_str(),
+	           CURLFORM_END);
+	 
+}
+
+void CurlProcess::add_form_data( const std::string& field_name, const std::string& value ) {
+	
+	curl_formadd(&_form_post,
+	       &_form_end,
+	       CURLFORM_COPYNAME, field_name.c_str(),
+	       CURLFORM_COPYCONTENTS, value.c_str(),
+	       CURLFORM_END);
+
+}
+
+
 void CurlProcess::prepare() {
 
 	/* Add Get data to URL */
@@ -179,8 +207,8 @@ void CurlProcess::send() {
 
 	this->prepare();
 
-	if ( _headerList != NULL ) {
-		curl_easy_setopt( _curl, CURLOPT_HTTPHEADER, _headerList );
+	if ( _header_list != NULL ) {
+		curl_easy_setopt( _curl, CURLOPT_HTTPHEADER, _header_list );
 	}
 
    	_response_code = 1000;

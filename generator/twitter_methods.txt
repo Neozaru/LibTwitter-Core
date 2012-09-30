@@ -1,33 +1,34 @@
-:: mentions_timeline:: int count 20, uid_t since_id DEF, int max_id DEF, bool trim_user false, bool contributor_details false, bool include_entities true :: GET :: statuses/mentions_timeline
+:: mentions_timeline:: int count 20, usr_id_t since_id DEF, int max_id DEF, bool trim_user false, bool contributor_details false, bool include_entities true :: GET :: statuses/mentions_timeline
 /* Doc here for "mentions_timeline"  */
-:: user_timeline_by_id :: uid_t user_id, int count DEF, uid_t since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_rts true :: GET :: statuses/user_timeline
-:: user_timeline :: string screen_name, int count DEF, uid_t since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_rts true :: GET :: statuses/user_timeline
-:: home_timeline :: int count DEF, uid_t since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_entities true :: GET :: statuses/home_timeline
+:: user_timeline_by_id :: usr_id_t user_id, int count DEF, usr_id_t since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_rts true :: GET :: statuses/user_timeline
+:: user_timeline :: string screen_name, int count DEF, usr_id_t since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_rts true :: GET :: statuses/user_timeline
+:: home_timeline :: int count DEF, usr_id_t since_id DEF, int max_id DEF, bool trim_user false, bool exclude_replies false, bool contributor_details false, bool include_entities true :: GET :: statuses/home_timeline
 
 # STATUSES
-:: retweets :: uid_t id, int count 50, bool trim_user false :: GET :: statuses/retweets/:id
-:: show_status :: uid_t id, bool include_my_retweet false, bool trim_user false, bool include_entities true :: statuses/show/:id
-:: destroy_status :: uid_t id, bool trim_user false :: POST :: statuses/destroy/:id
+:: get_retweets :: usr_id_t id, int count 50, bool trim_user false :: GET :: statuses/retweets/:id
+:: show_status :: usr_id_t id, bool include_my_retweet true, bool trim_user false, bool include_entities true :: GET :: statuses/show/:id
+:: destroy_status :: usr_id_t id, bool trim_user false :: POST :: statuses/destroy/:id
 :: update_status :: string status, string in_reply_to_status_id DEF, string place_id DEF, bool display_coordinates false, bool trim_user false, float lat DEF, float lon DEF :: POST :: statuses/update
-:: retweet :: uid_t id, bool trim_user false :: POST :: statuses/retweet/:id
-# TODO (manually)
-#:: update_status_media ::  :: POST :: statuses/update_with_media
-:: oembed_status :: uid_t id, string url, int maxwidth DEF, bool hide_media false, bool hide_thread false, bool omit_script false, string align "center", string related DEF, string lang DEF :: GET :: statuses/oembed
-:: search_tweets :: string q, string locale DEF, string result_type DEF, int count DEF, string until DEF, uid_t since_id DEF, string max_id DEF, bool include_entities true, string callback DEF :: GET :: search/tweets
+:: retweet :: usr_id_t id, bool trim_user false :: POST :: statuses/retweet/:id
+
+# DONE MANUALLY : update_status_media
+
+:: oembed_status :: usr_id_t id, string url, int maxwidth DEF, bool hide_media false, bool hide_thread false, bool omit_script false, string align "center", string related DEF, string lang DEF :: GET :: statuses/oembed
+:: search_tweets :: string q, string locale DEF, string result_type DEF, int count DEF, string until DEF, usr_id_t since_id DEF, string max_id DEF, bool include_entities true, string callback DEF :: GET :: search/tweets
 
 # DIRECT MESSAGES
-#:: direct_messages :: int count DEF, int page DEF, uid_t since_id DEF, string max_id DEF, bool include_entities true, bool skip_status false :: GET :: direct_messages
-:: sent_direct_messages :: int count DEF, int page DEF, uid_t since_id DEF, string max_id DEF, bool include_entities true :: GET :: direct_messages/sent
-:: show_direct_messages :: uid_t id :: GET :: direct_messages/show
-:: destroy_direct_messages :: uid_t id, bool include_entities true :: POST :: direct_messages/destroy
+#:: direct_messages :: int count DEF, int page DEF, usr_id_t since_id DEF, string max_id DEF, bool include_entities true, bool skip_status false :: GET :: direct_messages
+:: sent_direct_messages :: int count DEF, int page DEF, usr_id_t since_id DEF, string max_id DEF, bool include_entities true :: GET :: direct_messages/sent
+:: show_direct_messages :: usr_id_t id :: GET :: direct_messages/show
+:: destroy_direct_messages :: usr_id_t id, bool include_entities true :: POST :: direct_messages/destroy
 :: new_direct_message_by_user_id :: string user_id, string text :: POST :: direct_messages/new
 :: new_direct_message_by_screen_name :: string screen_name, string text :: POST :: direct_messages/new
 
 # FRIENDS AND FOLLOWERS
 # TODO : See cursors usage !!!
-:: friends_ids :: uid_t user_id, bool stringify_ids true :: GET :: friends/ids
+:: friends_ids :: usr_id_t user_id, bool stringify_ids true :: GET :: friends/ids
 :: friends_ids :: string screen_name, bool stringify_ids true :: GET :: friends/ids
-:: followers_ids :: uid_t user_id, bool stringify_ids true :: GET :: followers/ids
+:: followers_ids :: usr_id_t user_id, bool stringify_ids true :: GET :: followers/ids
 :: followers_ids :: string screen_name, bool stringify_ids true :: GET :: followers/ids
 :: lookup_friendship_by_names :: string screen_name :: GET :: friendships/lookup
 /*
@@ -40,12 +41,12 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: incoming_friendships :: bool stringify_ids true :: GET :: friendships/incoming
 :: outgoing_friendships :: bool stringify_ids true :: GET :: friendships/outgoing
 :: create_friendship :: string screen_name, bool follow true :: POST :: friendships/create
-:: create_friendship :: uid_t user_id, bool follow true :: POST :: friendships/create
+:: create_friendship :: usr_id_t user_id, bool follow true :: POST :: friendships/create
 :: destroy_friendship :: string screen_name :: POST :: friendships/destroy
-:: destroy_friendship :: uid_t user_id :: POST :: friendships/destroy
+:: destroy_friendship :: usr_id_t user_id :: POST :: friendships/destroy
 :: update_friendship :: string screen_name, bool retweets, bool device :: POST :: friendships/update
-:: update_friendship :: uid_t user_id, bool retweets, bool device :: POST :: friendships/update
-:: show_friendship :: uid_t source_id, uid_t target_id :: GET :: friendships/show
+:: update_friendship :: usr_id_t user_id, bool retweets, bool device :: POST :: friendships/update
+:: show_friendship :: usr_id_t source_id, usr_id_t target_id :: GET :: friendships/show
 :: show_friendship :: string source_screen_name, string target_screen_name :: GET :: friendships/show
 
 # USERS
@@ -63,9 +64,9 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: get_blocks_list :: cid_t cursor DEF, bool skip_status true, bool include_entities false :: GET :: blocks/list
 :: get_blocks_ids :: cid_t cursor DEF, bool stringify_ids true :: GET :: blocks/ids
 :: create_blocks :: string screen_name, bool include_entities  false, bool skip_status true :: POST :: blocks/create
-:: create_blocks_by_id :: uid_t user_id, bool include_entities  false, bool skip_status true :: POST :: blocks/create
+:: create_blocks_by_id :: usr_id_t user_id, bool include_entities  false, bool skip_status true :: POST :: blocks/create
 :: destroy_blocks :: string screen_name, bool include_entities  false, bool skip_status true :: POST :: blocks/destroy
-:: destroy_blocks_by_id :: uid_t user_id, bool include_entities  false, bool skip_status true :: POST :: blocks/destroy
+:: destroy_blocks_by_id :: usr_id_t user_id, bool include_entities  false, bool skip_status true :: POST :: blocks/destroy
 :: lookup_user_by_id :: string user_id, bool include_entities true :: GET :: users/lookup
 /*
 You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
@@ -77,9 +78,9 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: show_user_by_id :: string user_id, bool include_entities true :: GET :: users/show
 :: show_user :: string screen_name, bool include_entities true :: GET :: users/show
 :: search_user :: string q, int count DEF, int page DEF, bool include_entities true :: GET :: users/search
-:: user_contributees_by_user_id :: uid_t user_id, bool include_entities true, bool skip_status false :: GET :: users/contributees
+:: user_contributees_by_user_id :: usr_id_t user_id, bool include_entities true, bool skip_status false :: GET :: users/contributees
 :: user_contributees_by_screen_name :: string screen_name, bool include_entities true, bool skip_status false :: GET :: users/contributees
-:: user_contributors_by_user_id :: uid_t user_id, bool include_entities true, bool skip_status false :: GET :: users/contributors
+:: user_contributors_by_user_id :: usr_id_t user_id, bool include_entities true, bool skip_status false :: GET :: users/contributors
 :: user_contributors_by_screen_name :: string screen_name, bool include_entities true, bool skip_status false :: GET :: users/contributors
 
 # SUGGESTED USERS
@@ -88,25 +89,25 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: user_suggestions_members :: string slug :: GET :: users/suggestions/:slug/members
 
 # FAVORITES
-:: list_favorites :: uid_t user_id DEF, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false :: GET :: favorites/list
+:: list_favorites :: usr_id_t user_id DEF, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false :: GET :: favorites/list
 :: list_favorites_by_screen_name :: string screen_name, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false :: GET :: favorites/list
 :: destroy_favorite :: tid_t id, bool include_entities false :: POST :: favorites/destroy 
 :: create_favorite :: tid_t id, bool include_entities false :: POST :: favorites/create
 
 # LISTS
-:: lists_by_user_id :: uid_t user_id :: GET :: lists/list
-:: lists_by_screen_name :: uid_t screen_name :: GET :: lists/list
+:: lists_by_user_id :: usr_id_t user_id :: GET :: lists/list
+:: lists_by_screen_name :: usr_id_t screen_name :: GET :: lists/list
 :: list_statuses_by_ids :: lid_t list_id, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses
-:: list_statuses :: string slug, uid_t owner_screen_name, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses
-:: destroy_list_member_by_ids :: lid_t list_id, uid_t user_id :: POST :: lists/members/destroy
-:: destroy_list_member :: string slug, uid_t screen_name :: POST :: lists/members/destroy
+:: list_statuses :: string slug, usr_id_t owner_screen_name, int count DEF, int since_id DEF, int max_id DEF, bool include_entities false, bool include_rts false :: GET :: lists/statuses
+:: destroy_list_member_by_ids :: lid_t list_id, usr_id_t user_id :: POST :: lists/members/destroy
+:: destroy_list_member :: string slug, usr_id_t screen_name :: POST :: lists/members/destroy
 :: list_membership :: string screen_name, cid_t cursor DEF :: GET :: lists/memberships
-:: list_membership_by_id :: uid_t user_id, cid_t cursor DEF :: GET :: lists/memberships
+:: list_membership_by_id :: usr_id_t user_id, cid_t cursor DEF :: GET :: lists/memberships
 :: list_suscribers :: string slug, string screen_name, cid_t cursor, bool include_entities false, bool skip_status true :: GET :: lists/subscribers
 :: list_suscribers_by_id :: lid_t list_id, cid_t cursor, bool include_entities false, bool skip_status true :: GET :: lists/subscribers
 :: subscribe_to_list :: lid_t list_id :: POST :: lists/subscribers/create
 :: subscribe_to_list :: string slug, string owner_screen_name :: POST :: lists/subscribers/create
-:: show_user_is_suscriber_by_ids :: uid_t user_id, lid_t list_id, bool include_entities false, bool skip_status true :: GET :: lists/subscribers/show
+:: show_user_is_suscriber_by_ids :: usr_id_t user_id, lid_t list_id, bool include_entities false, bool skip_status true :: GET :: lists/subscribers/show
 :: show_user_is_suscriber :: string screen_name, lid_t slug, string owner_screen_name, bool include_entities false, bool skip_status true :: GET :: lists/subscribers/show
 :: unsubscribe_from_list :: lid_t list_id :: POST :: lists/subscribers/destroy
 :: unsubscribe_from_list :: string slug, string owner_screen_name :: POST :: lists/subscribers/destroy
@@ -118,11 +119,11 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 /*
 You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 */
-:: show_user_is_member_by_ids :: lid_t list_id, uid_t user_id, bool include_entities false, bool skip_status true :: GET :: lists/members/show
+:: show_user_is_member_by_ids :: lid_t list_id, usr_id_t user_id, bool include_entities false, bool skip_status true :: GET :: lists/members/show
 :: show_user_is_member :: string slug, string owner_screen_name, string screen_name, bool include_entities false, bool skip_status true :: GET :: lists/members/show
 :: list_members_by_id :: lid_t list_id, cid_t cursor DEF, bool include_entities false, bool skip_status true :: GET :: lists/members
 :: list_members :: string slug, string owner_screen_name, cid_t cursor, bool include_entities false, bool skip_status true :: GET :: lists/members
-:: join_list :: uid_t user_id, lid_t list_id :: POST :: lists/members/create
+:: join_list :: usr_id_t user_id, lid_t list_id :: POST :: lists/members/create
 :: join_list :: string screen_name, string slug, string owner_screen_name :: POST :: lists/members/create
 :: part_from_list :: lid_t list_id :: POST :: lists/destroy
 :: part_from_list :: string slug, screen_name owner_screen_name :: lists/destroy
@@ -131,7 +132,7 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: create_list :: string name, string description "", bool mode "public" :: POST :: lists/create
 :: show_list :: lid_t list_id :: GET :: lists/show
 :: show_list :: string slug, string owner_screen_name :: GET :: lists/show
-:: lists_subscription_by_id :: uid_t user_id, int count DEF, cid_t cursor DEF :: GET :: lists/subscriptions
+:: lists_subscription_by_id :: usr_id_t user_id, int count DEF, cid_t cursor DEF :: GET :: lists/subscriptions
 :: lists_subscription :: string screen_name, int count DEF, cid_t cursor DEF :: GET :: lists/subscriptions
 :: expulse_from_list_by_ids :: lid_t list_id, string user_id :: POST :: lists/members/destroy_all
 /*
@@ -157,8 +158,8 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: closest_trend :: float Lat, float Long :: GET :: trends/closest
 
 
-# SPAM REPORTIGN
-:: report_spam :: uid_t user_id :: POST :: report_spam
+# SPAM REPORTING
+:: report_spam :: usr_id_t user_id :: POST :: report_spam
 
 #HELP
 :: rate_limit_status :: string ressources :: GET :: application/rate_limit_status

@@ -90,6 +90,27 @@ public:
 	void set_POST_data( const std::map<std::string,std::string>& data );
 
 	/**
+	* \fn add_form_file
+	* \brief Adds a file in multipart upload list. (ex : uploading an image with status)
+	*
+	* \param field_name Name of the form field
+	* \param file_path Path to the file to upload
+	*
+	*/
+	void add_form_file( const std::string& field_name, const std::string& file_path );
+
+	/**
+	* \fn add_form_data
+	* \brief Adds data to a HTTP multipart form. Replaces "POST" data in uploading requests
+	*
+	* \param field_name Name of the form field
+	* \param value Associated data
+	*
+	*/
+	void add_form_data( const std::string& field_name, const std::string& value );
+
+
+	/**
 	* \fn send
 	* \brief Sends request to target URL. This is a blocking method.
 	*/
@@ -151,8 +172,12 @@ protected:
 	/**************/
 
 	CURL* _curl;
+	struct curl_httppost* _form_post;
+	struct curl_httppost* _form_end;
+	struct curl_slist* _header_list;
+
 	std::string _url;
-	struct curl_slist* _headerList;
+	
 	bool _running;
 
 	std::map<std::string,std::string> _GET_data;
@@ -162,6 +187,9 @@ protected:
 
 
 	pthread_t _thread_id;
+
+
+
 
 
 	/**

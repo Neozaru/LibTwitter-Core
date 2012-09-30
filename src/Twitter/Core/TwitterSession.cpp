@@ -7,14 +7,14 @@
 #include "Parsers/Auth_Page_Parser.h"
 #include "Parsers/PIN_Page_Parser.h"
 
-bool _g_debug_mode;
+char _g_debug_mode;
 
 TwitterSession::TwitterSession() 
 		: RequestCreator(new RequestFactory<TwitterRequest>(this)),
 		 _request_counter(0),
 		 _http_proxy(DEFAULT_PROXY) {
 
-	_g_debug_mode = false;
+	_g_debug_mode = NONE;
 
 }
 
@@ -281,7 +281,7 @@ int TwitterSession::get_request_id( TwitterRequest* request ) {
 }
 
 
-void TwitterSession::set_debug_mode( bool debug ) {
+void TwitterSession::set_debug_mode( char debug ) {
 	
 	_g_debug_mode = debug;
 

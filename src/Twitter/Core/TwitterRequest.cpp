@@ -12,7 +12,7 @@
 #include <string.h>
 
 TwitterRequest::TwitterRequest( TwitterSession* session, const std::string& url ) 
-							  : CurlProcess(url),  _session(session), _form_post(NULL), _form_end(NULL) {
+							  : CurlProcess(url),  _session(session) {
 
  	pthread_mutex_init(&_data_mutex_rw,NULL);
 
@@ -20,9 +20,6 @@ TwitterRequest::TwitterRequest( TwitterSession* session, const std::string& url 
 
 TwitterRequest::~TwitterRequest() {
 
-    if ( _form_post != NULL ) {
-    	curl_formfree(_form_post);
-    }
 
 }
 
@@ -147,25 +144,6 @@ static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userp) {
 
 }
 
-void TwitterRequest::add_form_file( const std::string& field_name, const std::string& file_path ) {
-
-	curl_formadd(&_form_post,
-	           &_form_end,
-	           CURLFORM_COPYNAME, field_name.c_str(),
-	           CURLFORM_FILE, file_path.c_str(),
-	           CURLFORM_END);
-	 
-}
-
-void TwitterRequest::add_form_data( const std::string& field_name, const std::string& value ) {
-	
-	curl_formadd(&_form_post,
-	       &_form_end,
-	       CURLFORM_COPYNAME, field_name.c_str(),
-	       CURLFORM_COPYCONTENTS, value.c_str(),
-	       CURLFORM_END);
-
-}
 
 void TwitterRequest::prepare() {
 
@@ -213,7 +191,7 @@ void TwitterRequest::prepare() {
 void TwitterRequest::set_oauth_header( const std::string& header ) {
 
 	if ( header.size() > 0 ) {
-		_headerList = curl_slist_append( _headerList, header.c_str() );
+		_header_list = curl_slist_append( _header_list, header.c_str() );
 	}
 	
 }

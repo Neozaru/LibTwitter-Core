@@ -8,17 +8,36 @@
 namespace Utils {
 
  
-  void debug( const std::string& str ) {
+  void debug( const std::string& str, char debug_mode ) {
 
-      if ( _g_debug_mode) {
+      if ( debug_mode <= NONE || debug_mode > NB_DEBUG_LEVELS ) {
+        return;
+      }
 
-        std::cout << str << std::endl;
+      const char* str_debug_levels[] {
+        "NONE",
+        "DEBUG",
+        "WARNING",
+        "ERROR"
+      };
+
+      if ( _g_debug_mode >= debug_mode ) {
+
+        std::cout << "[TwCore : " << str_debug_levels[debug_mode] << "] " << str << std::endl;
 
       }
 
     }
 
 
+  bool replace(std::string& str, const std::string& from, const std::string& to) {
+      size_t start_pos = str.find(from);
+      if(start_pos == std::string::npos) {
+          return false;
+      }
+      str.replace(start_pos, from.length(), to);
+      return true;
+  }
 
 
   std::string put_variable_in_url( const std::string& URL, 
@@ -27,12 +46,7 @@ namespace Utils {
 
     std::string pattern = ":"+var_name;
     std::string new_URL(URL);
-
-    size_t found = URL.find(pattern);
-
-    if ( found != std::string::npos ) {
-      new_URL.replace(found,var_value.length(),var_value);
-    }
+    replace(new_URL,pattern,var_value);
 
     return new_URL;
 

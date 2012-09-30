@@ -16,7 +16,7 @@
 
 
 
-  extern bool _g_debug_mode;
+  extern char _g_debug_mode;
 
 
   namespace Utils {
@@ -26,7 +26,7 @@
     * \fn debug
     * \brief Simple stdout, but checks if flag "debug_mode" is set before printing.
     */
-    void debug( const std::string& str );
+    void debug( const std::string& str, char debug_mode = 0 );
 
     std::string put_variable_in_url( const std::string& URL, 
                                      const std::string& var_name, 

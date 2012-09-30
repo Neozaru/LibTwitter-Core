@@ -135,7 +135,7 @@
 		TwitterRequest* get_settings_request();
 */
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/29 0:1) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/30 21:15) */
 /**
 * \htmlonly 
 * <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/statuses/mentions_timeline">Twitter Documentation for [mentions_timeline]<a>
@@ -146,7 +146,7 @@
 */
 /* Doc here for "mentions_timeline"  */
 TwitterRequest* mentions_timeline_request( int count = 20, 
-										uid_t since_id = N_UN, 
+										usr_id_t since_id = S_UN, 
 										int max_id = N_UN, 
 										bool trim_user = false, 
 										bool contributor_details = false, 
@@ -160,9 +160,9 @@ TwitterRequest* mentions_timeline_request( int count = 20,
 * \href{http://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline}{Twitter Documentation for [user\_timeline\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* user_timeline_by_id_request( uid_t user_id, 
+TwitterRequest* user_timeline_by_id_request( usr_id_t user_id, 
 										int count = N_UN, 
-										uid_t since_id = N_UN, 
+										usr_id_t since_id = S_UN, 
 										int max_id = N_UN, 
 										bool trim_user = false, 
 										bool exclude_replies = false, 
@@ -179,7 +179,7 @@ TwitterRequest* user_timeline_by_id_request( uid_t user_id,
 */
 TwitterRequest* user_timeline_request( str_t screen_name, 
 										int count = N_UN, 
-										uid_t since_id = N_UN, 
+										usr_id_t since_id = S_UN, 
 										int max_id = N_UN, 
 										bool trim_user = false, 
 										bool exclude_replies = false, 
@@ -196,7 +196,7 @@ TwitterRequest* user_timeline_request( str_t screen_name,
 */
 
 TwitterRequest* home_timeline_request( int count = N_UN, 
-										uid_t since_id = N_UN, 
+										usr_id_t since_id = S_UN, 
 										int max_id = N_UN, 
 										bool trim_user = false, 
 										bool exclude_replies = false, 
@@ -205,15 +205,28 @@ TwitterRequest* home_timeline_request( int count = N_UN,
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/statuses/retweets/:id">Twitter Documentation for [retweets]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/statuses/retweets/:id">Twitter Documentation for [get_retweets]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/get/statuses/retweets/:id}{Twitter Documentation for [retweets]}
+* \href{http://dev.twitter.com/docs/api/1.1/get/statuses/retweets/:id}{Twitter Documentation for [get\_retweets]}
 * \endlatexonly
 */
-TwitterRequest* retweets_request( uid_t id, 
+TwitterRequest* get_retweets_request( usr_id_t id, 
 										int count = 50, 
 										bool trim_user = false );
+
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/statuses/show/:id">Twitter Documentation for [show_status]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/get/statuses/show/:id}{Twitter Documentation for [show\_status]}
+* \endlatexonly
+*/
+TwitterRequest* show_status_request( usr_id_t id, 
+										bool include_my_retweet = true, 
+										bool trim_user = false, 
+										bool include_entities = true );
 
 /**
 * \htmlonly 
@@ -223,7 +236,7 @@ TwitterRequest* retweets_request( uid_t id,
 * \href{http://dev.twitter.com/docs/api/1.1/post/statuses/destroy/:id}{Twitter Documentation for [destroy\_status]}
 * \endlatexonly
 */
-TwitterRequest* destroy_status_request( uid_t id, 
+TwitterRequest* destroy_status_request( usr_id_t id, 
 										bool trim_user = false );
 
 /**
@@ -250,7 +263,9 @@ TwitterRequest* update_status_request( str_t status,
 * \href{http://dev.twitter.com/docs/api/1.1/post/statuses/retweet/:id}{Twitter Documentation for [retweet]}
 * \endlatexonly
 */
-TwitterRequest* retweet_request( uid_t id, 
+
+
+TwitterRequest* retweet_request( usr_id_t id, 
 										bool trim_user = false );
 
 /**
@@ -261,7 +276,7 @@ TwitterRequest* retweet_request( uid_t id,
 * \href{http://dev.twitter.com/docs/api/1.1/get/statuses/oembed}{Twitter Documentation for [oembed\_status]}
 * \endlatexonly
 */
-TwitterRequest* oembed_status_request( uid_t id, 
+TwitterRequest* oembed_status_request( usr_id_t id, 
 										str_t url, 
 										int maxwidth = N_UN, 
 										bool hide_media = false, 
@@ -285,7 +300,7 @@ TwitterRequest* search_tweets_request( str_t q,
 										str_t result_type = S_UN, 
 										int count = N_UN, 
 										str_t until = S_UN, 
-										uid_t since_id = N_UN, 
+										usr_id_t since_id = S_UN, 
 										str_t max_id = S_UN, 
 										bool include_entities = true, 
 										str_t callback = S_UN );
@@ -300,7 +315,7 @@ TwitterRequest* search_tweets_request( str_t q,
 */
 TwitterRequest* sent_direct_messages_request( int count = N_UN, 
 										int page = N_UN, 
-										uid_t since_id = N_UN, 
+										usr_id_t since_id = S_UN, 
 										str_t max_id = S_UN, 
 										bool include_entities = true );
 
@@ -312,7 +327,7 @@ TwitterRequest* sent_direct_messages_request( int count = N_UN,
 * \href{http://dev.twitter.com/docs/api/1.1/get/direct_messages/show}{Twitter Documentation for [show\_direct\_messages]}
 * \endlatexonly
 */
-TwitterRequest* show_direct_messages_request( uid_t id );
+TwitterRequest* show_direct_messages_request( usr_id_t id );
 
 /**
 * \htmlonly 
@@ -322,7 +337,7 @@ TwitterRequest* show_direct_messages_request( uid_t id );
 * \href{http://dev.twitter.com/docs/api/1.1/post/direct_messages/destroy}{Twitter Documentation for [destroy\_direct\_messages]}
 * \endlatexonly
 */
-TwitterRequest* destroy_direct_messages_request( uid_t id, 
+TwitterRequest* destroy_direct_messages_request( usr_id_t id, 
 										bool include_entities = true );
 
 /**
@@ -356,7 +371,7 @@ TwitterRequest* new_direct_message_by_screen_name_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/get/friends/ids}{Twitter Documentation for [friends\_ids]}
 * \endlatexonly
 */
-TwitterRequest* friends_ids_request( uid_t user_id, 
+TwitterRequest* friends_ids_request( usr_id_t user_id, 
 										bool stringify_ids = true );
 
 /**
@@ -378,7 +393,7 @@ TwitterRequest* friends_ids_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/get/followers/ids}{Twitter Documentation for [followers\_ids]}
 * \endlatexonly
 */
-TwitterRequest* followers_ids_request( uid_t user_id, 
+TwitterRequest* followers_ids_request( usr_id_t user_id, 
 										bool stringify_ids = true );
 
 /**
@@ -457,7 +472,7 @@ TwitterRequest* create_friendship_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/post/friendships/create}{Twitter Documentation for [create\_friendship]}
 * \endlatexonly
 */
-TwitterRequest* create_friendship_request( uid_t user_id, 
+TwitterRequest* create_friendship_request( usr_id_t user_id, 
 										bool follow = true );
 
 /**
@@ -478,7 +493,7 @@ TwitterRequest* destroy_friendship_request( str_t screen_name );
 * \href{http://dev.twitter.com/docs/api/1.1/post/friendships/destroy}{Twitter Documentation for [destroy\_friendship]}
 * \endlatexonly
 */
-TwitterRequest* destroy_friendship_request( uid_t user_id );
+TwitterRequest* destroy_friendship_request( usr_id_t user_id );
 
 /**
 * \htmlonly 
@@ -500,7 +515,7 @@ TwitterRequest* update_friendship_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/post/friendships/update}{Twitter Documentation for [update\_friendship]}
 * \endlatexonly
 */
-TwitterRequest* update_friendship_request( uid_t user_id, 
+TwitterRequest* update_friendship_request( usr_id_t user_id, 
 										bool retweets, 
 										bool device );
 
@@ -512,8 +527,8 @@ TwitterRequest* update_friendship_request( uid_t user_id,
 * \href{http://dev.twitter.com/docs/api/1.1/get/friendships/show}{Twitter Documentation for [show\_friendship]}
 * \endlatexonly
 */
-TwitterRequest* show_friendship_request( uid_t source_id, 
-										uid_t target_id );
+TwitterRequest* show_friendship_request( usr_id_t source_id, 
+										usr_id_t target_id );
 
 /**
 * \htmlonly 
@@ -621,7 +636,7 @@ TwitterRequest* create_blocks_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/post/blocks/create}{Twitter Documentation for [create\_blocks\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* create_blocks_by_id_request( uid_t user_id, 
+TwitterRequest* create_blocks_by_id_request( usr_id_t user_id, 
 										bool include_entities = false, 
 										bool skip_status = true );
 
@@ -645,7 +660,7 @@ TwitterRequest* destroy_blocks_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/post/blocks/destroy}{Twitter Documentation for [destroy\_blocks\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* destroy_blocks_by_id_request( uid_t user_id, 
+TwitterRequest* destroy_blocks_by_id_request( usr_id_t user_id, 
 										bool include_entities = false, 
 										bool skip_status = true );
 
@@ -720,7 +735,7 @@ TwitterRequest* search_user_request( str_t q,
 * \href{http://dev.twitter.com/docs/api/1.1/get/users/contributees}{Twitter Documentation for [user\_contributees\_by\_user\_id]}
 * \endlatexonly
 */
-TwitterRequest* user_contributees_by_user_id_request( uid_t user_id, 
+TwitterRequest* user_contributees_by_user_id_request( usr_id_t user_id, 
 										bool include_entities = true, 
 										bool skip_status = false );
 
@@ -744,7 +759,7 @@ TwitterRequest* user_contributees_by_screen_name_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/get/users/contributors}{Twitter Documentation for [user\_contributors\_by\_user\_id]}
 * \endlatexonly
 */
-TwitterRequest* user_contributors_by_user_id_request( uid_t user_id, 
+TwitterRequest* user_contributors_by_user_id_request( usr_id_t user_id, 
 										bool include_entities = true, 
 										bool skip_status = false );
 
@@ -801,7 +816,7 @@ TwitterRequest* user_suggestions_members_request( str_t slug );
 * \href{http://dev.twitter.com/docs/api/1.1/get/favorites/list}{Twitter Documentation for [list\_favorites]}
 * \endlatexonly
 */
-TwitterRequest* list_favorites_request( uid_t user_id = N_UN, 
+TwitterRequest* list_favorites_request( usr_id_t user_id = S_UN, 
 										int count = N_UN, 
 										int since_id = N_UN, 
 										int max_id = N_UN, 
@@ -852,7 +867,7 @@ TwitterRequest* create_favorite_request( tid_t id,
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/list}{Twitter Documentation for [lists\_by\_user\_id]}
 * \endlatexonly
 */
-TwitterRequest* lists_by_user_id_request( uid_t user_id );
+TwitterRequest* lists_by_user_id_request( usr_id_t user_id );
 
 /**
 * \htmlonly 
@@ -862,7 +877,7 @@ TwitterRequest* lists_by_user_id_request( uid_t user_id );
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/list}{Twitter Documentation for [lists\_by\_screen\_name]}
 * \endlatexonly
 */
-TwitterRequest* lists_by_screen_name_request( uid_t screen_name );
+TwitterRequest* lists_by_screen_name_request( usr_id_t screen_name );
 
 /**
 * \htmlonly 
@@ -888,7 +903,7 @@ TwitterRequest* list_statuses_by_ids_request( lid_t list_id,
 * \endlatexonly
 */
 TwitterRequest* list_statuses_request( str_t slug, 
-										uid_t owner_screen_name, 
+										usr_id_t owner_screen_name, 
 										int count = N_UN, 
 										int since_id = N_UN, 
 										int max_id = N_UN, 
@@ -904,7 +919,7 @@ TwitterRequest* list_statuses_request( str_t slug,
 * \endlatexonly
 */
 TwitterRequest* destroy_list_member_by_ids_request( lid_t list_id, 
-										uid_t user_id );
+										usr_id_t user_id );
 
 /**
 * \htmlonly 
@@ -915,7 +930,7 @@ TwitterRequest* destroy_list_member_by_ids_request( lid_t list_id,
 * \endlatexonly
 */
 TwitterRequest* destroy_list_member_request( str_t slug, 
-										uid_t screen_name );
+										usr_id_t screen_name );
 
 /**
 * \htmlonly 
@@ -936,7 +951,7 @@ TwitterRequest* list_membership_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/memberships}{Twitter Documentation for [list\_membership\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* list_membership_by_id_request( uid_t user_id, 
+TwitterRequest* list_membership_by_id_request( usr_id_t user_id, 
 										cid_t cursor = N_UN );
 
 /**
@@ -995,7 +1010,7 @@ TwitterRequest* subscribe_to_list_request( str_t slug,
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/subscribers/show}{Twitter Documentation for [show\_user\_is\_suscriber\_by\_ids]}
 * \endlatexonly
 */
-TwitterRequest* show_user_is_suscriber_by_ids_request( uid_t user_id, 
+TwitterRequest* show_user_is_suscriber_by_ids_request( usr_id_t user_id, 
 										lid_t list_id, 
 										bool include_entities = false, 
 										bool skip_status = true );
@@ -1073,7 +1088,7 @@ TwitterRequest* subscribe_to_list_multi_request( str_t slug,
 * \endlatexonly
 */
 TwitterRequest* show_user_is_member_by_ids_request( lid_t list_id, 
-										uid_t user_id, 
+										usr_id_t user_id, 
 										bool include_entities = false, 
 										bool skip_status = true );
 
@@ -1126,7 +1141,7 @@ TwitterRequest* list_members_request( str_t slug,
 * \href{http://dev.twitter.com/docs/api/1.1/post/lists/members/create}{Twitter Documentation for [join\_list]}
 * \endlatexonly
 */
-TwitterRequest* join_list_request( uid_t user_id, 
+TwitterRequest* join_list_request( usr_id_t user_id, 
 										lid_t list_id );
 
 /**
@@ -1219,7 +1234,7 @@ TwitterRequest* show_list_request( str_t slug,
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/subscriptions}{Twitter Documentation for [lists\_subscription\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* lists_subscription_by_id_request( uid_t user_id, 
+TwitterRequest* lists_subscription_by_id_request( usr_id_t user_id, 
 										int count = N_UN, 
 										cid_t cursor = N_UN );
 
@@ -1351,7 +1366,7 @@ TwitterRequest* closest_trend_request( float Lat,
 * \endlatexonly
 */
 
-TwitterRequest* report_spam_request( uid_t user_id );
+TwitterRequest* report_spam_request( usr_id_t user_id );
 
 /**
 * \htmlonly 
@@ -1366,7 +1381,7 @@ You SHOULD pass ressources names in a "comma,sepa,rated,string"
 */
 TwitterRequest* rate_limit_status_request( str_t ressources );
 
-/* END_PYGEN don't remove this comment (2012/9/29 0:1) */
+/* END_PYGEN don't remove this comment (2012/9/30 21:15) */
 
 
 /* MANUALLY (file uploads) */

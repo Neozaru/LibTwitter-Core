@@ -9,7 +9,7 @@
 
 	typedef std::string tid_t;
 	typedef unsigned int cid_t;
-	typedef unsigned int uid_t;
+	typedef std::string usr_id_t;
 	typedef unsigned int lid_t;
 	typedef unsigned int slug_t;
 	typedef unsigned int sid_t;
@@ -17,6 +17,16 @@
 
 
 const std::string DEFAULT_PROXY = "system_defined";
+
+enum e_debug_levels {
+	NONE = 0,
+	DEBUG,
+	WARNINGS,
+	ERRORS,
+	NB_DEBUG_LEVELS
+};
+
+
 
 enum e_HTTP_request_type {
     INVALID = 0,
@@ -73,7 +83,7 @@ namespace TwitterConsts {
 	const string REPORT_SPAM = API_LINK + "report_spam";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/29 0:1) */
+/* BEGIN_PYGEN don't remove this comment (2012/9/30 21:15) */
 
 	namespace STATUSES {
 
@@ -83,9 +93,9 @@ namespace TwitterConsts {
 		const std::string USER_TIMELINE = API_LINK + STATUSES + "user_timeline" + FORMAT ;
 		const std::string HOME_TIMELINE = API_LINK + STATUSES + "home_timeline" + FORMAT ;
 		const std::string RETWEETS = API_LINK + STATUSES + "retweets/:id" + FORMAT ;
+		const std::string SHOW = API_LINK + STATUSES + "show/:id" + FORMAT ;
 		const std::string DESTROY = API_LINK + STATUSES + "destroy/:id" + FORMAT ;
 		const std::string UPDATE = API_LINK + STATUSES + "update" + FORMAT ;
-		const std::string UPDATE_WITH_MEDIA = API_LINK + STATUSES + "update_with_media" + FORMAT ;
 		const std::string RETWEET = API_LINK + STATUSES + "retweet/:id" + FORMAT ;
 		const std::string OEMBED = API_LINK + STATUSES + "oembed" + FORMAT ;
 	};
@@ -217,7 +227,13 @@ namespace TwitterConsts {
 		const std::string RATE_LIMIT_STATUS = API_LINK + APPLICATION + "rate_limit_status" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/9/29 0:1) */
+/* END_PYGEN don't remove this comment (2012/9/30 21:15) */
+
+	namespace STATUSES {
+
+		const std::string UPDATE_WITH_MEDIA = API_LINK + "statuses/" + "update_with_media" + FORMAT ;	
+	
+	};
 
 	namespace Streaming {
 

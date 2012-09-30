@@ -311,7 +311,7 @@ class Tw_Parameter:
 		rstr = self.to_str()
 		if self.default_value != "":
 			if self.default_value == "DEF":
-				if "str" not in self.p_type:
+				if "str" not in self.p_type and "usr" not in self.p_type:
 					rstr += " = N_UN"
 				else:
 					rstr += " = S_UN"
@@ -444,6 +444,12 @@ def is_file_exists(filename):
 
    	return 1
 
+
+
+#############
+# MAIN PROG #
+#############
+
 file_name_in = sys.argv[1]
 file_name_out = sys.argv[2]
 
@@ -480,6 +486,8 @@ remove_from_file(file_name_out+".h",pattern)
 
 write_in_file(methods,file_name_out+".cpp",pattern,1)
 write_in_file(methods,file_name_out+".h",pattern,0)
+
+print("[ "+str(len(methods))+" methods generated ]")
 
 if len(sys.argv) > 3:
 	consts_file = sys.argv[3]
