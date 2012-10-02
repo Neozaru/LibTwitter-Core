@@ -41,9 +41,9 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 :: incoming_friendships :: bool stringify_ids true :: GET :: friendships/incoming
 :: outgoing_friendships :: bool stringify_ids true :: GET :: friendships/outgoing
 :: create_friendship :: string screen_name, bool follow true :: POST :: friendships/create
-:: create_friendship :: usr_id_t user_id, bool follow true :: POST :: friendships/create
+:: create_friendship_by_id :: usr_id_t user_id, bool follow true :: POST :: friendships/create
 :: destroy_friendship :: string screen_name :: POST :: friendships/destroy
-:: destroy_friendship :: usr_id_t user_id :: POST :: friendships/destroy
+:: destroy_friendship_by_id :: usr_id_t user_id :: POST :: friendships/destroy
 :: update_friendship :: string screen_name, bool retweets, bool device :: POST :: friendships/update
 :: update_friendship :: usr_id_t user_id, bool retweets, bool device :: POST :: friendships/update
 :: show_friendship :: usr_id_t source_id, usr_id_t target_id :: GET :: friendships/show

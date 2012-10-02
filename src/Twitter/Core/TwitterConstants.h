@@ -83,7 +83,7 @@ namespace TwitterConsts {
 	const string REPORT_SPAM = API_LINK + "report_spam";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/30 21:15) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/2 15:18) */
 
 	namespace STATUSES {
 
@@ -227,7 +227,7 @@ namespace TwitterConsts {
 		const std::string RATE_LIMIT_STATUS = API_LINK + APPLICATION + "rate_limit_status" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/9/30 21:15) */
+/* END_PYGEN don't remove this comment (2012/10/2 15:18) */
 
 	namespace STATUSES {
 

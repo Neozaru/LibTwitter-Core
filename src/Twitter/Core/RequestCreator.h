@@ -135,7 +135,7 @@
 		TwitterRequest* get_settings_request();
 */
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/30 21:15) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/2 15:18) */
 /**
 * \htmlonly 
 * <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/statuses/mentions_timeline">Twitter Documentation for [mentions_timeline]<a>
@@ -466,13 +466,13 @@ TwitterRequest* create_friendship_request( str_t screen_name,
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/friendships/create">Twitter Documentation for [create_friendship]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/friendships/create">Twitter Documentation for [create_friendship_by_id]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/post/friendships/create}{Twitter Documentation for [create\_friendship]}
+* \href{http://dev.twitter.com/docs/api/1.1/post/friendships/create}{Twitter Documentation for [create\_friendship\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* create_friendship_request( usr_id_t user_id, 
+TwitterRequest* create_friendship_by_id_request( usr_id_t user_id, 
 										bool follow = true );
 
 /**
@@ -487,13 +487,13 @@ TwitterRequest* destroy_friendship_request( str_t screen_name );
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/friendships/destroy">Twitter Documentation for [destroy_friendship]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/friendships/destroy">Twitter Documentation for [destroy_friendship_by_id]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/post/friendships/destroy}{Twitter Documentation for [destroy\_friendship]}
+* \href{http://dev.twitter.com/docs/api/1.1/post/friendships/destroy}{Twitter Documentation for [destroy\_friendship\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* destroy_friendship_request( usr_id_t user_id );
+TwitterRequest* destroy_friendship_by_id_request( usr_id_t user_id );
 
 /**
 * \htmlonly 
@@ -1381,7 +1381,7 @@ You SHOULD pass ressources names in a "comma,sepa,rated,string"
 */
 TwitterRequest* rate_limit_status_request( str_t ressources );
 
-/* END_PYGEN don't remove this comment (2012/9/30 21:15) */
+/* END_PYGEN don't remove this comment (2012/10/2 15:18) */
 
 
 /* MANUALLY (file uploads) */

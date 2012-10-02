@@ -84,7 +84,7 @@ TwitterRequest* RequestCreator::stream_user_request( std::string with, std::stri
 
 }
 
-/* BEGIN_PYGEN don't remove this comment (2012/9/30 21:15) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/2 15:18) */
 TwitterRequest* RequestCreator::mentions_timeline_request( int count, usr_id_t since_id, int max_id, bool trim_user, bool contributor_details, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::MENTIONS_TIMELINE );
 	req->set_GET_data( REC_ARGS_6( count, since_id, max_id, trim_user, contributor_details, include_entities ) );
@@ -243,7 +243,7 @@ TwitterRequest* RequestCreator::create_friendship_request( str_t screen_name, bo
 	return req;
 }
 
-TwitterRequest* RequestCreator::create_friendship_request( usr_id_t user_id, bool follow ) {
+TwitterRequest* RequestCreator::create_friendship_by_id_request( usr_id_t user_id, bool follow ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::CREATE );
 	req->set_POST_data( REC_ARGS_2( user_id, follow ) );
 	return req;
@@ -255,7 +255,7 @@ TwitterRequest* RequestCreator::destroy_friendship_request( str_t screen_name ) 
 	return req;
 }
 
-TwitterRequest* RequestCreator::destroy_friendship_request( usr_id_t user_id ) {
+TwitterRequest* RequestCreator::destroy_friendship_by_id_request( usr_id_t user_id ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::DESTROY );
 	req->set_POST_data( REC_ARGS_1( user_id ) );
 	return req;
@@ -707,7 +707,7 @@ TwitterRequest* RequestCreator::rate_limit_status_request( str_t ressources ) {
 	return req;
 }
 
-/* END_PYGEN don't remove this comment (2012/9/30 21:15) */
+/* END_PYGEN don't remove this comment (2012/10/2 15:18) */
 
 
 /* MANUALLY (media uploads) */
