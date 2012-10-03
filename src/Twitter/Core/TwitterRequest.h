@@ -81,6 +81,28 @@ public:
 	*/
 	void remove_listener( TwitterRequestListener* listener );
 
+	/**
+	* \fn copy
+	* \brief Copy current object parameters into an other TwitterRequest
+	*
+	* \param target Target TwitterRequest in which parameters will be copied
+	*
+	* \return true if copy was successful, false otherwise
+	*
+	*/
+	bool copy( TwitterRequest* target ) {
+
+		if ( target == NULL ) {
+			return false;
+		}
+
+		target->set_URL( _url );
+		target->set_GET_data( _GET_data );
+		target->set_POST_data( _POST_data );
+
+		return true;
+
+	}
 
 protected:
 
@@ -107,6 +129,8 @@ protected:
 	*/
 	void prepare();
 
+	
+	TwitterSession* _session;
 
 private:
 
@@ -145,8 +169,7 @@ private:
 
 	/** Attributes **/
 	std::set<TwitterRequestListener*> _listeners;
-	
-	TwitterSession* _session;
+
 
 	std::string _response_data;
 

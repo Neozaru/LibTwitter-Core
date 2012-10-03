@@ -141,8 +141,11 @@ bool CurlProcess::add_GET_parameter( const std::string& key, const std::string& 
 	}}
 
 void CurlProcess::set_POST_data( const std::map<std::string,std::string>& data ) {
-	_POST_data = data;
-	curl_easy_setopt( _curl, CURLOPT_POST, 1 );
+	
+	if ( !data.empty() ) {
+		_POST_data = data;
+		curl_easy_setopt( _curl, CURLOPT_POST, 1 );
+	}
 
 }
 

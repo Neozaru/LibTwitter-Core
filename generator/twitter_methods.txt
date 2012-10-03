@@ -161,8 +161,11 @@ You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 # SPAM REPORTING
 :: report_spam :: usr_id_t user_id :: POST :: report_spam
 
-#HELP
+# HELP
 :: rate_limit_status :: string ressources :: GET :: application/rate_limit_status
 /*
 You SHOULD pass ressources names in a "comma,sepa,rated,string"
 */
+
+# STREAMING API
+:: user_stream :: string with DEF, string replies DEF, string track DEF, string locations DEF, bool delimited false, bool stall_warnings false :: GET :: https://userstream.twitter.com/1.1/user 

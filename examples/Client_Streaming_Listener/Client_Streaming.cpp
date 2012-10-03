@@ -109,7 +109,7 @@ int main( int argc, char** argv ) {
 	}
 
 	/* The method stream_user_request(), will return an instance of MyTwitterRequest */
-	TwitterRequest* tr_stream_user = ts->stream_user_request();
+	TwitterRequest* tr_stream_user = ts->user_stream_request();
 
 	tr_stream_user->add_listener( new MyRequestListener() );
 	/* Send our request. The callback "on_data_received" of MyTwitterRequest will be called */

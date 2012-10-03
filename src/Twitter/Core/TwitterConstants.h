@@ -73,8 +73,9 @@ namespace TwitterConsts {
 
 	const string API_VERSION = "1.1";
 
+	const string PROTOCOL = "https://";
 
-	const string API_LINK = "http://api.twitter.com/"+API_VERSION+"/";
+	const string API_LINK = PROTOCOL + "api.twitter.com/"+API_VERSION+"/";
 	const string STREAM_API_LINK = "http://stream.twitter.com/"+API_VERSION+"/";
 
 	const string FORMAT  = ".json";
@@ -83,7 +84,7 @@ namespace TwitterConsts {
 	const string REPORT_SPAM = API_LINK + "report_spam";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/10/2 15:18) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/2 22:0) */
 
 	namespace STATUSES {
 
@@ -227,7 +228,14 @@ namespace TwitterConsts {
 		const std::string RATE_LIMIT_STATUS = API_LINK + APPLICATION + "rate_limit_status" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/10/2 15:18) */
+	namespace STREAMS {
+
+		const std::string STREAMS = "streams/";
+
+		const std::string USERSTREAM = PROTOCOL + "" + "userstream.twitter.com/1.1/user" + FORMAT ;
+	};
+
+/* END_PYGEN don't remove this comment (2012/10/2 22:0) */
 
 	namespace STATUSES {
 

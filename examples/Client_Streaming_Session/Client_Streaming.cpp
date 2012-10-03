@@ -109,7 +109,7 @@ int main( int argc, char** argv ) {
 	
 	/* Let MyTwitterSession handle the request */
 	/* See MyTwitterSession.h */
-	mts->send_request( mts->stream_user_request() );
+	mts->send_request( mts->user_stream_request() );
 
 
 	return 0;

@@ -135,7 +135,7 @@
 		TwitterRequest* get_settings_request();
 */
 
-/* BEGIN_PYGEN don't remove this comment (2012/10/2 15:18) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/2 22:0) */
 /**
 * \htmlonly 
 * <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/statuses/mentions_timeline">Twitter Documentation for [mentions_timeline]<a>
@@ -1379,9 +1379,25 @@ TwitterRequest* report_spam_request( usr_id_t user_id );
 /*
 You SHOULD pass ressources names in a "comma,sepa,rated,string"
 */
+
 TwitterRequest* rate_limit_status_request( str_t ressources );
 
-/* END_PYGEN don't remove this comment (2012/10/2 15:18) */
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/https://userstream.twitter.com/1.1/user">Twitter Documentation for [user_stream]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/get/https://userstream.twitter.com/1.1/user}{Twitter Documentation for [user\_stream]}
+* \endlatexonly
+*/
+TwitterRequest* user_stream_request( str_t with = S_UN, 
+										str_t replies = S_UN, 
+										str_t track = S_UN, 
+										str_t locations = S_UN, 
+										bool delimited = false, 
+										bool stall_warnings = false );
+
+/* END_PYGEN don't remove this comment (2012/10/2 22:0) */
 
 
 /* MANUALLY (file uploads) */

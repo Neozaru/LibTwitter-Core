@@ -62,19 +62,25 @@ class Tw_ConstantS:
 
 	def addConst(self,link):
 		#if link not in self.constants:
-		tab = link.split("/")
-		
-		l_namespace = ""
-
+		tab = None
+		l_namespace = link
 		sublink = link
-		if len(tab) > 1:
-			l_namespace = tab[0].upper()
-			self.addNamespace( l_namespace )
-			sublink = tab[1]
-			if len(tab) > 2:
-				sublink += "/"+tab[2]
-				if len(tab) > 3:
-					sublink += "/"+tab[3]
+
+		if "http://" in link or "https://" in link:
+			sublink = link.replace("https://","").replace("http://","")
+			l_namespace = "STREAMS"
+			self.addNamespace(l_namespace)
+		else:
+			tab = link.split("/")
+	
+			if len(tab) > 1:
+				l_namespace = tab[0].upper()
+				self.addNamespace( l_namespace )
+				sublink = tab[1]
+				if len(tab) > 2:
+					sublink += "/"+tab[2]
+					if len(tab) > 3:
+						sublink += "/"+tab[3]
 
 		const_obj = Tw_Constant( l_namespace, sublink )
 
@@ -108,7 +114,6 @@ class Tw_ConstantS:
 
 			rstr += "\t};\n"
 
-		#rstr += "\n};\n"
 		return rstr
 
 # Constants are used for Twitter API links
@@ -118,20 +123,42 @@ class Tw_Constant:
 		- Namespace of the constant
 	"""
 	def __init__(self,namespace,const_name):
-		self.sublink = const_name
-		self.const_name = const_name.split("/")[0]
+
 		self.namespace = namespace
+		self.sublink = const_name
+
+
+		self.const_name = const_name
+		const_tab = const_name.split("/")
+
+		if len(const_tab) > 1:
+			self.const_name = const_name.split("/")[0]
+	
 
 	def getNamespace(self):
 		return self.namespace.upper()
 
 	def getConstName(self):
+		if "." in self.const_name:
+			return self.const_name.split(".")[0].upper()
 		return self.const_name.upper()
 
 	def gen_line(self):
 		api_link = "API_LINK"
-		rstr = ""
-		rstr += "const std::string "+self.getConstName()+" = "+api_link+" + "+self.getNamespace()+" + \""+self.sublink+"\""+" + FORMAT"+" ;"
+
+
+		rstr = "const std::string "
+
+		cn = self.getConstName()
+		ns = self.getNamespace()
+
+		if "STREAM" in cn:
+			cn = cn.split(".")[0].upper()
+			api_link = "PROTOCOL"
+			ns = "\"\""
+
+		rstr += cn+" = "+api_link+" + "+ns+" + \""+self.sublink+"\""+" + FORMAT"+" ;"
+
 		return rstr
 
 class Tw_Method:
@@ -173,7 +200,7 @@ class Tw_Method:
 	def addParameter(self,parameter):
 		pattern = ":"+parameter.name
 		if pattern in self.request_link:
-			#print("Adding pattern : " + pattern)
+
 			self.param_in_request = parameter
 
 		self.parameters.append(parameter)
@@ -223,7 +250,7 @@ class Tw_Method:
 
 
 		link_constant = self.cm.getMainNamespace()
-		if self.request_const.getNamespace() != "":
+		if self.request_const.getNamespace() != "" and self.request_const.getNamespace() != self.request_const.getConstName():
 			link_constant += "::"+self.request_const.getNamespace()
 		link_constant += "::"+self.request_const.getConstName()
 		# Copy a temporary list from the parameters list
@@ -345,11 +372,15 @@ def parse_parameter(p_str):
 def parse_method(cm,p_str):
 	tab = p_str.split("::")
 	if len(tab) == 5:
-		method = Tw_Method(cm,tab[1].strip(),tab[3].strip(),tab[4].strip())
+
+		#proto = tab[3].strip()
+		#get_post = proto
+		#stream = 0
+
+		method = Tw_Method( cm, tab[1].strip(), tab[3].strip(), tab[4].strip() )
 
 		tab_vars = tab[2].split(",")
-		#print("Split : ")
-		#print(tab_vars)
+
 		for p in tab_vars:
 			if p != " ":
 				param = parse_parameter(p)
