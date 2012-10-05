@@ -7,13 +7,13 @@
 	
 	typedef const std::string& str_t;
 
-	typedef std::string tid_t;
-	typedef unsigned int cid_t;
+	typedef std::string twt_id_t;
+	typedef std::string cur_id_t;
 	typedef std::string usr_id_t;
-	typedef unsigned int lid_t;
+	typedef unsigned int lst_id_t;
 	typedef unsigned int slug_t;
-	typedef unsigned int sid_t;
-
+	typedef unsigned int sch_id_t;
+	typedef unsigned int msg_id_t;
 
 
 const std::string DEFAULT_PROXY = "system_defined";
@@ -84,7 +84,7 @@ namespace TwitterConsts {
 	const string REPORT_SPAM = API_LINK + "report_spam";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/10/2 22:0) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/5 11:47) */
 
 	namespace STATUSES {
 
@@ -150,7 +150,9 @@ namespace TwitterConsts {
 		const std::string ACCOUNT = "account/";
 
 		const std::string VERIFY_CREDENTIALS = API_LINK + ACCOUNT + "verify_credentials" + FORMAT ;
+		const std::string SETTINGS = API_LINK + ACCOUNT + "settings" + FORMAT ;
 		const std::string UPDATE_DELIVERY_DEVICE = API_LINK + ACCOUNT + "update_delivery_device" + FORMAT ;
+		const std::string UPDATE_PROFILE = API_LINK + ACCOUNT + "update_profile" + FORMAT ;
 		const std::string UPDATE_PROFILE_BACKGROUND_IMAGE = API_LINK + ACCOUNT + "update_profile_background_image" + FORMAT ;
 		const std::string UPDATE_PROFILE_COLORS = API_LINK + ACCOUNT + "update_profile_colors" + FORMAT ;
 	};
@@ -228,6 +230,15 @@ namespace TwitterConsts {
 		const std::string RATE_LIMIT_STATUS = API_LINK + APPLICATION + "rate_limit_status" + FORMAT ;
 	};
 
+	namespace HELP {
+
+		const std::string HELP = "help/";
+
+		const std::string LANGUAGES = API_LINK + HELP + "languages" + FORMAT ;
+		const std::string PRIVACY = API_LINK + HELP + "privacy" + FORMAT ;
+		const std::string TOS = API_LINK + HELP + "tos" + FORMAT ;
+	};
+
 	namespace STREAMS {
 
 		const std::string STREAMS = "streams/";
@@ -235,7 +246,7 @@ namespace TwitterConsts {
 		const std::string USERSTREAM = PROTOCOL + "" + "userstream.twitter.com/1.1/user" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/10/2 22:0) */
+/* END_PYGEN don't remove this comment (2012/10/5 11:47) */
 
 	namespace STATUSES {
 

@@ -135,7 +135,7 @@
 		TwitterRequest* get_settings_request();
 */
 
-/* BEGIN_PYGEN don't remove this comment (2012/10/2 22:0) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/5 11:47) */
 /**
 * \htmlonly 
 * <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/statuses/mentions_timeline">Twitter Documentation for [mentions_timeline]<a>
@@ -162,8 +162,8 @@ TwitterRequest* mentions_timeline_request( int count = 20,
 */
 TwitterRequest* user_timeline_by_id_request( usr_id_t user_id, 
 										int count = N_UN, 
-										usr_id_t since_id = S_UN, 
-										int max_id = N_UN, 
+										twt_id_t since_id = S_UN, 
+										twt_id_t max_id = S_UN, 
 										bool trim_user = false, 
 										bool exclude_replies = false, 
 										bool contributor_details = false, 
@@ -179,8 +179,8 @@ TwitterRequest* user_timeline_by_id_request( usr_id_t user_id,
 */
 TwitterRequest* user_timeline_request( str_t screen_name, 
 										int count = N_UN, 
-										usr_id_t since_id = S_UN, 
-										int max_id = N_UN, 
+										twt_id_t since_id = S_UN, 
+										twt_id_t max_id = S_UN, 
 										bool trim_user = false, 
 										bool exclude_replies = false, 
 										bool contributor_details = false, 
@@ -211,7 +211,7 @@ TwitterRequest* home_timeline_request( int count = N_UN,
 * \href{http://dev.twitter.com/docs/api/1.1/get/statuses/retweets/:id}{Twitter Documentation for [get\_retweets]}
 * \endlatexonly
 */
-TwitterRequest* get_retweets_request( usr_id_t id, 
+TwitterRequest* get_retweets_request( twt_id_t id, 
 										int count = 50, 
 										bool trim_user = false );
 
@@ -223,7 +223,7 @@ TwitterRequest* get_retweets_request( usr_id_t id,
 * \href{http://dev.twitter.com/docs/api/1.1/get/statuses/show/:id}{Twitter Documentation for [show\_status]}
 * \endlatexonly
 */
-TwitterRequest* show_status_request( usr_id_t id, 
+TwitterRequest* show_status_request( twt_id_t id, 
 										bool include_my_retweet = true, 
 										bool trim_user = false, 
 										bool include_entities = true );
@@ -236,7 +236,7 @@ TwitterRequest* show_status_request( usr_id_t id,
 * \href{http://dev.twitter.com/docs/api/1.1/post/statuses/destroy/:id}{Twitter Documentation for [destroy\_status]}
 * \endlatexonly
 */
-TwitterRequest* destroy_status_request( usr_id_t id, 
+TwitterRequest* destroy_status_request( twt_id_t id, 
 										bool trim_user = false );
 
 /**
@@ -265,7 +265,7 @@ TwitterRequest* update_status_request( str_t status,
 */
 
 
-TwitterRequest* retweet_request( usr_id_t id, 
+TwitterRequest* retweet_request( twt_id_t id, 
 										bool trim_user = false );
 
 /**
@@ -276,7 +276,7 @@ TwitterRequest* retweet_request( usr_id_t id,
 * \href{http://dev.twitter.com/docs/api/1.1/get/statuses/oembed}{Twitter Documentation for [oembed\_status]}
 * \endlatexonly
 */
-TwitterRequest* oembed_status_request( usr_id_t id, 
+TwitterRequest* oembed_status_request( twt_id_t id, 
 										str_t url, 
 										int maxwidth = N_UN, 
 										bool hide_media = false, 
@@ -300,8 +300,8 @@ TwitterRequest* search_tweets_request( str_t q,
 										str_t result_type = S_UN, 
 										int count = N_UN, 
 										str_t until = S_UN, 
-										usr_id_t since_id = S_UN, 
-										str_t max_id = S_UN, 
+										twt_id_t since_id = S_UN, 
+										twt_id_t max_id = S_UN, 
 										bool include_entities = true, 
 										str_t callback = S_UN );
 
@@ -327,7 +327,7 @@ TwitterRequest* sent_direct_messages_request( int count = N_UN,
 * \href{http://dev.twitter.com/docs/api/1.1/get/direct_messages/show}{Twitter Documentation for [show\_direct\_messages]}
 * \endlatexonly
 */
-TwitterRequest* show_direct_messages_request( usr_id_t id );
+TwitterRequest* show_direct_messages_request( msg_id_t id );
 
 /**
 * \htmlonly 
@@ -337,42 +337,43 @@ TwitterRequest* show_direct_messages_request( usr_id_t id );
 * \href{http://dev.twitter.com/docs/api/1.1/post/direct_messages/destroy}{Twitter Documentation for [destroy\_direct\_messages]}
 * \endlatexonly
 */
-TwitterRequest* destroy_direct_messages_request( usr_id_t id, 
+TwitterRequest* destroy_direct_messages_request( msg_id_t id, 
 										bool include_entities = true );
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/direct_messages/new">Twitter Documentation for [new_direct_message_by_user_id]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/direct_messages/new">Twitter Documentation for [new_direct_message_by_id]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/post/direct_messages/new}{Twitter Documentation for [new\_direct\_message\_by\_user\_id]}
+* \href{http://dev.twitter.com/docs/api/1.1/post/direct_messages/new}{Twitter Documentation for [new\_direct\_message\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* new_direct_message_by_user_id_request( str_t user_id, 
+TwitterRequest* new_direct_message_by_id_request( usr_id_t user_id, 
 										str_t text );
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/direct_messages/new">Twitter Documentation for [new_direct_message_by_screen_name]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/direct_messages/new">Twitter Documentation for [new_direct_message]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/post/direct_messages/new}{Twitter Documentation for [new\_direct\_message\_by\_screen\_name]}
+* \href{http://dev.twitter.com/docs/api/1.1/post/direct_messages/new}{Twitter Documentation for [new\_direct\_message]}
 * \endlatexonly
 */
 
-TwitterRequest* new_direct_message_by_screen_name_request( str_t screen_name, 
+TwitterRequest* new_direct_message_request( str_t screen_name, 
 										str_t text );
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/friends/ids">Twitter Documentation for [friends_ids]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/friends/ids">Twitter Documentation for [friends_ids_by_id]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/get/friends/ids}{Twitter Documentation for [friends\_ids]}
+* \href{http://dev.twitter.com/docs/api/1.1/get/friends/ids}{Twitter Documentation for [friends\_ids\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* friends_ids_request( usr_id_t user_id, 
-										bool stringify_ids = true );
+TwitterRequest* friends_ids_by_id_request( usr_id_t user_id, 
+										bool stringify_ids = true, 
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
@@ -383,18 +384,20 @@ TwitterRequest* friends_ids_request( usr_id_t user_id,
 * \endlatexonly
 */
 TwitterRequest* friends_ids_request( str_t screen_name, 
-										bool stringify_ids = true );
+										bool stringify_ids = true, 
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/followers/ids">Twitter Documentation for [followers_ids]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/followers/ids">Twitter Documentation for [followers_ids_by_id]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/get/followers/ids}{Twitter Documentation for [followers\_ids]}
+* \href{http://dev.twitter.com/docs/api/1.1/get/followers/ids}{Twitter Documentation for [followers\_ids\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* followers_ids_request( usr_id_t user_id, 
-										bool stringify_ids = true );
+TwitterRequest* followers_ids_by_id_request( usr_id_t user_id, 
+										bool stringify_ids = true, 
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
@@ -405,20 +408,21 @@ TwitterRequest* followers_ids_request( usr_id_t user_id,
 * \endlatexonly
 */
 TwitterRequest* followers_ids_request( str_t screen_name, 
-										bool stringify_ids = true );
+										bool stringify_ids = true, 
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/friendships/lookup">Twitter Documentation for [lookup_friendship_by_names]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/friendships/lookup">Twitter Documentation for [lookup_friendship]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/get/friendships/lookup}{Twitter Documentation for [lookup\_friendship\_by\_names]}
+* \href{http://dev.twitter.com/docs/api/1.1/get/friendships/lookup}{Twitter Documentation for [lookup\_friendship]}
 * \endlatexonly
 */
 /*
 You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 */
-TwitterRequest* lookup_friendship_by_names_request( str_t screen_name );
+TwitterRequest* lookup_friendship_request( str_t screen_name );
 
 /**
 * \htmlonly 
@@ -441,7 +445,8 @@ TwitterRequest* lookup_friendship_by_ids_request( str_t user_id );
 * \href{http://dev.twitter.com/docs/api/1.1/get/friendships/incoming}{Twitter Documentation for [incoming\_friendships]}
 * \endlatexonly
 */
-TwitterRequest* incoming_friendships_request( bool stringify_ids = true );
+TwitterRequest* incoming_friendships_request( bool stringify_ids = true, 
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
@@ -451,7 +456,8 @@ TwitterRequest* incoming_friendships_request( bool stringify_ids = true );
 * \href{http://dev.twitter.com/docs/api/1.1/get/friendships/outgoing}{Twitter Documentation for [outgoing\_friendships]}
 * \endlatexonly
 */
-TwitterRequest* outgoing_friendships_request( bool stringify_ids = true );
+TwitterRequest* outgoing_friendships_request( bool stringify_ids = true, 
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
@@ -509,13 +515,13 @@ TwitterRequest* update_friendship_request( str_t screen_name,
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/friendships/update">Twitter Documentation for [update_friendship]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/friendships/update">Twitter Documentation for [update_friendship_by_id]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/post/friendships/update}{Twitter Documentation for [update\_friendship]}
+* \href{http://dev.twitter.com/docs/api/1.1/post/friendships/update}{Twitter Documentation for [update\_friendship\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* update_friendship_request( usr_id_t user_id, 
+TwitterRequest* update_friendship_by_id_request( usr_id_t user_id, 
 										bool retweets, 
 										bool device );
 
@@ -527,20 +533,20 @@ TwitterRequest* update_friendship_request( usr_id_t user_id,
 * \href{http://dev.twitter.com/docs/api/1.1/get/friendships/show}{Twitter Documentation for [show\_friendship]}
 * \endlatexonly
 */
-TwitterRequest* show_friendship_request( usr_id_t source_id, 
-										usr_id_t target_id );
+TwitterRequest* show_friendship_request( str_t source_screen_name, 
+										str_t target_screen_name );
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/friendships/show">Twitter Documentation for [show_friendship]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/friendships/show">Twitter Documentation for [show_friendship_by_id]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/get/friendships/show}{Twitter Documentation for [show\_friendship]}
+* \href{http://dev.twitter.com/docs/api/1.1/get/friendships/show}{Twitter Documentation for [show\_friendship\_by\_id]}
 * \endlatexonly
 */
 
-TwitterRequest* show_friendship_request( str_t source_screen_name, 
-										str_t target_screen_name );
+TwitterRequest* show_friendship_by_id_request( usr_id_t source_id, 
+										usr_id_t target_id );
 
 /**
 * \htmlonly 
@@ -555,6 +561,21 @@ TwitterRequest* verify_credentials_request( bool include_entities = true,
 
 /**
 * \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/account/settings">Twitter Documentation for [set_account_settings]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/post/account/settings}{Twitter Documentation for [set\_account\_settings]}
+* \endlatexonly
+*/
+TwitterRequest* set_account_settings_request( bool sleep_time_enabled = false, 
+										int start_sleep_time = N_UN, 
+										int end_sleep_time = N_UN, 
+										str_t lang = S_UN, 
+										str_t time_zone = S_UN, 
+										int trend_location_woeid = N_UN );
+
+/**
+* \htmlonly 
 * <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/account/update_delivery_device">Twitter Documentation for [update_delivery_device]<a>
 * \endhtmlonly
 * \latexonly 
@@ -563,6 +584,21 @@ TwitterRequest* verify_credentials_request( bool include_entities = true,
 */
 TwitterRequest* update_delivery_device_request( str_t device = "none", 
 										bool include_entities = false );
+
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/post/account/update_profile">Twitter Documentation for [update_profile]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/post/account/update_profile}{Twitter Documentation for [update\_profile]}
+* \endlatexonly
+*/
+TwitterRequest* update_profile_request( str_t name = S_UN, 
+										str_t description = S_UN, 
+										str_t url = S_UN, 
+										bool include_entities = true, 
+										bool skip_status = false, 
+										str_t location = S_UN );
 
 /**
 * \htmlonly 
@@ -601,7 +637,7 @@ TwitterRequest* update_profile_colors_request( str_t profile_background_color = 
 * \href{http://dev.twitter.com/docs/api/1.1/get/blocks/list}{Twitter Documentation for [get\_blocks\_list]}
 * \endlatexonly
 */
-TwitterRequest* get_blocks_list_request( cid_t cursor = N_UN, 
+TwitterRequest* get_blocks_list_request( cur_id_t cursor = S_UN, 
 										bool skip_status = true, 
 										bool include_entities = false );
 
@@ -613,7 +649,7 @@ TwitterRequest* get_blocks_list_request( cid_t cursor = N_UN,
 * \href{http://dev.twitter.com/docs/api/1.1/get/blocks/ids}{Twitter Documentation for [get\_blocks\_ids]}
 * \endlatexonly
 */
-TwitterRequest* get_blocks_ids_request( cid_t cursor = N_UN, 
+TwitterRequest* get_blocks_ids_request( cur_id_t cursor = S_UN, 
 										bool stringify_ids = true );
 
 /**
@@ -844,7 +880,7 @@ TwitterRequest* list_favorites_by_screen_name_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/post/favorites/destroy}{Twitter Documentation for [destroy\_favorite]}
 * \endlatexonly
 */
-TwitterRequest* destroy_favorite_request( tid_t id, 
+TwitterRequest* destroy_favorite_request( twt_id_t id, 
 										bool include_entities = false );
 
 /**
@@ -856,7 +892,7 @@ TwitterRequest* destroy_favorite_request( tid_t id,
 * \endlatexonly
 */
 
-TwitterRequest* create_favorite_request( tid_t id, 
+TwitterRequest* create_favorite_request( twt_id_t id, 
 										bool include_entities = false );
 
 /**
@@ -871,13 +907,13 @@ TwitterRequest* lists_by_user_id_request( usr_id_t user_id );
 
 /**
 * \htmlonly 
-* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/lists/list">Twitter Documentation for [lists_by_screen_name]<a>
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/lists/list">Twitter Documentation for [lists]<a>
 * \endhtmlonly
 * \latexonly 
-* \href{http://dev.twitter.com/docs/api/1.1/get/lists/list}{Twitter Documentation for [lists\_by\_screen\_name]}
+* \href{http://dev.twitter.com/docs/api/1.1/get/lists/list}{Twitter Documentation for [lists]}
 * \endlatexonly
 */
-TwitterRequest* lists_by_screen_name_request( usr_id_t screen_name );
+TwitterRequest* lists_request( usr_id_t screen_name );
 
 /**
 * \htmlonly 
@@ -887,7 +923,7 @@ TwitterRequest* lists_by_screen_name_request( usr_id_t screen_name );
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/statuses}{Twitter Documentation for [list\_statuses\_by\_ids]}
 * \endlatexonly
 */
-TwitterRequest* list_statuses_by_ids_request( lid_t list_id, 
+TwitterRequest* list_statuses_by_ids_request( lst_id_t list_id, 
 										int count = N_UN, 
 										int since_id = N_UN, 
 										int max_id = N_UN, 
@@ -918,7 +954,7 @@ TwitterRequest* list_statuses_request( str_t slug,
 * \href{http://dev.twitter.com/docs/api/1.1/post/lists/members/destroy}{Twitter Documentation for [destroy\_list\_member\_by\_ids]}
 * \endlatexonly
 */
-TwitterRequest* destroy_list_member_by_ids_request( lid_t list_id, 
+TwitterRequest* destroy_list_member_by_ids_request( lst_id_t list_id, 
 										usr_id_t user_id );
 
 /**
@@ -941,7 +977,7 @@ TwitterRequest* destroy_list_member_request( str_t slug,
 * \endlatexonly
 */
 TwitterRequest* list_membership_request( str_t screen_name, 
-										cid_t cursor = N_UN );
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
@@ -952,7 +988,7 @@ TwitterRequest* list_membership_request( str_t screen_name,
 * \endlatexonly
 */
 TwitterRequest* list_membership_by_id_request( usr_id_t user_id, 
-										cid_t cursor = N_UN );
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
@@ -964,7 +1000,7 @@ TwitterRequest* list_membership_by_id_request( usr_id_t user_id,
 */
 TwitterRequest* list_suscribers_request( str_t slug, 
 										str_t screen_name, 
-										cid_t cursor, 
+										cur_id_t cursor, 
 										bool include_entities = false, 
 										bool skip_status = true );
 
@@ -976,8 +1012,8 @@ TwitterRequest* list_suscribers_request( str_t slug,
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/subscribers}{Twitter Documentation for [list\_suscribers\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* list_suscribers_by_id_request( lid_t list_id, 
-										cid_t cursor, 
+TwitterRequest* list_suscribers_by_id_request( lst_id_t list_id, 
+										cur_id_t cursor, 
 										bool include_entities = false, 
 										bool skip_status = true );
 
@@ -989,7 +1025,7 @@ TwitterRequest* list_suscribers_by_id_request( lid_t list_id,
 * \href{http://dev.twitter.com/docs/api/1.1/post/lists/subscribers/create}{Twitter Documentation for [subscribe\_to\_list]}
 * \endlatexonly
 */
-TwitterRequest* subscribe_to_list_request( lid_t list_id );
+TwitterRequest* subscribe_to_list_request( lst_id_t list_id );
 
 /**
 * \htmlonly 
@@ -1011,7 +1047,7 @@ TwitterRequest* subscribe_to_list_request( str_t slug,
 * \endlatexonly
 */
 TwitterRequest* show_user_is_suscriber_by_ids_request( usr_id_t user_id, 
-										lid_t list_id, 
+										lst_id_t list_id, 
 										bool include_entities = false, 
 										bool skip_status = true );
 
@@ -1024,7 +1060,7 @@ TwitterRequest* show_user_is_suscriber_by_ids_request( usr_id_t user_id,
 * \endlatexonly
 */
 TwitterRequest* show_user_is_suscriber_request( str_t screen_name, 
-										lid_t slug, 
+										lst_id_t slug, 
 										str_t owner_screen_name, 
 										bool include_entities = false, 
 										bool skip_status = true );
@@ -1037,7 +1073,7 @@ TwitterRequest* show_user_is_suscriber_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/post/lists/subscribers/destroy}{Twitter Documentation for [unsubscribe\_from\_list]}
 * \endlatexonly
 */
-TwitterRequest* unsubscribe_from_list_request( lid_t list_id );
+TwitterRequest* unsubscribe_from_list_request( lst_id_t list_id );
 
 /**
 * \htmlonly 
@@ -1061,7 +1097,7 @@ TwitterRequest* unsubscribe_from_list_request( str_t slug,
 /*
 You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 */
-TwitterRequest* subscribe_to_list_multi_by_ids_request( lid_t list_id, 
+TwitterRequest* subscribe_to_list_multi_by_ids_request( lst_id_t list_id, 
 										str_t user_id );
 
 /**
@@ -1087,7 +1123,7 @@ TwitterRequest* subscribe_to_list_multi_request( str_t slug,
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/members/show}{Twitter Documentation for [show\_user\_is\_member\_by\_ids]}
 * \endlatexonly
 */
-TwitterRequest* show_user_is_member_by_ids_request( lid_t list_id, 
+TwitterRequest* show_user_is_member_by_ids_request( lst_id_t list_id, 
 										usr_id_t user_id, 
 										bool include_entities = false, 
 										bool skip_status = true );
@@ -1114,8 +1150,8 @@ TwitterRequest* show_user_is_member_request( str_t slug,
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/members}{Twitter Documentation for [list\_members\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* list_members_by_id_request( lid_t list_id, 
-										cid_t cursor = N_UN, 
+TwitterRequest* list_members_by_id_request( lst_id_t list_id, 
+										cur_id_t cursor = S_UN, 
 										bool include_entities = false, 
 										bool skip_status = true );
 
@@ -1129,7 +1165,7 @@ TwitterRequest* list_members_by_id_request( lid_t list_id,
 */
 TwitterRequest* list_members_request( str_t slug, 
 										str_t owner_screen_name, 
-										cid_t cursor, 
+										cur_id_t cursor, 
 										bool include_entities = false, 
 										bool skip_status = true );
 
@@ -1142,7 +1178,7 @@ TwitterRequest* list_members_request( str_t slug,
 * \endlatexonly
 */
 TwitterRequest* join_list_request( usr_id_t user_id, 
-										lid_t list_id );
+										lst_id_t list_id );
 
 /**
 * \htmlonly 
@@ -1164,7 +1200,7 @@ TwitterRequest* join_list_request( str_t screen_name,
 * \href{http://dev.twitter.com/docs/api/1.1/post/lists/destroy}{Twitter Documentation for [part\_from\_list]}
 * \endlatexonly
 */
-TwitterRequest* part_from_list_request( lid_t list_id );
+TwitterRequest* part_from_list_request( lst_id_t list_id );
 
 /**
 * \htmlonly 
@@ -1174,7 +1210,7 @@ TwitterRequest* part_from_list_request( lid_t list_id );
 * \href{http://dev.twitter.com/docs/api/1.1/post/lists/update}{Twitter Documentation for [update\_list\_by\_id]}
 * \endlatexonly
 */
-TwitterRequest* update_list_by_id_request( lid_t list_id, 
+TwitterRequest* update_list_by_id_request( lst_id_t list_id, 
 										str_t name = S_UN, 
 										str_t description = "", 
 										str_t mode = "public" );
@@ -1213,7 +1249,7 @@ TwitterRequest* create_list_request( str_t name,
 * \href{http://dev.twitter.com/docs/api/1.1/get/lists/show}{Twitter Documentation for [show\_list]}
 * \endlatexonly
 */
-TwitterRequest* show_list_request( lid_t list_id );
+TwitterRequest* show_list_request( lst_id_t list_id );
 
 /**
 * \htmlonly 
@@ -1236,7 +1272,7 @@ TwitterRequest* show_list_request( str_t slug,
 */
 TwitterRequest* lists_subscription_by_id_request( usr_id_t user_id, 
 										int count = N_UN, 
-										cid_t cursor = N_UN );
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
@@ -1248,7 +1284,7 @@ TwitterRequest* lists_subscription_by_id_request( usr_id_t user_id,
 */
 TwitterRequest* lists_subscription_request( str_t screen_name, 
 										int count = N_UN, 
-										cid_t cursor = N_UN );
+										cur_id_t cursor = S_UN );
 
 /**
 * \htmlonly 
@@ -1261,7 +1297,7 @@ TwitterRequest* lists_subscription_request( str_t screen_name,
 /*
 You SHOULD pass user ids or screen names in a "comma,sepa,rated,string"
 */
-TwitterRequest* expulse_from_list_by_ids_request( lid_t list_id, 
+TwitterRequest* expulse_from_list_by_ids_request( lst_id_t list_id, 
 										str_t user_id );
 
 /**
@@ -1298,7 +1334,7 @@ TwitterRequest* get_saved_searches_request(  );
 * \href{http://dev.twitter.com/docs/api/1.1/get/saved_searches/show/:id}{Twitter Documentation for [show\_saved\_search]}
 * \endlatexonly
 */
-TwitterRequest* show_saved_search_request( sid_t id );
+TwitterRequest* show_saved_search_request( sch_id_t id );
 
 /**
 * \htmlonly 
@@ -1321,7 +1357,7 @@ TwitterRequest* search_request( str_t query );
 
 
 
-TwitterRequest* destroy_saved_search_request( sid_t id );
+TwitterRequest* destroy_saved_search_request( sch_id_t id );
 
 /**
 * \htmlonly 
@@ -1379,8 +1415,48 @@ TwitterRequest* report_spam_request( usr_id_t user_id );
 /*
 You SHOULD pass ressources names in a "comma,sepa,rated,string"
 */
-
 TwitterRequest* rate_limit_status_request( str_t ressources );
+
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/help/languages">Twitter Documentation for [help_languages]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/get/help/languages}{Twitter Documentation for [help\_languages]}
+* \endlatexonly
+*/
+TwitterRequest* help_languages_request(  );
+
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/help/privacy">Twitter Documentation for [help_privacy]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/get/help/privacy}{Twitter Documentation for [help\_privacy]}
+* \endlatexonly
+*/
+TwitterRequest* help_privacy_request(  );
+
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/help/tos">Twitter Documentation for [help_TOS]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/get/help/tos}{Twitter Documentation for [help\_TOS]}
+* \endlatexonly
+*/
+TwitterRequest* help_TOS_request(  );
+
+/**
+* \htmlonly 
+* <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/application/rate_limit_status">Twitter Documentation for [application_rate_limit_status]<a>
+* \endhtmlonly
+* \latexonly 
+* \href{http://dev.twitter.com/docs/api/1.1/get/application/rate_limit_status}{Twitter Documentation for [application\_rate\_limit\_status]}
+* \endlatexonly
+*/
+
+TwitterRequest* application_rate_limit_status_request( str_t ressources = S_UN );
 
 /**
 * \htmlonly 
@@ -1397,7 +1473,7 @@ TwitterRequest* user_stream_request( str_t with = S_UN,
 										bool delimited = false, 
 										bool stall_warnings = false );
 
-/* END_PYGEN don't remove this comment (2012/10/2 22:0) */
+/* END_PYGEN don't remove this comment (2012/10/5 11:47) */
 
 
 /* MANUALLY (file uploads) */

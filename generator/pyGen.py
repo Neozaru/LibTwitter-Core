@@ -338,7 +338,8 @@ class Tw_Parameter:
 		rstr = self.to_str()
 		if self.default_value != "":
 			if self.default_value == "DEF":
-				if "str" not in self.p_type and "usr" not in self.p_type:
+				str_types = ["str_t","string","twt_id_t","cur_id_t","usr_id_t"]
+				if self.p_type not in str_types:
 					rstr += " = N_UN"
 				else:
 					rstr += " = S_UN"
