@@ -118,6 +118,11 @@ void CurlProcess::set_URL( const std::string& url ) {
 
 }
 
+
+const std::string& CurlProcess::get_URL() {
+	return _url;
+}
+
 bool CurlProcess::add_POST_parameter( const std::string& key, const std::string& value ) {
 
 	if ( key.size() > 0 ) {

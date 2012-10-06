@@ -39,11 +39,19 @@ public:
 
 	/**
 	* \fn set_URL
-	* \brief Defines target URL of the HTTP requests.
+	* \brief Defines the target URL of the HTTP request
 	*
 	* \param url URL, without get data ("?[...]&...")
 	*/
 	void set_URL( const std::string& url );
+
+	/**
+	* \fn get_URL
+	* \brief Gets the target URL of the HTTP request
+	*
+	* \return Target URL, without get or POST data.
+	*/
+	const std::string& get_URL();
 
 	/**
 	* \fn add_GET_parameter
