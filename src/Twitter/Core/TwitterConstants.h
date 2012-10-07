@@ -84,7 +84,7 @@ namespace TwitterConsts {
 	const string REPORT_SPAM = API_LINK + "report_spam";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/10/5 11:47) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/7 1:12) */
 
 	namespace STATUSES {
 
@@ -246,7 +246,7 @@ namespace TwitterConsts {
 		const std::string USERSTREAM = PROTOCOL + "" + "userstream.twitter.com/1.1/user" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/10/5 11:47) */
+/* END_PYGEN don't remove this comment (2012/10/7 1:12) */
 
 	namespace STATUSES {
 

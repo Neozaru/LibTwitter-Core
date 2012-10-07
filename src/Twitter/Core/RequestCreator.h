@@ -135,7 +135,7 @@
 		TwitterRequest* get_settings_request();
 */
 
-/* BEGIN_PYGEN don't remove this comment (2012/10/5 11:47) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/7 1:12) */
 /**
 * \htmlonly 
 * <a target="_blank"href="http://dev.twitter.com/docs/api/1.1/get/statuses/mentions_timeline">Twitter Documentation for [mentions_timeline]<a>
@@ -1473,7 +1473,7 @@ TwitterRequest* user_stream_request( str_t with = S_UN,
 										bool delimited = false, 
 										bool stall_warnings = false );
 
-/* END_PYGEN don't remove this comment (2012/10/5 11:47) */
+/* END_PYGEN don't remove this comment (2012/10/7 1:12) */
 
 
 /* MANUALLY (file uploads) */

@@ -84,7 +84,7 @@ TwitterRequest* RequestCreator::stream_user_request( std::string with, std::stri
 
 }
 
-/* BEGIN_PYGEN don't remove this comment (2012/10/5 11:47) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/7 1:12) */
 TwitterRequest* RequestCreator::mentions_timeline_request( int count, usr_id_t since_id, int max_id, bool trim_user, bool contributor_details, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::MENTIONS_TIMELINE );
 	req->set_GET_data( REC_ARGS_6( count, since_id, max_id, trim_user, contributor_details, include_entities ) );
@@ -749,7 +749,7 @@ TwitterRequest* RequestCreator::user_stream_request( str_t with, str_t replies, 
 	return req;
 }
 
-/* END_PYGEN don't remove this comment (2012/10/5 11:47) */
+/* END_PYGEN don't remove this comment (2012/10/7 1:12) */
 
 
 /* MANUALLY (media uploads) */

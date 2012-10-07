@@ -196,3 +196,14 @@ void TwitterRequest::set_oauth_header( const std::string& header ) {
 	
 }
 
+
+void TwitterRequest::to_stream( std::ostream& stream ) const {
+	stream << "URL : " << _url << std::endl;
+	stream << "GET data : " << this->concatenate_data(_GET_data) << std::endl;
+	stream << "POST data : " << this->concatenate_data(_POST_data) << std::endl;
+
+	if ( _response_code < 999 && _response_code >= 0) {
+		stream << "> Response : [" << _response_code << "] \n<< " << _response_data << " >>" << std::endl;
+	}
+
+}

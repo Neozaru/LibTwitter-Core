@@ -243,17 +243,17 @@ unsigned long CurlProcess::get_response_code() const {
 }
 
 
-std::string CurlProcess::concatenate_data( std::map<std::string,std::string>& data_source ) {
+const std::string CurlProcess::concatenate_data( const std::map<std::string,std::string>& data_source ) const {
 
 	std::string data_str;
-	std::map<std::string,std::string>::iterator it = data_source.begin();
+	std::map<std::string,std::string>::const_iterator it = data_source.begin();
 	bool first = true;
 
 	for ( it = data_source.begin() ; it != data_source.end(); it++ ) {
 		
 		data_str += ( !first ? "&" : "" ) + (*it).first;
 		
-		std::string& value = (*it).second;
+		const std::string& value = (*it).second;
 		if ( value.size() > 0 ) {
 			data_str += "=" + (*it).second;
 		}

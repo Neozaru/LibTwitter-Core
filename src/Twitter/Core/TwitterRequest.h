@@ -104,6 +104,8 @@ public:
 
 	}
 
+	void to_stream( std::ostream& stream ) const;
+
 protected:
 
 	/**
@@ -178,5 +180,9 @@ private:
 
 };
 
+	static std::ostream& operator<<( std::ostream& stream, TwitterRequest const& request ) {
+		request.to_stream(stream);
+		return stream;
+	}
 
 #endif

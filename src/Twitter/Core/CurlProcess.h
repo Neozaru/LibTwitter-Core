@@ -210,7 +210,7 @@ protected:
 	CURL* load_curl();
 
 	/* Will be deported to Utils:: */
-	std::string concatenate_data( std::map<std::string,std::string>& data_source );
+	const std::string concatenate_data( const std::map<std::string,std::string>& data_source ) const;
 	//bool set_authentification(  const std::string& user, const std::string& password );
 
 	/**
