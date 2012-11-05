@@ -45,46 +45,8 @@ void RequestCreator::set_next_request( TwitterRequest* req ) {
 /* REC_ARGS_X : Convert X arguments to String, and put them in a std::map */
 /* 				"<var_name>" => "<var_value_in_string>" */
 
-/*
-TwitterRequest* RequestCreator::update_status_request( const std::string& status, int in_reply_to, bool display_coordinates,
-						 					bool trim_user ) {
 
-	PUT_VAR_IN_URL( TwitterConsts::Tweets::UPDATE, in_reply_to );
-	TwitterRequest* req = __make_a_request( TwitterConsts::Tweets::UPDATE );
-	req->set_POST_data( REC_ARGS_4( status, in_reply_to, display_coordinates, trim_user ) );
-
-	return req;
-}
-*/
-/*
-TwitterRequest* RequestCreator::verify_credentials_request() {
-
-
-	TwitterRequest* req = __make_a_request( TwitterConsts::Users::VERIFY_CREDENTIALS );
-
-	return req;
-
-}
-
-
-TwitterRequest* RequestCreator::get_settings_request() {
-
-	TwitterRequest* req = __make_a_request( TwitterConsts::Settings::GET_SETTINGS );
-
-	return req;
-}
-*/
-
-TwitterRequest* RequestCreator::stream_user_request( std::string with, std::string track ) {
-
-	TwitterRequest* req = __make_a_request( TwitterConsts::Streaming::STREAM_USER );
-	req->set_POST_data( REC_ARGS_2( with, track ) );
-
-	return req;
-
-}
-
-/* BEGIN_PYGEN don't remove this comment (2012/10/7 1:12) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/27 14:35) */
 TwitterRequest* RequestCreator::mentions_timeline_request( int count, usr_id_t since_id, int max_id, bool trim_user, bool contributor_details, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::MENTIONS_TIMELINE );
 	req->set_GET_data( REC_ARGS_6( count, since_id, max_id, trim_user, contributor_details, include_entities ) );
@@ -97,7 +59,7 @@ TwitterRequest* RequestCreator::user_timeline_by_id_request( usr_id_t user_id, i
 	return req;
 }
 
-TwitterRequest* RequestCreator::user_timeline_request( str_t screen_name, int count, twt_id_t since_id, twt_id_t max_id, bool trim_user, bool exclude_replies, bool contributor_details, bool include_rts ) {
+TwitterRequest* RequestCreator::user_timeline_request( usr_name_t screen_name, int count, twt_id_t since_id, twt_id_t max_id, bool trim_user, bool exclude_replies, bool contributor_details, bool include_rts ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::USER_TIMELINE );
 	req->set_GET_data( REC_ARGS_8( screen_name, count, since_id, max_id, trim_user, exclude_replies, contributor_details, include_rts ) );
 	return req;
@@ -147,7 +109,7 @@ TwitterRequest* RequestCreator::retweet_request( twt_id_t id, bool trim_user ) {
 	return req;
 }
 
-TwitterRequest* RequestCreator::oembed_status_request( twt_id_t id, str_t url, int maxwidth, bool hide_media, bool hide_thread, bool omit_script, str_t align, str_t related, str_t lang ) {
+TwitterRequest* RequestCreator::oembed_status_request( twt_id_t id, str_t url, int maxwidth, bool hide_media, bool hide_thread, bool omit_script, str_t align, str_t related, lang_t lang ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::OEMBED );
 	req->set_GET_data( REC_ARGS_9( id, url, maxwidth, hide_media, hide_thread, omit_script, align, related, lang ) );
 	return req;
@@ -183,7 +145,7 @@ TwitterRequest* RequestCreator::new_direct_message_by_id_request( usr_id_t user_
 	return req;
 }
 
-TwitterRequest* RequestCreator::new_direct_message_request( str_t screen_name, str_t text ) {
+TwitterRequest* RequestCreator::new_direct_message_request( usr_name_t screen_name, str_t text ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::DIRECT_MESSAGES::NEW );
 	req->set_POST_data( REC_ARGS_2( screen_name, text ) );
 	return req;
@@ -195,7 +157,7 @@ TwitterRequest* RequestCreator::friends_ids_by_id_request( usr_id_t user_id, boo
 	return req;
 }
 
-TwitterRequest* RequestCreator::friends_ids_request( str_t screen_name, bool stringify_ids, cur_id_t cursor ) {
+TwitterRequest* RequestCreator::friends_ids_request( usr_name_t screen_name, bool stringify_ids, cur_id_t cursor ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDS::IDS );
 	req->set_GET_data( REC_ARGS_3( screen_name, stringify_ids, cursor ) );
 	return req;
@@ -207,19 +169,19 @@ TwitterRequest* RequestCreator::followers_ids_by_id_request( usr_id_t user_id, b
 	return req;
 }
 
-TwitterRequest* RequestCreator::followers_ids_request( str_t screen_name, bool stringify_ids, cur_id_t cursor ) {
+TwitterRequest* RequestCreator::followers_ids_request( usr_name_t screen_name, bool stringify_ids, cur_id_t cursor ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FOLLOWERS::IDS );
 	req->set_GET_data( REC_ARGS_3( screen_name, stringify_ids, cursor ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::lookup_friendship_request( str_t screen_name ) {
+TwitterRequest* RequestCreator::lookup_friendship_request( usr_name_t screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::LOOKUP );
 	req->set_GET_data( REC_ARGS_1( screen_name ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::lookup_friendship_by_ids_request( str_t user_id ) {
+TwitterRequest* RequestCreator::lookup_friendship_by_ids_request( usr_id_t user_id ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::LOOKUP );
 	req->set_GET_data( REC_ARGS_1( user_id ) );
 	return req;
@@ -237,7 +199,7 @@ TwitterRequest* RequestCreator::outgoing_friendships_request( bool stringify_ids
 	return req;
 }
 
-TwitterRequest* RequestCreator::create_friendship_request( str_t screen_name, bool follow ) {
+TwitterRequest* RequestCreator::create_friendship_request( usr_name_t screen_name, bool follow ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::CREATE );
 	req->set_POST_data( REC_ARGS_2( screen_name, follow ) );
 	return req;
@@ -249,7 +211,7 @@ TwitterRequest* RequestCreator::create_friendship_by_id_request( usr_id_t user_i
 	return req;
 }
 
-TwitterRequest* RequestCreator::destroy_friendship_request( str_t screen_name ) {
+TwitterRequest* RequestCreator::destroy_friendship_request( usr_name_t screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::DESTROY );
 	req->set_POST_data( REC_ARGS_1( screen_name ) );
 	return req;
@@ -261,7 +223,7 @@ TwitterRequest* RequestCreator::destroy_friendship_by_id_request( usr_id_t user_
 	return req;
 }
 
-TwitterRequest* RequestCreator::update_friendship_request( str_t screen_name, bool retweets, bool device ) {
+TwitterRequest* RequestCreator::update_friendship_request( usr_name_t screen_name, bool retweets, bool device ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::UPDATE );
 	req->set_POST_data( REC_ARGS_3( screen_name, retweets, device ) );
 	return req;
@@ -273,7 +235,7 @@ TwitterRequest* RequestCreator::update_friendship_by_id_request( usr_id_t user_i
 	return req;
 }
 
-TwitterRequest* RequestCreator::show_friendship_request( str_t source_screen_name, str_t target_screen_name ) {
+TwitterRequest* RequestCreator::show_friendship_request( usr_name_t source_screen_name, usr_name_t target_screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FRIENDSHIPS::SHOW );
 	req->set_GET_data( REC_ARGS_2( source_screen_name, target_screen_name ) );
 	return req;
@@ -291,7 +253,7 @@ TwitterRequest* RequestCreator::verify_credentials_request( bool include_entitie
 	return req;
 }
 
-TwitterRequest* RequestCreator::set_account_settings_request( bool sleep_time_enabled, int start_sleep_time, int end_sleep_time, str_t lang, str_t time_zone, int trend_location_woeid ) {
+TwitterRequest* RequestCreator::set_account_settings_request( bool sleep_time_enabled, int start_sleep_time, int end_sleep_time, lang_t lang, str_t time_zone, int trend_location_woeid ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::ACCOUNT::SETTINGS );
 	req->set_POST_data( REC_ARGS_6( sleep_time_enabled, start_sleep_time, end_sleep_time, lang, time_zone, trend_location_woeid ) );
 	return req;
@@ -333,7 +295,7 @@ TwitterRequest* RequestCreator::get_blocks_ids_request( cur_id_t cursor, bool st
 	return req;
 }
 
-TwitterRequest* RequestCreator::create_blocks_request( str_t screen_name, bool include_entities, bool skip_status ) {
+TwitterRequest* RequestCreator::create_blocks_request( usr_name_t screen_name, bool include_entities, bool skip_status ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::BLOCKS::CREATE );
 	req->set_POST_data( REC_ARGS_3( screen_name, include_entities, skip_status ) );
 	return req;
@@ -345,7 +307,7 @@ TwitterRequest* RequestCreator::create_blocks_by_id_request( usr_id_t user_id, b
 	return req;
 }
 
-TwitterRequest* RequestCreator::destroy_blocks_request( str_t screen_name, bool include_entities, bool skip_status ) {
+TwitterRequest* RequestCreator::destroy_blocks_request( usr_name_t screen_name, bool include_entities, bool skip_status ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::BLOCKS::DESTROY );
 	req->set_POST_data( REC_ARGS_3( screen_name, include_entities, skip_status ) );
 	return req;
@@ -357,25 +319,25 @@ TwitterRequest* RequestCreator::destroy_blocks_by_id_request( usr_id_t user_id, 
 	return req;
 }
 
-TwitterRequest* RequestCreator::lookup_user_by_id_request( str_t user_id, bool include_entities ) {
+TwitterRequest* RequestCreator::lookup_user_by_id_request( usr_id_t user_id, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::LOOKUP );
 	req->set_GET_data( REC_ARGS_2( user_id, include_entities ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::lookup_user_by_screen_name_request( str_t screen_name, bool include_entities ) {
+TwitterRequest* RequestCreator::lookup_user_by_screen_name_request( usr_name_t screen_name, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::LOOKUP );
 	req->set_GET_data( REC_ARGS_2( screen_name, include_entities ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::show_user_by_id_request( str_t user_id, bool include_entities ) {
+TwitterRequest* RequestCreator::show_user_by_id_request( usr_id_t user_id, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::SHOW );
 	req->set_GET_data( REC_ARGS_2( user_id, include_entities ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::show_user_request( str_t screen_name, bool include_entities ) {
+TwitterRequest* RequestCreator::show_user_request( usr_name_t screen_name, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::SHOW );
 	req->set_GET_data( REC_ARGS_2( screen_name, include_entities ) );
 	return req;
@@ -393,7 +355,7 @@ TwitterRequest* RequestCreator::user_contributees_by_user_id_request( usr_id_t u
 	return req;
 }
 
-TwitterRequest* RequestCreator::user_contributees_by_screen_name_request( str_t screen_name, bool include_entities, bool skip_status ) {
+TwitterRequest* RequestCreator::user_contributees_by_screen_name_request( usr_name_t screen_name, bool include_entities, bool skip_status ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::CONTRIBUTEES );
 	req->set_GET_data( REC_ARGS_3( screen_name, include_entities, skip_status ) );
 	return req;
@@ -405,13 +367,13 @@ TwitterRequest* RequestCreator::user_contributors_by_user_id_request( usr_id_t u
 	return req;
 }
 
-TwitterRequest* RequestCreator::user_contributors_by_screen_name_request( str_t screen_name, bool include_entities, bool skip_status ) {
+TwitterRequest* RequestCreator::user_contributors_by_screen_name_request( usr_name_t screen_name, bool include_entities, bool skip_status ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::CONTRIBUTORS );
 	req->set_GET_data( REC_ARGS_3( screen_name, include_entities, skip_status ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::user_suggestions_request( str_t slug, str_t lang ) {
+TwitterRequest* RequestCreator::user_suggestions_request( slug_t slug, lang_t lang ) {
 	TwitterRequest* req = __make_a_request( 
 		PUT_VAR_IN_URL( TwitterConsts::USERS::SUGGESTIONS, slug )
 	 );
@@ -419,13 +381,13 @@ TwitterRequest* RequestCreator::user_suggestions_request( str_t slug, str_t lang
 	return req;
 }
 
-TwitterRequest* RequestCreator::user_suggestions_alt_request( str_t lang ) {
+TwitterRequest* RequestCreator::user_suggestions_alt_request( lang_t lang ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::USERS::SUGGESTIONS );
 	req->set_GET_data( REC_ARGS_1( lang ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::user_suggestions_members_request( str_t slug ) {
+TwitterRequest* RequestCreator::user_suggestions_members_request( slug_t slug ) {
 	TwitterRequest* req = __make_a_request( 
 		PUT_VAR_IN_URL( TwitterConsts::USERS::SUGGESTIONS, slug )
 	 );
@@ -439,7 +401,7 @@ TwitterRequest* RequestCreator::list_favorites_request( usr_id_t user_id, int co
 	return req;
 }
 
-TwitterRequest* RequestCreator::list_favorites_by_screen_name_request( str_t screen_name, int count, int since_id, int max_id, bool include_entities ) {
+TwitterRequest* RequestCreator::list_favorites_by_screen_name_request( usr_name_t screen_name, int count, int since_id, int max_id, bool include_entities ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::FAVORITES::LIST );
 	req->set_GET_data( REC_ARGS_5( screen_name, count, since_id, max_id, include_entities ) );
 	return req;
@@ -475,7 +437,7 @@ TwitterRequest* RequestCreator::list_statuses_by_ids_request( lst_id_t list_id, 
 	return req;
 }
 
-TwitterRequest* RequestCreator::list_statuses_request( str_t slug, usr_id_t owner_screen_name, int count, int since_id, int max_id, bool include_entities, bool include_rts ) {
+TwitterRequest* RequestCreator::list_statuses_request( slug_t slug, usr_id_t owner_screen_name, int count, int since_id, int max_id, bool include_entities, bool include_rts ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::STATUSES );
 	req->set_GET_data( REC_ARGS_7( slug, owner_screen_name, count, since_id, max_id, include_entities, include_rts ) );
 	return req;
@@ -487,13 +449,13 @@ TwitterRequest* RequestCreator::destroy_list_member_by_ids_request( lst_id_t lis
 	return req;
 }
 
-TwitterRequest* RequestCreator::destroy_list_member_request( str_t slug, usr_id_t screen_name ) {
+TwitterRequest* RequestCreator::destroy_list_member_request( slug_t slug, usr_id_t screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERS );
 	req->set_POST_data( REC_ARGS_2( slug, screen_name ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::list_membership_request( str_t screen_name, cur_id_t cursor ) {
+TwitterRequest* RequestCreator::list_membership_request( usr_name_t screen_name, cur_id_t cursor ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERSHIPS );
 	req->set_GET_data( REC_ARGS_2( screen_name, cursor ) );
 	return req;
@@ -505,7 +467,7 @@ TwitterRequest* RequestCreator::list_membership_by_id_request( usr_id_t user_id,
 	return req;
 }
 
-TwitterRequest* RequestCreator::list_suscribers_request( str_t slug, str_t screen_name, cur_id_t cursor, bool include_entities, bool skip_status ) {
+TwitterRequest* RequestCreator::list_suscribers_request( slug_t slug, usr_name_t screen_name, cur_id_t cursor, bool include_entities, bool skip_status ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::SUBSCRIBERS );
 	req->set_GET_data( REC_ARGS_5( slug, screen_name, cursor, include_entities, skip_status ) );
 	return req;
@@ -523,7 +485,7 @@ TwitterRequest* RequestCreator::subscribe_to_list_request( lst_id_t list_id ) {
 	return req;
 }
 
-TwitterRequest* RequestCreator::subscribe_to_list_request( str_t slug, str_t owner_screen_name ) {
+TwitterRequest* RequestCreator::subscribe_to_list_request( slug_t slug, usr_name_t owner_screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::SUBSCRIBERS );
 	req->set_POST_data( REC_ARGS_2( slug, owner_screen_name ) );
 	return req;
@@ -535,7 +497,7 @@ TwitterRequest* RequestCreator::show_user_is_suscriber_by_ids_request( usr_id_t 
 	return req;
 }
 
-TwitterRequest* RequestCreator::show_user_is_suscriber_request( str_t screen_name, lst_id_t slug, str_t owner_screen_name, bool include_entities, bool skip_status ) {
+TwitterRequest* RequestCreator::show_user_is_suscriber_request( usr_name_t screen_name, lst_id_t slug, usr_name_t owner_screen_name, bool include_entities, bool skip_status ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::SUBSCRIBERS );
 	req->set_GET_data( REC_ARGS_5( screen_name, slug, owner_screen_name, include_entities, skip_status ) );
 	return req;
@@ -547,19 +509,19 @@ TwitterRequest* RequestCreator::unsubscribe_from_list_request( lst_id_t list_id 
 	return req;
 }
 
-TwitterRequest* RequestCreator::unsubscribe_from_list_request( str_t slug, str_t owner_screen_name ) {
+TwitterRequest* RequestCreator::unsubscribe_from_list_request( slug_t slug, usr_name_t owner_screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::SUBSCRIBERS );
 	req->set_POST_data( REC_ARGS_2( slug, owner_screen_name ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::subscribe_to_list_multi_by_ids_request( lst_id_t list_id, str_t user_id ) {
+TwitterRequest* RequestCreator::subscribe_to_list_multi_by_ids_request( lst_id_t list_id, usr_id_t user_id ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERS );
 	req->set_POST_data( REC_ARGS_2( list_id, user_id ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::subscribe_to_list_multi_request( str_t slug, str_t owner_screen_name, str_t screen_name ) {
+TwitterRequest* RequestCreator::subscribe_to_list_multi_request( slug_t slug, usr_name_t owner_screen_name, usr_name_t screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERS );
 	req->set_POST_data( REC_ARGS_3( slug, owner_screen_name, screen_name ) );
 	return req;
@@ -571,7 +533,7 @@ TwitterRequest* RequestCreator::show_user_is_member_by_ids_request( lst_id_t lis
 	return req;
 }
 
-TwitterRequest* RequestCreator::show_user_is_member_request( str_t slug, str_t owner_screen_name, str_t screen_name, bool include_entities, bool skip_status ) {
+TwitterRequest* RequestCreator::show_user_is_member_request( slug_t slug, usr_name_t owner_screen_name, usr_name_t screen_name, bool include_entities, bool skip_status ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERS );
 	req->set_GET_data( REC_ARGS_5( slug, owner_screen_name, screen_name, include_entities, skip_status ) );
 	return req;
@@ -583,7 +545,7 @@ TwitterRequest* RequestCreator::list_members_by_id_request( lst_id_t list_id, cu
 	return req;
 }
 
-TwitterRequest* RequestCreator::list_members_request( str_t slug, str_t owner_screen_name, cur_id_t cursor, bool include_entities, bool skip_status ) {
+TwitterRequest* RequestCreator::list_members_request( slug_t slug, usr_name_t owner_screen_name, cur_id_t cursor, bool include_entities, bool skip_status ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERS );
 	req->set_GET_data( REC_ARGS_5( slug, owner_screen_name, cursor, include_entities, skip_status ) );
 	return req;
@@ -595,7 +557,7 @@ TwitterRequest* RequestCreator::join_list_request( usr_id_t user_id, lst_id_t li
 	return req;
 }
 
-TwitterRequest* RequestCreator::join_list_request( str_t screen_name, str_t slug, str_t owner_screen_name ) {
+TwitterRequest* RequestCreator::join_list_request( usr_name_t screen_name, slug_t slug, usr_name_t owner_screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERS );
 	req->set_POST_data( REC_ARGS_3( screen_name, slug, owner_screen_name ) );
 	return req;
@@ -613,7 +575,7 @@ TwitterRequest* RequestCreator::update_list_by_id_request( lst_id_t list_id, str
 	return req;
 }
 
-TwitterRequest* RequestCreator::update_list_request( str_t slug, str_t owner_screen_name, str_t name, str_t description, str_t mode ) {
+TwitterRequest* RequestCreator::update_list_request( slug_t slug, usr_name_t owner_screen_name, str_t name, str_t description, str_t mode ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::UPDATE );
 	req->set_POST_data( REC_ARGS_5( slug, owner_screen_name, name, description, mode ) );
 	return req;
@@ -631,7 +593,7 @@ TwitterRequest* RequestCreator::show_list_request( lst_id_t list_id ) {
 	return req;
 }
 
-TwitterRequest* RequestCreator::show_list_request( str_t slug, str_t owner_screen_name ) {
+TwitterRequest* RequestCreator::show_list_request( slug_t slug, usr_name_t owner_screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::SHOW );
 	req->set_GET_data( REC_ARGS_2( slug, owner_screen_name ) );
 	return req;
@@ -643,19 +605,19 @@ TwitterRequest* RequestCreator::lists_subscription_by_id_request( usr_id_t user_
 	return req;
 }
 
-TwitterRequest* RequestCreator::lists_subscription_request( str_t screen_name, int count, cur_id_t cursor ) {
+TwitterRequest* RequestCreator::lists_subscription_request( usr_name_t screen_name, int count, cur_id_t cursor ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::SUBSCRIPTIONS );
 	req->set_GET_data( REC_ARGS_3( screen_name, count, cursor ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::expulse_from_list_by_ids_request( lst_id_t list_id, str_t user_id ) {
+TwitterRequest* RequestCreator::expulse_from_list_by_ids_request( lst_id_t list_id, usr_id_t user_id ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERS );
 	req->set_POST_data( REC_ARGS_2( list_id, user_id ) );
 	return req;
 }
 
-TwitterRequest* RequestCreator::expulse_from_list_request( str_t slug, str_t owner_screen_name, str_t screen_name ) {
+TwitterRequest* RequestCreator::expulse_from_list_request( slug_t slug, usr_name_t owner_screen_name, usr_name_t screen_name ) {
 	TwitterRequest* req = __make_a_request( TwitterConsts::LISTS::MEMBERS );
 	req->set_POST_data( REC_ARGS_3( slug, owner_screen_name, screen_name ) );
 	return req;
@@ -749,7 +711,7 @@ TwitterRequest* RequestCreator::user_stream_request( str_t with, str_t replies, 
 	return req;
 }
 
-/* END_PYGEN don't remove this comment (2012/10/7 1:12) */
+/* END_PYGEN don't remove this comment (2012/10/27 14:35) */
 
 
 /* MANUALLY (media uploads) */
@@ -758,15 +720,15 @@ TwitterRequest* RequestCreator::_update_status_with_media_request( str_t status,
 	TwitterRequest* req = __make_a_request( TwitterConsts::STATUSES::UPDATE_WITH_MEDIA);
 
 	req->add_form_data( "status", status );
-	if ( in_reply_to_status_id != S_UN ) { req->add_form_data( "in_reply_to_status_id", in_reply_to_status_id ); }
+	if ( in_reply_to_status_id != DEF_STR ) { req->add_form_data( "in_reply_to_status_id", in_reply_to_status_id ); }
 	if ( possibly_sensitive ) { req->add_form_data( "possibly_sensitive", "true" ); }
 
-	if ( place_id != S_UN ) { req->add_form_data( "place_id", place_id ); }
+	if ( place_id != DEF_STR ) { req->add_form_data( "place_id", place_id ); }
 
 	if ( display_coordinates ) { req->add_form_data( "display_coordinates", "true" ); }
 	if ( trim_user ) { req->add_form_data( "trim_user", "true" ); }
-	if ( lon != N_UN ) { req->add_form_data( "lon", Utils::otos(lon) ); }
-	if ( lat != N_UN ) { req->add_form_data( "lat", Utils::otos(lat) ); }
+	if ( lon != DEF_NUM ) { req->add_form_data( "lon", Utils::otos(lon) ); }
+	if ( lat != DEF_NUM) { req->add_form_data( "lat", Utils::otos(lat) ); }
 
 	return req;
 

@@ -193,7 +193,6 @@ class Tw_Method:
 		self.param_in_request = None
 
 
-
 	def addDoc(self,doc):
 		self.documentation += doc
 
@@ -204,6 +203,12 @@ class Tw_Method:
 			self.param_in_request = parameter
 
 		self.parameters.append(parameter)
+
+	def getName(self):
+		return self.name
+
+	def getParameters(self):
+		return self.parameters
 
 	def gen_declaration(self,inc_doc):
 
@@ -305,6 +310,40 @@ class Tw_Method:
 		if pdoc == 1:
 			print("DOC : "+self.documentation)
 
+	def gen_test(self,overload):
+
+		test_name = self.name
+		if overload != 0:
+			test_name += "_"+str(overload)
+
+		rstr = ""
+		rstr += "void "+test_name+"_test("
+
+		rstr += ") {\n"
+
+		rstr += "\ttest_request( "
+
+		rstr += "_session->"+self.name+"_request("
+
+		first_arg = 1
+		for p in self.parameters:
+			if not p.hasDefaultValue():
+				if first_arg:
+					first_arg = 0
+				else:
+					rstr += ","
+				rstr += "DEF_"+p.getType().upper()
+
+		rstr += ""
+
+		rstr += ") "
+
+		rstr += ");\n"
+
+		rstr += "}\n\n"
+
+		return rstr
+
 class Tw_Parameter:
 	""" Twitter Parameter
 	- Type of variable ("float","int","string","bool")
@@ -330,6 +369,12 @@ class Tw_Parameter:
 	def setDefaultValue(self,dv):
 		self.default_value = dv
 
+	def hasDefaultValue(self):
+		return ( self.default_value != "" )
+
+	def getType(self):
+		return self.p_type
+
 	def to_str(self):
 		rstr = self.p_type+" "+self.name
 		return rstr
@@ -338,11 +383,11 @@ class Tw_Parameter:
 		rstr = self.to_str()
 		if self.default_value != "":
 			if self.default_value == "DEF":
-				str_types = ["str_t","string","twt_id_t","cur_id_t","usr_id_t"]
+				str_types = ["str_t","string","twt_id_t","cur_id_t","usr_id_t","slug_t","lang_t","usr_name_t"]
 				if self.p_type not in str_types:
-					rstr += " = N_UN"
+					rstr += " = DEF_NUM"
 				else:
-					rstr += " = S_UN"
+					rstr += " = DEF_STR"
 
 			else:
 				rstr += " = "+self.default_value
@@ -458,6 +503,46 @@ def write_constants_file(file_name,consts):
 	        	outfile.write(line)
 	shutil.move(file_name+".out",file_name)
 
+
+def write_test_suite(file_name,methods,pattern):
+	t = datetime.datetime.now()
+	file_out = open(file_name,"r+")
+	with open(file_name) as infile, open(file_name+".out","w") as outfile:
+	    for i,line in enumerate(infile):
+	        if "HERE_"+pattern in line:
+	        	outfile.write("/* BEGIN_"+pattern+" don't remove this comment ("+str(t.year)+"/"+str(t.month)+"/"+str(t.day)+" "+str(t.hour)+":"+str(t.minute)+") */\n")
+
+	        	outfile.write("CPPUNIT_TEST_SUITE( "+"Test_Requests"+" );")
+	        	prev_name = "-1"
+	        	for m in methods:
+	        		if m.gen_test(0) != "":
+	        			name = m.getName()
+	        			if "stream" not in name:
+	        				if name == prev_name:
+	        					name += "_1"
+	        				outfile.write("\nCPPUNIT_TEST( "+name+"_test"+" );")
+			        		prev_name = name
+
+
+    			outfile.write("CPPUNIT_TEST_SUITE_END();")
+    			outfile.write("\n\npublic:\n")
+
+	        	for m in methods:
+	        		name = m.getName()
+	        		if name == prev_name:
+	        			outfile.write( m.gen_test(1) )
+	        		else:
+	        			outfile.write( m.gen_test(0) )
+	        		prev_name = name
+
+	        	outfile.write("\n")
+	        	outfile.write("/* END_"+pattern+" don't remove this comment ("+str(t.year)+"/"+str(t.month)+"/"+str(t.day)+" "+str(t.hour)+":"+str(t.minute)+") */\n")
+	        else:
+	        	outfile.write(line)
+	shutil.move(file_name+".out",file_name)
+
+
+
 def dump_if_exists(file_name):
 	if is_file_exists(file_name):
 		print("Ouput file '" + file_name + "' already exists. Saving old file to '" + file_name + ".old'")
@@ -527,6 +612,14 @@ if len(sys.argv) > 3:
 	remove_from_file(consts_file,pattern)
 	dump_if_exists(consts_file)
 	write_constants_file(consts_file,cm)
+	print("Done.")
+
+if len(sys.argv) > 4:
+	tests_file = sys.argv[4]
+	print("Writing tests in file "+tests_file+"...")
+	remove_from_file(tests_file,pattern)
+	dump_if_exists(tests_file)
+	write_test_suite(tests_file,methods,pattern)
 	print("Done.")
 
 #constants_file = open("TwitterConstants.h.out")

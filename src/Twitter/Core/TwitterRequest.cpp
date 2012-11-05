@@ -3,7 +3,6 @@
 #include "TwitterSession.h"
 #include "Utils.h"
 #include "OAuth.h"
-#include "Utils/urlencode.h"
 #include "TwitterConstants.h"
 #include "TwitterRequestListener.h"
 

@@ -10,11 +10,18 @@
 	typedef std::string twt_id_t;
 	typedef std::string cur_id_t;
 	typedef std::string usr_id_t;
-	typedef unsigned int lst_id_t;
-	typedef unsigned int slug_t;
-	typedef unsigned int sch_id_t;
-	typedef unsigned int msg_id_t;
+	
+	typedef std::string slug_t;
+	typedef std::string lang_t;
+	typedef std::string usr_name_t;
 
+	//typedef unsigned int lst_id_t;
+	//typedef unsigned int sch_id_t;
+	//typedef unsigned int msg_id_t;
+
+	typedef std::string lst_id_t;
+	typedef std::string sch_id_t;
+	typedef std::string msg_id_t;
 
 const std::string DEFAULT_PROXY = "system_defined";
 
@@ -84,7 +91,7 @@ namespace TwitterConsts {
 	const string REPORT_SPAM = API_LINK + "report_spam";
 
 
-/* BEGIN_PYGEN don't remove this comment (2012/10/7 1:12) */
+/* BEGIN_PYGEN don't remove this comment (2012/10/27 14:35) */
 
 	namespace STATUSES {
 
@@ -246,7 +253,7 @@ namespace TwitterConsts {
 		const std::string USERSTREAM = PROTOCOL + "" + "userstream.twitter.com/1.1/user" + FORMAT ;
 	};
 
-/* END_PYGEN don't remove this comment (2012/10/7 1:12) */
+/* END_PYGEN don't remove this comment (2012/10/27 14:35) */
 
 	namespace STATUSES {
 

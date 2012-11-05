@@ -60,7 +60,8 @@ AC_CONFIG_FILES([Makefile
                 examples/Client_Send_Image/Makefile
                 examples/Client_Streaming_Session/Makefile
                 examples/Client_Streaming_Listener/Makefile
-                examples/Client_Streaming_Hard_Request/Makefile])
+                examples/Client_Streaming_Hard_Request/Makefile
+                testSuite/Makefile])
 
 
 AC_OUTPUT

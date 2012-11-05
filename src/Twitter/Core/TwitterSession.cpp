@@ -43,12 +43,12 @@ const std::string& TwitterSession::get_HTTP_proxy() const {
 }
 
 bool TwitterSession::isDefined( int value ) {
-	return ( value != N_UN );
+	return ( value != DEF_NUM );
 }
 
 
 bool TwitterSession::isDefined( std::string value ) {
-	return ( value != S_UN );
+	return ( value != DEF_STR );
 }
 
 

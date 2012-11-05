@@ -39,9 +39,6 @@ CURL* CurlProcess::load_curl() {
         Utils::debug("CURL ERROR");
     }
     else {
-    	
-		/* Restore any custom request we may have */
-	    //curl_easy_setopt( curl, CURLOPT_CUSTOMREQUEST, NULL );
 
 	    curl_easy_setopt( curl, CURLOPT_ENCODING, "" );
 
@@ -138,12 +135,13 @@ bool CurlProcess::add_POST_parameter( const std::string& key, const std::string&
 bool CurlProcess::add_GET_parameter( const std::string& key, const std::string& value ) {
 
 	if ( key.size() > 0 ) {
-		_GET_data[key] = value;
+		_GET_data[key] = urlencode(value);
 		return true;
 	}
 	else {
 		return false;
-	}}
+	}
+}
 
 void CurlProcess::set_POST_data( const std::map<std::string,std::string>& data ) {
 	

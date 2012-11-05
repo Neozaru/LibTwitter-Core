@@ -1,7 +1,7 @@
 #include "Utils.h"
 
 #include "TwitterSession.h"
-
+#include "Utils/urlencode.h"
 
 
 
@@ -70,7 +70,7 @@ namespace Utils {
 
           Utils::debug( "'"+keys.at(i)+"'" + " = " + + "'"+ str_value + "'");
 
-          parameters[keys.at(i)] = str_value;
+          parameters[keys.at(i)] = urlencode(str_value);
         }
 
       }
